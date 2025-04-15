@@ -186,7 +186,7 @@ a:hover {
   display: none;
 }
 
-/* Modal */
+/* Modal - Versión mejorada */
 .modal {
   position: fixed;
   top: 0;
@@ -211,19 +211,24 @@ a:hover {
   box-shadow: 0 12px 36px rgba(0,0,0,0.2);
   position: relative;
   animation: modalFadeIn 0.4s ease-out;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--light);
 }
 
-.modal-content h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: var(--light);
 }
 
-.modal-content p {
-  font-size: 17px;
-  margin-bottom: 30px;
-}
-
-/* Radio buttons styling */
+/* Radio buttons - Versión mejorada */
 label {
   display: block;
   position: relative;
@@ -247,7 +252,6 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-/* Custom radio button */
 .radio-custom {
   position: absolute;
   top: 0;
@@ -260,17 +264,18 @@ input[type="radio"] {
   transition: all 0.2s ease;
 }
 
-label:hover .radio-custom {
-  background-color: #e6d0ff;
-}
-
 input[type="radio"]:checked ~ .radio-custom {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  box-shadow: inset 0 0 0 3px var(--white);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--accent);
 }
 
-/* Botón de pánico especial */
+label:hover .radio-custom {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--secondary);
+}
+
+/* Botón de pánico */
 #boton-panico {
   background: linear-gradient(135deg, #ff4d8d 0%, #ff2d6d 100%);
   font-size: 20px;
@@ -317,11 +322,6 @@ input[type="radio"]:checked ~ .radio-custom {
   }
 }
 
-.modal-content {
-  max-height: 80vh !important;  /* Altura máxima del 80% de la pantalla */
-  overflow-y: auto !important;  /* Habilita scroll si es necesario */
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   header {
@@ -342,6 +342,12 @@ input[type="radio"]:checked ~ .radio-custom {
   .modal-content {
     padding: 30px 20px;
   }
+  
+  #boton-panico {
+    width: 120px;
+    height: 120px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -353,9 +359,7 @@ input[type="radio"]:checked ~ .radio-custom {
     font-size: 22px;
   }
   
-  #boton-panico {
-    width: 120px;
-    height: 120px;
-    font-size: 18px;
+  .modal-content {
+    padding: 20px 15px;
   }
 }
