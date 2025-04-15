@@ -7,6 +7,31 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<script>
+  // Espera a que todo el DOM esté cargado
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Página web cargada correctamente');
+    
+    // Función mejorada para navegación
+    window.mostrarSeccion = function(id) {
+      // Oculta todas las secciones
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('seccion-activa');
+      });
+      
+      // Muestra la nueva sección
+      const seccion = document.getElementById(id);
+      if(seccion) {
+        seccion.classList.add('seccion-activa');
+      } else {
+        console.error('No se encontró la sección con ID:', id);
+      }
+    };
+    
+    // Activa solo la encuesta al inicio
+    mostrarSeccion('encuesta-modal');
+  });
+</script>
 <body>
 
   <header>
