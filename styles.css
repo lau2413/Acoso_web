@@ -349,7 +349,49 @@ label:hover .radio-custom {
     font-size: 18px;
   }
 }
+/* Añade esto al final de tu styles.css */
 
+/* ===== CORRECCIÓN PARA COMPUTADORA ===== */
+@media (min-width: 768px) {
+  .modal-content {
+    width: 70%; /* Más ancho en pantallas grandes */
+    max-width: 800px; /* Límite máximo */
+    padding: 40px 60px; /* Más espacio interno */
+  }
+}
+
+/* ===== SISTEMA DE NAVEGACIÓN ===== */
+/* Oculta todas las secciones al inicio */
+#encuesta-modal,
+#login-section,
+#contactos-section,
+#panico-section {
+  display: none;
+}
+
+/* Muestra solo la encuesta al inicio */
+#encuesta-modal {
+  display: flex; /* Solo esta visible al cargar */
+}
+
+/* Botón para avanzar después de la encuesta */
+#avanzar-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
+  margin-top: 30px;
+  display: none; /* Oculto inicialmente */
+}
+
+/* Muestra el botón cuando se completa la encuesta */
+#encuesta-form:valid #avanzar-btn {
+  display: block;
+}
+
+/* ===== TRANSICIONES ENTRE SECCIONES ===== */
+/* Clase para mostrar secciones */
+.mostrar-seccion {
+  display: flex !important;
+  animation: modalFadeIn 0.5s ease-out;
+}
 @media (max-width: 480px) {
   body {
     padding: 10px;
