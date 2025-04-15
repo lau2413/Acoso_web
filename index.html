@@ -3,25 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Web</title>
+  <title>Página de Seguridad</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <img src="logo.png" alt="Logo de la página">
-      <h1>Mi Página Web</h1>
+      <img src="logo.png" alt="Logo">
+      <h1>Protección Segura</h1>
     </div>
     <nav>
-      <a href="index.html">Inicio</a>
-      <a href="encuesta.html">Encuesta</a>
-      <a href="contacto.html">Contacto</a>
+      <!-- Podrías añadir enlaces si quieres -->
     </nav>
   </header>
 
-  <h1>página</h1>
-  <p>Primer párrafo.</p>
+  <!-- Encuesta emergente -->
+  <section id="encuesta-modal" class="modal">
+    <div class="modal-content">
+      <h2>¿Has experimentado acoso? Descúbrelo</h2>
+      <p>Este breve cuestionario te ayudará a identificar situaciones de acoso que quizás has experimentado, incluso de personas conocidas.</p>
+      <form id="encuesta-form">
+        <!-- Pregunta 1 -->
+        <p>1. ¿Alguna vez te han hecho comentarios sobre tu cuerpo o apariencia que te hicieron sentir incómodo/a?</p>
+        <label><input type="radio" name="q1" value="a"> No</label><br>
+        <label><input type="radio" name="q1" value="b"> Sí, de desconocidos</label><br>
+        <label><input type="radio" name="q1" value="c"> Sí, de conocidos o amigos</label><br>
+        <label><input type="radio" name="q1" value="d"> Sí, de ambos</label><br>
+  
+        <!-- Pregunta 2 -->
+        <p>2. ¿Alguien ha insistido en acompañarte o seguirte a pesar de tu negativa?</p>
+        <label><input type="radio" name="q2" value="a"> No</label><br>
+        <label><input type="radio" name="q2" value="b"> Sí, desconocidos</label><br>
+        <label><input type="radio" name="q2" value="c"> Sí, conocidos</label><br>
+        <label><input type="radio" name="q2" value="d"> Sí, ambas situaciones</label><br>
+  
+        <!-- Pregunta 3 -->
+        <p>3. ¿Has evitado ciertos lugares por miedo a encontrarte con alguien que te incomode?</p>
+        <label><input type="radio" name="q3" value="a"> No</label><br>
+        <label><input type="radio" name="q3" value="b"> Sí, desconocidos</label><br>
+        <label><input type="radio" name="q3" value="c"> Sí, conocidos</label><br>
+        <label><input type="radio" name="q3" value="d"> Sí, ambas situaciones</label><br>
+  
+        <!-- Pregunta 4 -->
+        <p>4. ¿Alguien ha invadido tu espacio personal de forma que te hizo sentir atrapado/a?</p>
+        <label><input type="radio" name="q4" value="a"> No</label><br>
+        <label><input type="radio" name="q4" value="b"> Sí, en la calle</label><br>
+        <label><input type="radio" name="q4" value="c"> Sí, en reuniones sociales</label><br>
+        <label><input type="radio" name="q4" value="d"> Sí, ambos contextos</label><br>
+  
+        <!-- Pregunta 5 -->
+        <p>5. ¿Has recibido o te han tomado fotos sin permiso?</p>
+        <label><input type="radio" name="q5" value="a"> No</label><br>
+        <label><input type="radio" name="q5" value="b"> Sí, desconocidos</label><br>
+        <label><input type="radio" name="q5" value="c"> Sí, conocidos</label><br>
+        <label><input type="radio" name="q5" value="d"> Sí, ambos</label><br>
+  
+        <!-- Pregunta 6 -->
+        <p>6. ¿Te has sentido obligado/a a responder “amablemente” ante comentarios incómodos por miedo?</p>
+        <label><input type="radio" name="q6" value="a"> No</label><br>
+        <label><input type="radio" name="q6" value="b"> Sí, con desconocidos</label><br>
+        <label><input type="radio" name="q6" value="c"> Sí, con conocidos</label><br>
+        <label><input type="radio" name="q6" value="d"> Sí, ambos casos</label><br>
+  
+        <!-- Pregunta 7 -->
+        <p>7. ¿Te han hecho sentir culpable por expresar incomodidad?</p>
+        <label><input type="radio" name="q7" value="a"> No</label><br>
+        <label><input type="radio" name="q7" value="b"> Sí, desconocidos</label><br>
+        <label><input type="radio" name="q7" value="c"> Sí, conocidos</label><br>
+        <label><input type="radio" name="q7" value="d"> Sí, ambos</label><br>
+  
+        <!-- Pregunta 8 -->
+        <p>8. ¿Has compartido tu ubicación con alguien por miedo?</p>
+        <label><input type="radio" name="q8" value="a"> No</label><br>
+        <label><input type="radio" name="q8" value="b"> Sí, ocasionalmente</label><br>
+        <label><input type="radio" name="q8" value="c"> Sí, frecuentemente</label><br>
+  
+        <!-- Pregunta 9 -->
+        <p>9. ¿Te has sentido observado/a de forma persistente?</p>
+        <label><input type="radio" name="q9" value="a"> No</label><br>
+        <label><input type="radio" name="q9" value="b"> Sí, desconocidos</label><br>
+        <label><input type="radio" name="q9" value="c"> Sí, conocidos</label><br>
+        <label><input type="radio" name="q9" value="d"> Sí, ambos</label><br>
+  
+        <!-- Pregunta 10 -->
+        <p>10. ¿Qué función de nuestra app te sería más útil?</p>
+        <label><input type="radio" name="q10" value="a"> Botón de pánico con alerta</label><br>
+        <label><input type="radio" name="q10" value="b"> Ruta acompañada virtual</label><br>
+        <label><input type="radio" name="q10" value="c"> Conexión con autoridades</label><br>
+        <label><input type="radio" name="q10" value="d"> Comunidad de apoyo</label><br>
+        <label><input type="radio" name="q10" value="e"> Información educativa</label><br>
+  
+        <br>
+        <button type="submit">Enviar y continuar</button>
+      </form>
+    </div>
+  </section>
+  
+
+  <!-- Login / Registro -->
+  <section id="login-section" class="hidden">
+    <h2>Inicia sesión</h2>
+    <form id="login-form">
+      <input type="text" placeholder="Usuario" required>
+      <input type="password" placeholder="Contraseña" required>
+      <button type="submit">Entrar</button>
+      <p>¿No tienes cuenta? <a href="#">Regístrate</a></p>
+    </form>
+  </section>
+
+  <!-- Contactos de emergencia -->
+  <section id="contactos-section" class="hidden">
+    <h2>Contactos de emergencia</h2>
+    <form>
+      <input type="text" placeholder="Nombre del contacto" required>
+      <input type="tel" placeholder="Teléfono" required>
+      <button type="submit">Guardar contacto</button>
+    </form>
+  </section>
+
+  <!-- Botón de pánico -->
+  <section id="panico-section" class="hidden">
+    <h2>Botón de Pánico</h2>
+    <button id="boton-panico">¡PÁNICO!</button>
+    <p>Presiona el botón o usa los botones de volumen para activarlo.</p>
+  </section>
 
   <script src="script.js"></script>
 </body>
