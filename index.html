@@ -7,31 +7,6 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<script>
-  // Espera a que todo el DOM esté cargado
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('Página web cargada correctamente');
-    
-    // Función mejorada para navegación
-    window.mostrarSeccion = function(id) {
-      // Oculta todas las secciones
-      document.querySelectorAll('section').forEach(sec => {
-        sec.classList.remove('seccion-activa');
-      });
-      
-      // Muestra la nueva sección
-      const seccion = document.getElementById(id);
-      if(seccion) {
-        seccion.classList.add('seccion-activa');
-      } else {
-        console.error('No se encontró la sección con ID:', id);
-      }
-    };
-    
-    // Activa solo la encuesta al inicio
-    mostrarSeccion('encuesta-modal');
-  });
-</script>
 <body>
 
   <header>
@@ -121,15 +96,14 @@
         <label><input type="radio" name="q10" value="e"> Información educativa</label><br>
   
         <br>
-         <!--  botón cambio de sección-->
-        <button type="submit" id="avanzar-btn" onclick="mostrarSeccion('login-section')">Continuar</button>
+        <button type="submit" id="avanzar-btn">Continuar</button>
       </form>
     </div>
   </section>
   
 
-  <!-- Login / Registro -->
-  <section id="login-section" class="hidden">
+   <!-- Login / Registro -->
+   <section id="login-section" class="hidden">
     <h2>Inicia sesión</h2>
     <form id="login-form">
       <input type="text" placeholder="Usuario" required>
@@ -155,6 +129,49 @@
     <button id="boton-panico">¡PÁNICO!</button>
     <p>Presiona el botón o usa los botones de volumen para activarlo.</p>
   </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Página web cargada correctamente');
+
+      window.mostrarSeccion = function(id) {
+        document.querySelectorAll('section').forEach(sec => {
+          sec.classList.remove('seccion-activa');
+        });
+
+        const seccion = document.getElementById(id);
+        if (seccion) {
+          seccion.classList.add('seccion-activa');
+        } else {
+          console.error('No se encontró la sección con ID:', id);
+        }
+      };
+
+      // Mostrar encuesta al inicio
+      mostrarSeccion('encuesta-modal');
+
+      // Validación de encuesta
+      document.getElementById('encuesta-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita el envío automático
+
+        const totalPreguntas = 10;
+        let preguntasCompletadas = 0;
+
+        for (let i = 1; i <= totalPreguntas; i++) {
+          const opciones = document.querySelectorAll(`input[name="q${i}"]:checked`);
+          if (opciones.length > 0) {
+            preguntasCompletadas++;
+          }
+        }
+
+        if (preguntasCompletadas === totalPreguntas) {
+          mostrarSeccion('login-section');
+        } else {
+          alert('Por favor responde todas las preguntas antes de continuar.');
+        }
+      });
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
