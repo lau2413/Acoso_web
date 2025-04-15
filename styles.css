@@ -349,8 +349,6 @@ label:hover .radio-custom {
     font-size: 18px;
   }
 }
-/* Añade esto al final de tu styles.css */
-
 /* ===== CORRECCIÓN PARA COMPUTADORA ===== */
 @media (min-width: 768px) {
   .modal-content {
@@ -392,6 +390,31 @@ label:hover .radio-custom {
   display: flex !important;
   animation: modalFadeIn 0.5s ease-out;
 }
+.modal {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.modal-content {
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 90%;
+  max-width: 700px;
+  padding: 40px 50px;
+  box-shadow: var(--shadow);
+}
+
+
+@media (min-width: 768px) {
+  .modal-content {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @media (max-width: 480px) {
   body {
     padding: 10px;
