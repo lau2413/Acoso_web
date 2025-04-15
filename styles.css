@@ -317,6 +317,11 @@ input[type="radio"]:checked ~ .radio-custom {
   }
 }
 
+.modal-content {
+  max-height: 80vh !important;  /* Altura máxima del 80% de la pantalla */
+  overflow-y: auto !important;  /* Habilita scroll si es necesario */
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   header {
