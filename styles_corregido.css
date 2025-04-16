@@ -199,11 +199,12 @@ a:hover {
   align-items: center;
   z-index: 999;
   backdrop-filter: blur(5px);
+  padding: 20px;
 }
 
 .modal-content {
   background-color: var(--white);
-  padding: 40px 50px;
+  padding: 30px;
   border-radius: 20px;
   width: 100%;
   max-width: 700px;
@@ -213,7 +214,6 @@ a:hover {
   animation: modalFadeIn 0.4s ease-out;
   max-height: 80vh;
   overflow-y: auto;
-  margin: auto;
 }
 
 .modal-content::-webkit-scrollbar {
@@ -338,111 +338,11 @@ label:hover .radio-custom {
     padding: 25px;
   }
   
-  .modal-content {
-  background-color: var(--white);
-  padding: 40px 50px;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-  position: relative;
-  animation: modalFadeIn 0.4s ease-out;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: auto;
-}
-  
   #boton-panico {
     width: 120px;
     height: 120px;
     font-size: 18px;
   }
-}
-/* ===== CORRECCIÓN PARA COMPUTADORA ===== */
-@media (min-width: 768px) {
-  .modal-content {
-  background-color: var(--white);
-  padding: 40px 50px;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-  position: relative;
-  animation: modalFadeIn 0.4s ease-out;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: auto;
-}
-}
-
-/* ===== SISTEMA DE NAVEGACIÓN ===== */
-/* Oculta todas las secciones al inicio */
-#encuesta-modal,
-#login-section,
-#contactos-section,
-#panico-section {
-  display: none;
-}
-
-/* Muestra solo la encuesta al inicio */
-#encuesta-modal {
-  display: flex; /* Solo esta visible al cargar */
-}
-
-/* Botón para avanzar después de la encuesta */
-#avanzar-btn {
-  background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
-  margin-top: 30px;
-  display: none; /* Oculto inicialmente */
-}
-
-/* Muestra el botón cuando se completa la encuesta */
-
-
-/* ===== TRANSICIONES ENTRE SECCIONES ===== */
-/* Clase para mostrar secciones */
-.mostrar-seccion {
-  display: flex !important;
-  animation: modalFadeIn 0.5s ease-out;
-}
-.modal {
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-.modal-content {
-  background-color: var(--white);
-  padding: 40px 50px;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-  position: relative;
-  animation: modalFadeIn 0.4s ease-out;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: auto;
-}
-
-
-@media (min-width: 768px) {
-  .modal-content {
-  background-color: var(--white);
-  padding: 40px 50px;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-  position: relative;
-  animation: modalFadeIn 0.4s ease-out;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: auto;
-}
 }
 
 @media (max-width: 480px) {
@@ -455,17 +355,24 @@ label:hover .radio-custom {
   }
   
   .modal-content {
-  background-color: var(--white);
-  padding: 40px 50px;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-  position: relative;
-  animation: modalFadeIn 0.4s ease-out;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: auto;
+    padding: 20px;
+  }
 }
+
+/* Sistema de navegación */
+#login-section,
+#contactos-section,
+#panico-section {
+  display: none;
+}
+
+#encuesta-modal {
+  display: flex;
+}
+
+/* Botón para avanzar después de la encuesta */
+#avanzar-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
+  margin-top: 30px;
+  display: none;
 }
