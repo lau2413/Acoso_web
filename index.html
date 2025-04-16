@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Página de Seguridad</title>
-<link href="styles_corregido.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -115,57 +115,57 @@
 <p>Presiona el botón o usa los botones de volumen para activarlo.</p>
 </section>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Página web cargada correctamente');
-
-      window.mostrarSeccion = function(id) {
-        document.querySelectorAll('section').forEach(sec => {
-          sec.classList.remove('seccion-activa');
-        });
-
-        const seccion = document.getElementById(id);
-        if (seccion) {
-          seccion.classList.add('seccion-activa');
-        } else {
-          console.error('No se encontró la sección con ID:', id);
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Página web cargada correctamente');
+  
+    // Función para mostrar secciones
+    function mostrarSeccion(id) {
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+      
+      const seccion = document.getElementById(id);
+      if (seccion) {
+        seccion.classList.remove('hidden');
+      } else {
+        console.error('No se encontró la sección con ID:', id);
+      }
+    }
+  
+    // Mostrar encuesta al inicio
+    mostrarSeccion('encuesta-modal');
+  
+    // Validación de encuesta
+    document.getElementById('encuesta-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let todasRespondidas = true;
+      
+      // Verificar cada pregunta
+      for (let i = 1; i <= 10; i++) {
+        const pregunta = document.querySelectorAll(`input[name="q${i}"]:checked`);
+        if (pregunta.length === 0) {
+          todasRespondidas = false;
+          break;
         }
-      };
-
-      // Mostrar encuesta al inicio
-      mostrarSeccion('encuesta-modal');
-
-      // Validación de encuesta
-      document.getElementById('encuesta-form').addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita el envío automático
-
-        const totalPreguntas = 10;
-        let preguntasCompletadas = 0;
-
-        for (let i = 1; i <= totalPreguntas; i++) {
-          const opciones = document.querySelectorAll(`input[name="q${i}"]:checked`);
-          if (opciones.length > 0) {
-            preguntasCompletadas++;
-          }
-        }
-
-        if (preguntasCompletadas === totalPreguntas) {
-          mostrarSeccion('login-section');
-        } else {
-          alert('Por favor responde todas las preguntas antes de continuar.');
-        }
+      }
+      
+      if (todasRespondidas) {
+        mostrarSeccion('login-section');
+      } else {
+        alert('Por favor responde todas las preguntas antes de continuar.');
+      }
+    });
+  
+    // Mostrar botón cuando se selecciona cualquier opción
+    const radios = document.querySelectorAll('input[type="radio"]');
+    const avanzarBtn = document.getElementById('avanzar-btn');
+    
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        avanzarBtn.style.display = 'block';
       });
     });
-  </script>
-<script src="script.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const avanzarBtn = document.getElementById('avanzar-btn');
-  const radios = document.querySelectorAll('input[type="radio"]');
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      avanzarBtn.style.display = 'block';
-    });
   });
-});
-</script></body>
+  </script>
 </html>
