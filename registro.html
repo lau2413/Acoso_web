@@ -1,36 +1,25 @@
+<!-- ===== INICIO: Registro de Usuario y Contacto de Emergencia ===== -->
 <section class="registro-section">
     <h2>Registro de Usuario</h2>
     <form id="registro-form">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
-  
-      <label for="email">Correo Electrónico:</label>
-      <input type="email" id="email" name="email" required>
-  
-      <label for="contrasena">Contraseña:</label>
-      <input type="password" id="contrasena" name="contrasena" required>
-  
-      <button type="submit" class="registro-btn">Registrarse</button>
+      <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+      <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+      <button type="submit">Registrarse</button>
     </form>
   </section>
-  <!-- sección de contacto de emergencia ===== -->
-<section class="contacto-emergencia-section">
+  
+  <section class="contacto-emergencia-section">
     <h2>Contacto de Emergencia</h2>
     <form id="contacto-emergencia-form">
-      <label for="nombre-contacto">Nombre del Contacto:</label>
-      <input type="text" id="nombre-contacto" name="nombre-contacto" required>
-  
-      <label for="relacion-contacto">Relación:</label>
-      <input type="text" id="relacion-contacto" name="relacion-contacto" required>
-  
-      <label for="telefono-contacto">Teléfono:</label>
-      <input type="tel" id="telefono-contacto" name="telefono-contacto" required>
-  
-      <label for="email-contacto">Correo Electrónico:</label>
-      <input type="email" id="email-contacto" name="email-contacto">
-  
+      <input type="text" id="nombre-contacto" name="nombre-contacto" placeholder="Nombre del contacto" required>
+      <input type="text" id="relacion-contacto" name="relacion-contacto" placeholder="Relación (ej. madre, amigo...)" required>
+      <input type="tel" id="telefono-contacto" name="telefono-contacto" placeholder="Teléfono" required>
+      <input type="email" id="email-contacto" name="email-contacto" placeholder="Correo electrónico">
       <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
     </form>
   </section>
+  <!-- ===== FIN: Registro ===== -->
+  
 
   
