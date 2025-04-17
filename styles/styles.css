@@ -511,3 +511,24 @@ nav a:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(106, 48, 147, 0.4);
 }
+.registro-section {
+  padding: 2rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-top: 2rem;
+}
+
+.registro-section h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.registro-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
