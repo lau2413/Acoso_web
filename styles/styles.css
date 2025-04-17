@@ -28,16 +28,19 @@ body {
 }
 
 header {
-  background-color: var(--white);
-  box-shadow: var(--shadow);
-  padding: 15px 30px;
-  margin-bottom: 30px;
+  font-family: "Ubuntu", serif;
+  background: #e3f7f5;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: space-between;
-  border-radius: 15px;
-  position: relative;
-  overflow: hidden;
+  padding: 15px 50px;
+  position: fixed;
+  width: 100%;
+  height: 45px;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 80px;
 }
 
 header::before {
@@ -67,10 +70,13 @@ header::before {
   color: var(--primary);
   letter-spacing: -0.5px;
 }
-
+  /*cambios*/
 section {
-  max-width: 600px;
-  margin: 0 auto 30px auto;
+  max-width: 100%; /* Se asegura de que ocupe todo el ancho */
+  height: 100vh; /* Se asegura de que ocupe toda la altura de la pantalla */
+  display: flex; /* Usamos flexbox para alinear */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
   background-color: var(--white);
   border-radius: 20px;
   padding: 30px;
@@ -87,6 +93,19 @@ section::after {
   width: 100%;
   height: 5px;
   background: linear-gradient(to right, var(--accent), var(--secondary));
+}
+
+/* Asegúrate de que los inputs y el formulario ocupen todo el ancho disponible */
+form {
+  width: 100%; /* Asegura que el formulario ocupe todo el ancho de la sección */
+  display: flex;
+  flex-direction: column; /* Organiza los elementos de forma vertical */
+  gap: 20px; /* Espacio entre los elementos del formulario */
+}
+
+/* Estilos de los campos de entrada (inputs) */
+input, select, button {
+  width: 100%; /* Asegura que los campos de entrada ocupen todo el ancho disponible */
 }
 
 h2 {
@@ -296,6 +315,13 @@ label:hover .radio-custom {
   transform: scale(1.05);
   box-shadow: 0 12px 28px rgba(255, 77, 141, 0.6);
 }
+.panic-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  margin-top: 0;
+}
 
 /* Animaciones */
 @keyframes pulse {
@@ -321,7 +347,58 @@ label:hover .radio-custom {
   }
 }
 
-/* Responsive */
+/* Sistema de navegación */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background-color: #e6f9f8; /* O el color que tengas */
+}
+.nav-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+nav ul {
+  list-style: none; /* Quitar los puntitos feos */
+  display: flex; /* Poner los botones en línea */
+  justify-content: start; /* Centrar los botones */
+  align-items: center; /* Alinear verticalmente */
+  gap: 30px; /* Espacio entre botones */
+  margin: 0;
+  padding: 0;
+}
+
+/*
+nav li {
+  padding: 10px 15px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+*/
+nav a {
+  text-decoration: none; /* Quitar el subrayado */
+  color: var(--primary); /* O el color que quieras */
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--secondary); /* Color al pasar el mouse */
+}
+
+/* Botón para avanzar después de la encuesta */
+#avanzar-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
+  margin-top: 30px;
+  display: none;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -358,21 +435,34 @@ label:hover .radio-custom {
     padding: 20px;
   }
 }
+@media (max-width: 768px) {
 
-/* Sistema de navegación */
-#login-section,
-#contactos-section,
-#panico-section {
-  display: none;
-}
+  .nav-toggle {
+    display: block;
+  }
 
-#encuesta-modal {
-  display: flex;
-}
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    margin: 0;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  }
 
-/* Botón para avanzar después de la encuesta */
-#avanzar-btn {
-  background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
-  margin-top: 30px;
-  display: none;
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
 }
