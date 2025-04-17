@@ -2,21 +2,50 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <title>Registro - Paso 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contactos de Emergencia</title>
   <link rel="stylesheet" href="styles/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<section id="contactos-section">
-  <h2>Contactos de emergencia</h2>
-  <form id="contact-form">
-    <input type="text" placeholder="Nombre del contacto" required>
-    <input type="tel" placeholder="Teléfono" required>
-    <button type="submit">Guardar contacto</button>
-  </form>
-</section>
+  <section class="contacto-emergencia-section">
+    <h2>Contacto de Emergencia</h2>
+    <form id="contacto-emergencia-form">
+      <input type="text" name="nombre-contacto" placeholder="Nombre del contacto" required>
+      <input type="text" name="relacion-contacto" placeholder="Relación (madre, amigo...)" required>
+      <input type="tel" name="telefono-contacto" placeholder="Teléfono" required>
+      <input type="email" name="email-contacto" placeholder="Correo electrónico">
+      <button type="submit" class="contacto-emergencia-btn">Finalizar Registro</button>
+    </form>
+  </section>
 
-<script src="scripts.js"></script>
+  <p style="text-align: center; margin-top: 1rem;">
+    ¿Ya tienes una cuenta?
+    <a href="login.html">Inicia sesión</a>
+  </p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contacto-emergencia-form');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (form.checkValidity()) {
+          const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
+          alert(`¡Gracias por registrarte, ${nombreUsuario}!\nTu contacto ha sido guardado correctamente.`);
+
+          // Limpiar localStorage y redirigir
+          localStorage.clear();
+          form.reset();
+          window.location.href = "login.html";
+        } else {
+          form.reportValidity();
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
