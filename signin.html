@@ -2,21 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<section id="register-section">
-  <h2>Regístrate</h2>
-  <form id="registerForm">
-    <input id="registerUsername" type="text" placeholder="Correo" required>
-    <input id="registerPassword" type="password" placeholder="Contraseña" required>
-    <button type="submit">Registrarse</button>
-  </form>
-</section>
+  <!-- ===== INICIO: Registro de Usuario ===== -->
+  <section class="registro-section">
+    <h2>Registro de Usuario</h2>
+    <form id="registro-form">
+      <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+      <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+      <button type="submit">Registrarse</button>
+    </form>
+  </section>
 
-<script src="scripts/main.js"></script>
+  <!-- ===== INICIO: Contacto de Emergencia ===== -->
+  <section class="contacto-emergencia-section">
+    <h2>Contacto de Emergencia</h2>
+    <form id="contacto-emergencia-form">
+      <input type="text" id="nombre-contacto" name="nombre-contacto" placeholder="Nombre del contacto" required>
+      <input type="text" id="relacion-contacto" name="relacion-contacto" placeholder="Relación (ej. madre, amigo...)" required>
+      <input type="tel" id="telefono-contacto" name="telefono-contacto" placeholder="Teléfono" required>
+      <input type="email" id="email-contacto" name="email-contacto" placeholder="Correo electrónico">
+      <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
+    </form>
+  </section>
+
+  <!-- Script para funcionalidad -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const registroForm = document.getElementById('registro-form');
+      registroForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Registro enviado correctamente.");
+        registroForm.reset();
+      });
+
+      const contactoForm = document.getElementById('contacto-emergencia-form');
+      contactoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Contacto de emergencia guardado.");
+        contactoForm.reset();
+      });
+    });
+  </script>
+
 </body>
 </html>
