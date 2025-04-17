@@ -16,37 +16,52 @@
       <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
       <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
       <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
-      <button type="submit">Registrarse</button>
+      <button type="button" id="continuar-btn">Continuar</button>
     </form>
   </section>
 
-  <!-- ===== INICIO: Contacto de Emergencia ===== -->
-  <section class="contacto-emergencia-section">
+  <!-- ===== INICIO: Contacto de Emergencia (inicialmente oculto) ===== -->
+  <section class="contacto-emergencia-section hidden" id="contacto-section">
     <h2>Contacto de Emergencia</h2>
     <form id="contacto-emergencia-form">
       <input type="text" id="nombre-contacto" name="nombre-contacto" placeholder="Nombre del contacto" required>
-      <input type="text" id="relacion-contacto" name="relacion-contacto" placeholder="Relación (ej. madre, amigo...)" required>
+      <input type="text" id="relacion-contacto" name="relacion-contacto" placeholder="Relación (madre, amigo...)" required>
       <input type="tel" id="telefono-contacto" name="telefono-contacto" placeholder="Teléfono" required>
       <input type="email" id="email-contacto" name="email-contacto" placeholder="Correo electrónico">
-      <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
+      <button type="submit" class="contacto-emergencia-btn">Registrarse</button>
     </form>
   </section>
 
-  <!-- Script para funcionalidad -->
+  <!-- Enlace para volver al login -->
+  <p style="text-align: center; margin-top: 1rem;">
+    ¿Ya tienes una cuenta?
+    <a href="login.html">Inicia sesión</a>
+  </p>
+
+  <!-- Script para mostrar sección progresiva -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const continuarBtn = document.getElementById('continuar-btn');
+      const contactoSection = document.getElementById('contacto-section');
       const registroForm = document.getElementById('registro-form');
-      registroForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert("Registro enviado correctamente.");
-        registroForm.reset();
+      const contactoForm = document.getElementById('contacto-emergencia-form');
+
+      continuarBtn.addEventListener('click', () => {
+        if (registroForm.checkValidity()) {
+          contactoSection.classList.remove('hidden');
+          continuarBtn.disabled = true;
+          continuarBtn.textContent = "Datos guardados";
+        } else {
+          registroForm.reportValidity();
+        }
       });
 
-      const contactoForm = document.getElementById('contacto-emergencia-form');
       contactoForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert("Contacto de emergencia guardado.");
+        alert("Registro completo. ¡Bienvenido!");
         contactoForm.reset();
+        registroForm.reset();
+        window.location.href = "login.html"; // O a donde quieras redirigir
       });
     });
   </script>
