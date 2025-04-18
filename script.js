@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('contrasenaUsuario', contrasena);
   
         // Redirigir al segundo paso del registro
-        window.location.href = "contacto.html";
+        window.location.href = "contactos.html";
       });
     }
   
     // ====================
-    // CONTACTOS.HTML (registro de contacto)
+    // CONTACTO.HTML (registro de contacto)
     // ====================
     const contactoForm = document.getElementById('contacto-emergencia-form');
   
