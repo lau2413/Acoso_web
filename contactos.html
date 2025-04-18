@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Contacto de Emergencia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Estilos -->
   <link rel="stylesheet" href="styles/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -35,38 +37,8 @@
     <a href="login.html">Inicia sesión</a>
   </p>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('contacto-emergencia-form');
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const nombre = form["nombre-contacto"].value.trim();
-        const telefono = form["telefono-contacto"].value.trim();
-        const relacion = form["relacion-contacto"].value;
-
-        if (!nombre || !telefono || !relacion) {
-          alert("Por favor completa todos los campos.");
-          return;
-        }
-
-        if (!/^\d{10}$/.test(telefono)) {
-          alert("El teléfono debe tener exactamente 10 dígitos.");
-          return;
-        }
-
-        // Guardar temporalmente en localStorage para usar en la encuesta
-        localStorage.setItem('contactoNombre', nombre);
-        localStorage.setItem('contactoTelefono', telefono);
-        localStorage.setItem('contactoRelacion', relacion);
-
-        alert(`Tu contacto de emergencia ha sido registrado. Ahora responderás una breve encuesta.`);
-        form.reset();
-        window.location.href = "encuesta.html";
-      });
-    });
-  </script>
+  <!-- Lógica en main.js -->
+  <script src="scripts/main.js"></script>
 
 </body>
 </html>

@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const hash = bcrypt.hashSync(contrasena, 10); // bcrypt debe estar cargado en el HTML
+      const hash = bcrypt.hashSync(contrasena, 10); 
 
       // Guardar datos temporalmente en localStorage
       localStorage.setItem('nombreUsuario', nombre);
@@ -152,8 +152,40 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('telefonoUsuario', telefono);
       localStorage.setItem('contrasenaUsuario', hash);
 
-      // Continuar con el flujo
+      // Continuar 
       window.location.href = "contactos.html";
+    });
+  }
+  // CONTACTO DE EMERGENCIA 
+  const formContacto = document.getElementById('contacto-emergencia-form');
+
+  if (formContacto) {
+    formContacto.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nombre = formContacto["nombre-contacto"].value.trim();
+      const telefono = formContacto["telefono-contacto"].value.trim();
+      const relacion = formContacto["relacion-contacto"].value;
+
+      const nombreUsuario = localStorage.getItem('nombreUsuario') || "usuario";
+
+      if (!nombre || !telefono || !relacion) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      if (!/^\d{10}$/.test(telefono)) {
+        alert("El teléfono debe tener exactamente 10 dígitos.");
+        return;
+      }
+
+      // Guardar en localStorage para usarlo al final del registro
+      localStorage.setItem('contactoNombre', nombre);
+      localStorage.setItem('contactoTelefono', telefono);
+      localStorage.setItem('contactoRelacion', relacion);
+
+      alert(`${nombreUsuario}, tu contacto ha sido registrado.\nAhora completarás una breve encuesta.`);
+      window.location.href = "encuesta.html";
     });
   }
 });
