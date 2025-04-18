@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('contrasenaUsuario', contrasena);
   
         // Redirigir al segundo paso del registro
-        location.href = "contacto-emergencia-section";
+        location.href = "contactos.html";
+;
       });
     }
   
