@@ -20,19 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // Evita que recargue la página
 
         // Obtener todas las respuestas seleccionadas
-        const respuestas = formEncuesta.querySelectorAll('input[type="radio"]:checked');
-        const totalPreguntas = formEncuesta.querySelectorAll('input[type="radio"][name^="q"]').length / 4; // Contar radios y dividir por 4, ya que cada pregunta tiene 4 respuestas
+        const totalPreguntas = 10;
+        const respuestasSeleccionadas = formEncuesta.querySelectorAll('input[type="radio"]:checked'); 
 
         // Verificar si todas las preguntas fueron respondidas
-        if (respuestas.length < totalPreguntas) {
+        if (respuestasSeleccionadas.length < totalPreguntas)  {
           alert('Por favor, responde todas las preguntas antes de enviar.');
           return;
         }
 
         // Encuesta completada exitosamente
         alert('¡Gracias por completar la encuesta!');
+        formEncuesta.reset();
         window.location.href = 'index.html';
-        formEncuesta.reset(); // Limpiar respuestas
       });
     }
 });
