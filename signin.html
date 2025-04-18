@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
 </head>
 <body>
 
@@ -14,6 +15,7 @@
     <form id="registro-form">
       <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
       <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+      <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
       <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
       <button type="submit">Continuar</button>
     </form>
@@ -24,6 +26,7 @@
     <a href="login.html">Inicia sesión</a>
   </p>
 
+  <!-- Guardado local temporal -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('registro-form');
@@ -31,17 +34,32 @@
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Validar formulario antes de continuar
-        if (form.checkValidity()) {
-          // Guardar temporalmente los datos en localStorage: luego cambiar a  BD
-          localStorage.setItem('nombreUsuario', document.getElementById('nombre').value);
-          localStorage.setItem('correoUsuario', document.getElementById('email').value);
+        const nombre = document.getElementById('nombre').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
 
-          // Ir al siguiente paso
-          window.location.href = "contactos.html";
-        } else {
-          form.reportValidity();
+        if (!nombre || !email || !telefono || !contrasena) {
+          alert("Por favor completa todos los campos.");
+          return;
         }
+
+        if (!/^\d{10}$/.test(telefono)) {
+          alert("El teléfono debe tener exactamente 10 dígitos.");
+          return;
+        }
+
+        // Hash de contraseña
+        const hash = bcrypt.hashSync(contrasena, 10);
+
+        // Guardar en localStorage temporalmente
+        localStorage.setItem('nombreUsuario', nombre);
+        localStorage.setItem('correoUsuario', email);
+        localStorage.setItem('telefonoUsuario', telefono);
+        localStorage.setItem('contrasenaUsuario', hash);
+
+        // Ir al paso 2
+        window.location.href = "contactos.html";
       });
     });
   </script>

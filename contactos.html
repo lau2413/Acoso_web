@@ -35,7 +35,6 @@
     <a href="login.html">Inicia sesión</a>
   </p>
 
-  <!-- Script para guardar contacto y continuar al paso 3 -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('contacto-emergencia-form');
@@ -46,25 +45,23 @@
         const nombre = form["nombre-contacto"].value.trim();
         const telefono = form["telefono-contacto"].value.trim();
         const relacion = form["relacion-contacto"].value;
-        const nombreUsuario = localStorage.getItem('nombreUsuario') || "usuario";
+
+        if (!nombre || !telefono || !relacion) {
+          alert("Por favor completa todos los campos.");
+          return;
+        }
 
         if (!/^\d{10}$/.test(telefono)) {
           alert("El teléfono debe tener exactamente 10 dígitos.");
           return;
         }
 
-        if (!nombre || !relacion) {
-          alert("Por favor completa todos los campos.");
-          return;
-        }
-
-        // Guardar en localStorage (opcional)
+        // Guardar temporalmente en localStorage para usar en la encuesta
         localStorage.setItem('contactoNombre', nombre);
         localStorage.setItem('contactoTelefono', telefono);
         localStorage.setItem('contactoRelacion', relacion);
 
-        // Mensaje y redirección al paso 3
-        alert(`${nombreUsuario}, tu contacto de emergencia ha sido registrado.\nAhora responderás una breve encuesta.`);
+        alert(`Tu contacto de emergencia ha sido registrado. Ahora responderás una breve encuesta.`);
         form.reset();
         window.location.href = "encuesta.html";
       });
