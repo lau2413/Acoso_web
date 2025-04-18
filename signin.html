@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro - Paso 1</title>
+  <title>Registro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -24,27 +24,8 @@
     <a href="login.html">Inicia sesión</a>
   </p>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('registro-form');
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        // Validar formulario antes de continuar
-        if (form.checkValidity()) {
-          // Guardar temporalmente los datos en localStorage
-          localStorage.setItem('nombreUsuario', document.getElementById('nombre').value);
-          localStorage.setItem('correoUsuario', document.getElementById('email').value);
-
-          // Ir al siguiente paso
-          window.location.href = "contactos.html";
-        } else {
-          form.reportValidity();
-        }
-      });
-    });
-  </script>
+  <!-- script en script.js -->
+  <script src="scripts/script.js"></script>
 
 </body>
 </html>
