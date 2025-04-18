@@ -44,20 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'index.html';
       });
     }
-        // Mostrar saludo si el usuario está registrado
-    const nombreUsuario = localStorage.getItem('nombreUsuario');
-    if (nombreUsuario && window.location.pathname.includes("index.html")) {
-      const saludo = document.createElement('p');
-      saludo.textContent = `Bienvenido/a, ${nombreUsuario}`;
-      saludo.style.fontSize = "18px";
-      saludo.style.fontWeight = "600";
-      saludo.style.color = "var(--primary)";
-      saludo.style.textAlign = "center";
-      saludo.style.marginTop = "20px";
-
-      const main = document.querySelector('main');
-      main.prepend(saludo);
-    }
 });
 
   
