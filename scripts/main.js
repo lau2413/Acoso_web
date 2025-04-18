@@ -1,42 +1,49 @@
-// Esperar a que todo el documento esté listo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   console.log('Página cargada correctamente');
 
-  // === FUNCIONALIDAD DEL BOTÓN DE PÁNICO ===
   const btnPanico = document.getElementById('boton-panico');
   const modalEmergencia = document.getElementById('modal-emergencia');
   const btnLeve = document.getElementById('btn-leve');
   const btnGrave = document.getElementById('btn-grave');
   const cerrarModal = document.getElementById('cerrar-modal');
 
+  const nombreUsuario = localStorage.getItem('nombreUsuario') || "Usuario";
+
+  // Mostrar modal al presionar botón de pánico
   if (btnPanico) {
     btnPanico.addEventListener('click', () => {
       modalEmergencia.classList.remove('hidden');
     });
   }
 
+  // Cerrar modal con botón cancelar
   if (cerrarModal) {
     cerrarModal.addEventListener('click', () => {
       modalEmergencia.classList.add('hidden');
     });
   }
 
-  const nombreUsuario = localStorage.getItem('nombreUsuario') || "Usuario";
-
   // Acoso leve
-  btnLeve?.addEventListener('click', () => {
-    modalEmergencia.classList.add('hidden');
-    alert(`⚠️ Alerta de acoso leve enviada.\n${nombreUsuario}, tu contacto ha sido notificado.`);
-    window.location.href = 'index.html';
-  });
+  if (btnLeve) {
+    btnLeve.addEventListener('click', () => {
+      modalEmergencia.classList.add('hidden');
+      setTimeout(() => {
+        alert(`⚠️ Alerta de acoso leve enviada.\n${nombreUsuario}, tu contacto ha sido notificado.`);
+        window.location.href = 'index.html';
+      }, 200); // Pequeña pausa para que se oculte visualmente antes
+    });
+  }
 
   // Acoso grave
-  btnGrave?.addEventListener('click', () => {
-    modalEmergencia.classList.add('hidden');
-    alert(`🚨 Acoso grave reportado.\n${nombreUsuario}, tu contacto y las autoridades han sido notificados.`);
-    window.location.href = 'index.html';
-  });
-
+  if (btnGrave) {
+    btnGrave.addEventListener('click', () => {
+      modalEmergencia.classList.add('hidden');
+      setTimeout(() => {
+        alert(`🚨 Acoso grave reportado.\n${nombreUsuario}, tu contacto y las autoridades han sido notificados.`);
+        window.location.href = 'index.html';
+      }, 200); // Pausa para asegurar ocultamiento visual
+    });
+  }
   // === FUNCIONALIDAD FORMULARIO ENCUESTA ===
   const formEncuesta = document.getElementById('encuesta-form');
   const avanzarBtn = document.getElementById('avanzar-btn');
