@@ -122,4 +122,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  // FORM REGISTRO
+  const formRegistro = document.getElementById('registro-form');
+
+  if (formRegistro) {
+    formRegistro.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const contrasena = document.getElementById('contrasena').value.trim();
+
+      if (!nombre || !email || !telefono || !contrasena) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      if (!/^\d{10}$/.test(telefono)) {
+        alert("El teléfono debe tener exactamente 10 dígitos.");
+        return;
+      }
+
+      const hash = bcrypt.hashSync(contrasena, 10); // bcrypt debe estar cargado en el HTML
+
+      // Guardar datos temporalmente en localStorage
+      localStorage.setItem('nombreUsuario', nombre);
+      localStorage.setItem('correoUsuario', email);
+      localStorage.setItem('telefonoUsuario', telefono);
+      localStorage.setItem('contrasenaUsuario', hash);
+
+      // Continuar con el flujo
+      window.location.href = "contactos.html";
+    });
+  }
 });
