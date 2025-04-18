@@ -548,3 +548,12 @@ select:focus {
   border-color: var(--secondary);
   box-shadow: 0 0 0 3px rgba(106, 48, 147, 0.2);
 }
+
+/* Asegurar visibilidad del modal de encuesta */
+#encuesta-modal {
+  display: flex !important;
+  pointer-events: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
