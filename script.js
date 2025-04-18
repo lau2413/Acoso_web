@@ -1,3 +1,5 @@
+console.log("Script conectado");
+
 // ====================
 // SIGNIN.HTML (registro de usuario)
 // ====================
