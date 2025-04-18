@@ -31,13 +31,44 @@
   </section>
 
   <p style="text-align: center; margin-top: 1rem;">
-    ¿Ya tienes una cuenta?
+    ¿Ya tienes cuenta?
     <a href="login.html">Inicia sesión</a>
   </p>
 
-  <!-- script en script.js -->
-  <script src="scripts/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contacto-emergencia-form');
+  
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+  
+        const nombre = form["nombre-contacto"].value.trim();
+        const telefono = form["telefono-contacto"].value.trim();
+        const relacion = form["relacion-contacto"].value;
+  
+        const nombreUsuario = localStorage.getItem('nombreUsuario') || "usuario";
+  
+        if (!/^\d{10}$/.test(telefono)) {
+          alert("El teléfono debe tener exactamente 10 dígitos.");
+          return;
+        }
+  
+        if (!nombre || !relacion) {
+          alert("Por favor completa todos los campos.");
+          return;
+        }
+  
+        // Mostrar mensaje de registro
+        alert(`¡Registro completo!\n${nombreUsuario} fue registrado con éxito junto a su contacto "${nombre}".`);
+  
+        // Limpiar datos temporales y redirigir
+        localStorage.clear();
+        form.reset();
+        window.location.href = "login.html";
+      });
+    });
+  </script>
+  
 
 </body>
 </html>
-
