@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Encuesta completada exitosamente
-        alert('¡Gracias por completar la encuesta!');
+        alert('¡Gracias por completar la encuesta!\nTu registro ha sido finalizado exitosamente.');
+        localStorage.clear();
         formEncuesta.reset();
         window.location.href = 'index.html';
       });
