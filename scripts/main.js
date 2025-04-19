@@ -114,13 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const contactoRelacion = localStorage.getItem('contactoRelacion');
 
         // Insertar usuario
+        
         const { data: usuarioData, error: usuarioError } = await supabase
           .from('usuarios')
           .insert([{ nombre, correo, contrasena, telefono }])
           .select()
           .single();
 
-        if (usuarioError) throw usuarioError;
+        if (usuarioError) {
+          console.error("Error al registrar:", usuarioError);
+          throw usuarioError;
+        }
         const id_usuario = usuarioData.id;
 
         // Insertar contacto
