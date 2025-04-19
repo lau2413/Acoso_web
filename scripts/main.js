@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (usuarioError) {
           console.error("Error al registrar:", usuarioError);
-          throw usuarioError;
+          alert("Error al registrar:\n" + (usuarioError?.message || JSON.stringify(usuarioError)));
+          return
         }
         const id_usuario = usuarioData.id;
 
