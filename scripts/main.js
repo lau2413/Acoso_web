@@ -140,15 +140,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (contactoError) throw contactoError;
 
         // Insertar respuestas
-        const respuestas = Array.from(respuestasSeleccionadas).map(radio => ({
-          id_usuario,
-          id_pregunta: parseInt(radio.name.replace('q', '')),
-          opcion: radio.value
-        }));
+        const respuestas = [];
 
-        const { error: respuestaError } = await supabase.from('respuestas').insert(respuestas);
+        for (const radio of respuestasSeleccionadas) {
+          const id_pregunta = parseInt(radio.name.replace('q', ''));
+          const textoOpcion = radio.nextSibling.textContent.trim(); 
+
+          const { data: opcionData, error: opcionError } = await supabase
+          .from('opciones')
+          .select('id_opcion')
+          .eq('id_pregunta', id_pregunta)
+          .eq('opcion', textoOpcion)
+          .single();
+
+          if (opcionError || !opcionData) {
+            throw new Error(`No se encontró id_opcion para la pregunta ${id_pregunta} y opción "${textoOpcion}"`);
+        }
+         respuestas.push({
+            id_usuario,
+            id_opcion: opcionData.id_opcion
+          });
+        }
+        const { error: respuestaError } = await supabase
+          .from('respuestas')
+          .insert(respuestas);
         if (respuestaError) throw respuestaError;
-
+        
         // Finalizar
         localStorage.clear();
         alert('¡Gracias por completar la encuesta! Tu registro ha sido finalizado exitosamente.');
