@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacto de Emergencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <section class="contacto-emergencia-section">
+    <h2>Contacto de Emergencia</h2>
+    <form id="contacto-emergencia-form">
+      <input type="text" name="nombre-contacto" placeholder="Nombre del contacto" required>
+
+      <select name="relacion-contacto" required>
+        <option value="">Selecciona relación</option>
+        <option value="Madre">Madre</option>
+        <option value="Padre">Padre</option>
+        <option value="Hermano/a">Hermano/a</option>
+        <option value="Pareja">Pareja</option>
+        <option value="Amigo/a">Amigo/a</option>
+        <option value="Otro">Otro</option>
+      </select>
+
+      <input type="tel" name="telefono-contacto" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
+
+      <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
+    </form>
+  </section>
+
+  <p style="text-align: center; margin-top: 1rem;">
+    ¿Ya tienes cuenta?
+    <a href="login.html">Inicia sesión</a>
+  </p>
+  <div id="modal-encuesta" class="hidden">
+    <div class="modal-contenido">
+      <p id="texto-modal"></p>
+      <button id="btn-si">Si</button>
+      <button id="btn-no">No</button>
+    </div>
+  </div>
+
+  <!-- Lógica en main.js -->
+  <script type="module" src="scripts/main.js"></script>
+
+</body>
+</html>

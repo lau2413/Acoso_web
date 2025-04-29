@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protección Segura</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="Logo.jpg" alt="Logo FEMX">
+      <span class="logo-text">FEMX</span>
+    </div>
+    <!-- Botón para mostrar/ocultar la navegación en móviles -->
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      ☰
+    </button>
+    <nav>
+      <ul>
+        <li><a href="informacion.html">Información</a></li>
+        <li><a href="contactos.html">Contacto de Emergencia</a></li>
+        <li><a href="encuesta.html">Encuesta de Acoso</a></li>
+        <li><a href="glosario.html">Glosario</a></li>
+        <li><a href="login.html">Iniciar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="panico-section">
+      <div class="panic-button-container">
+        <div class="card">
+          <button id="boton-panico">¡PÁNICO!</button>
+          <p>Presiona el botón para realizar el reporte.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODAL DE EMERGENCIA CON SLIDER ===== -->
+<div id="modal-emergencia" class="modal hidden">
+  <div class="modal-content">
+    <h2>¿Qué nivel de acoso estás viviendo?</h2>
+    <input type="range" id="slider-acoso" min="0" max="5" step="1" value="0">
+    <p id="nivel-acoso">Nivel 0: Leve</p>
+    <button id="enviar-alerta">Enviar Alerta</button>
+    <button class="secondary" id="cerrar-modal">Cancelar</button>
+  </div>
+</div>
+</section>
+</main>
+
+
+<script type="module" src="scripts/main.js"></script>
+
+</body>
+</html>

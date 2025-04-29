@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <title>Protección Segura</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sacramento">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header con la barra de navegación -->
+    <header>
+        <div class="logo">
+            <h1><span>Protección Segura</span></h1>
+            <img src="assets/images/logo1.png" alt="Ubicación">
+        </div>
+
+    </header>
+
+    <!-- Sección de el formulario acompañado de la imagen -->
+
+    <div class="container-login">
+        <div class="form-login">
+            <h1 data-i18n="IniciarSesion">Iniciar Sesión</h1>
+            <form id="formulario_login">
+                <label for="correo" data-i18n="Correo">Correo</label>
+                <input type="text" id="loginUsername" name="Correo" placeholder="Ingrese su correo electrónico"
+                    data-i18n-placeholder="CampoUsuario" required>
+
+                <label for="contraseña" data-i18n="Contraseña">Contraseña</label>
+                <input type="password" id="loginPassword" name="contraseña" placeholder="Ingrese su contraseña"
+                    data-i18n-placeholder="CampoContraseña" required>
+
+                <button type="submit" data-i18n="IniciarSesion">Iniciar Sesión</button>
+                <button onclick="location.href='signin.html'" type="button" data-i18n="Registrarse">Registrarse</button>
+
+
+            </form>
+        </div>
+    </div>
+    
+        <!-- Link a JS -->
+        <script type="module" src="scripts/main.js"></script>
+</body>
+</html>

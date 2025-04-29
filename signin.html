@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - Paso 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- BcryptJS para hash de contraseñas -->
+  <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+</head>
+<body>
+
+  <section class="registro-section">
+    <h2>Registro de Usuario</h2>
+    <form id="registro-form">
+      <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+
+      <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+
+      <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
+
+      <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+
+      <button type="submit">Continuar</button>
+    </form>
+  </section>
+
+  <p style="text-align: center; margin-top: 1rem;">
+    ¿Ya tienes una cuenta?
+    <a href="login.html">Inicia sesión</a>
+  </p>
+
+  <!-- Lógica de registro en main.js -->
+  <script type="module" src="scripts/main.js"></script>
+
+</body>
+</html>
