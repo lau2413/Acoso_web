@@ -1,9 +1,6 @@
 // Supabase conexión y bcrypt para encriptar contraseñas
-import { createClient } from 'https://cdn.skypack.dev/@supabase/supabase-js';
-
-const supabaseUrl = 'https://vzqhafehwzfviqprwvbf.supabase.co'; 
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6cWhhZmVod3pmdmlxcHJ3dmJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwMTM1NjgsImV4cCI6MjA2MDU4OTU2OH0.5YJvlpdAS-mUpnor0V2SHwj3yHTzkExyKHtG1w1WFAI'; 
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { LogIn, updateSessionUI } from './auth.js';
+import { supabase } from "./supabase.js";
 // Configuración de Twilio (reemplaza con tus datos reales)
 const TWILIO_SID = "ACc38625a993719beb95e6ac9154570709"; // Account SID de Twilio
 const TWILIO_TOKEN = "82d829c04c269e2c3791605f45bfc93c"; // Auth Token de Twilio
@@ -69,13 +66,13 @@ enviarAlerta?.addEventListener('click', async () => {
     alert("No se encontró un contacto de emergencia para este usuario.");
     console.log("Usuario actual:", user.id);
 
-const { data: contactos, error: contactoError } = await supabase
+  const { data: contactos, error: contactoError } = await supabase
   .from('contactos')
   .select('telefono_contacto')
   .eq('id_usuario', user.id)
   .limit(1);
 
-console.log("Contactos encontrados:", contactos);
+  console.log("Contactos encontrados:", contactos);
 
     return;
   }
@@ -250,7 +247,6 @@ if (formContacto) {
           .insert([{ id: uid, nombre: nombreUsuario, correo, contrasena, telefono: telefonoUsuario }]);
     
         if (usuarioError) throw usuarioError;
-    
         // Insertar contacto de emergencia
         const { error: contactoError } = await supabase
           .from('contactos')
@@ -393,67 +389,8 @@ if (formEncuesta) {
    });
  });
 
- //LOG IN
- const formLogin = document.getElementById('formulario_login');
-
- if (formLogin) {
-   formLogin.addEventListener('submit', async (e) => {
-     e.preventDefault();
-
-     const correo = document.getElementById('loginUsername').value.trim();
-     const contrasena = document.getElementById('loginPassword').value.trim();
-
-     if (!correo || !contrasena) {
-       alert("Por favor ingresa tu correo y contraseña.");
-       return;
-     }
-
-     try {
-       const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
-         email: correo,
-         password: contrasena
-       });
-
-       if (loginError) {
-         console.error('Error de login:', loginError);
-         alert('Correo o contraseña incorrectos. Inténtalo de nuevo.');
-         return;
-       }
-
-       alert('Inicio de sesión exitoso');
-       window.location.href = 'index.html'; // Redirige al inicio 
-
-     } catch (error) {
-       console.error('Error al intentar iniciar sesión:', error);
-       alert('Hubo un problema. Intenta de nuevo más tarde.');
-     }
-   });
-  }
-  updateSessionUI();
-});
-
-async function updateSessionUI() {
-  const { data: { user } } = await supabase.auth.getUser();
-  const navList = document.querySelector('nav ul');
-
-  if (!navList) return;
-
-  // Remover el último <li> si es de sesión
-  const lastLi = navList.querySelector('li:last-child');
-  if (lastLi) lastLi.remove();
-
-  const loginLi = document.createElement('li');
-  if (user) {
-    loginLi.innerHTML = `<a href="#" id="logoutBtn">Cerrar sesión</a>`;
-    navList.appendChild(loginLi);
-
-    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-      await supabase.auth.signOut();
-      location.reload();
-    });
-  } else {
-    loginLi.innerHTML = `<a href="login.html">Iniciar Sesión</a>`;
-    navList.appendChild(loginLi);
-  }
+if (document.querySelector('#formulario_login')) {
+  LogIn();
 }
+ updateSessionUI();
+});
