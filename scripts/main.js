@@ -44,32 +44,83 @@ slider?.addEventListener('input', () => {
   nivel.style.color = (val <= 2) ? 'orange' : 'red';
 });
 
-// Enviar alerta basada en el nivel seleccionado
+//Enviar alerta segun el nivel
 enviarAlerta?.addEventListener('click', async () => {
-  try {
-    const response = await fetch(
-      'https://turbo-cod-x5wq5wqjvpp73pxrv-3000.app.github.dev',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Basic ' + btoa('ACc38625a993719beb95e6ac9154570709:5001c19902f678ba32ea5ed40143edda'),
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          'To': '+573197697334',  // Número destino (reemplaza con el real)
-          'From': '+13163892927', // Tu número Twilio
-          'Body': '🚨 ¡Esta es una alerta de prueba!',
-        }),
-      }
-    );
-
-    const data = await response.json();
-    console.log("SMS enviado:", data.sid);
-    alert("Mensaje enviado correctamente");
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Error al enviar el mensaje");
+  if (!navigator.geolocation) {
+    alert("Tu navegador no soporta geolocalización.");
+    return;
   }
+
+  // Obtener usuario actual
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  if (userError || !user) {
+    alert("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
+    return;
+  }
+
+  // Obtener contacto de emergencia del usuario
+  const { data: contactos, error: contactoError } = await supabase
+    .from('contactos')
+    .select('telefono_contacto')
+    .eq('id_usuario', user.id)
+    .limit(1);
+
+  if (contactoError || !contactos || contactos.length === 0) {
+    alert("No se encontró un contacto de emergencia para este usuario.");
+    console.log("Usuario actual:", user.id);
+
+const { data: contactos, error: contactoError } = await supabase
+  .from('contactos')
+  .select('telefono_contacto')
+  .eq('id_usuario', user.id)
+  .limit(1);
+
+console.log("Contactos encontrados:", contactos);
+
+    return;
+  }
+
+  const numeroEmergencia = contactos[0].telefono_contacto;
+  if (!numeroEmergencia.startsWith("+")) {
+    alert("El número del contacto debe estar en formato internacional, ejemplo +573001234567");
+    return;
+  }
+
+  // Obtener geolocalización
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    const link = `https://www.google.com/maps?q=${lat},${lon}`;
+    const mensaje = `🚨 ¡Alerta! Necesito ayuda. Esta es mi ubicación: ${link}`;
+
+    try {
+      const response = await fetch(
+        'https://turbo-cod-x5wq5wqjvpp73pxrv-3000.app.github.dev',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Basic ' + btoa(`${TWILIO_SID}:${TWILIO_TOKEN}`),
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            'To': numeroEmergencia,
+            'From': TWILIO_NUMBER,
+            'Body': mensaje,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log("SMS enviado:", data.sid || data);
+      alert("¡Mensaje de emergencia enviado con ubicación!");
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+      alert("Error al enviar el mensaje de alerta.");
+    }
+  }, (error) => {
+    console.error("No se pudo obtener la ubicación:", error);
+    alert("Error al obtener la ubicación.");
+  });
 });
 
 const formRegistro = document.getElementById('registro-form');
@@ -88,14 +139,22 @@ if (formRegistro) {
       return;
     }
 
+    if (contrasena.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+
+    // Si todo está bien, guardar temporalmente
     localStorage.setItem('nombreUsuario', nombre);
     localStorage.setItem('correoUsuario', correo);
     localStorage.setItem('telefonoUsuario', telefono);
     localStorage.setItem('contrasenaUsuario', contrasena);
 
+    // Ir a pantalla de contactos
     window.location.href = 'contactos.html'; 
   });
 }
+
 
 
 const formContacto = document.getElementById('contacto-emergencia-form');
@@ -139,45 +198,60 @@ if (formContacto) {
       const correo = localStorage.getItem('correoUsuario');
       const contrasena = localStorage.getItem('contrasenaUsuario');
       const telefonoUsuario = localStorage.getItem('telefonoUsuario');
-
+    
+      const nombreUsuario = localStorage.getItem('nombreUsuario');
+      const contactoNombre = localStorage.getItem('contactoNombre');
+      const contactoTelefono = localStorage.getItem('contactoTelefono');
+      const contactoRelacion = localStorage.getItem('contactoRelacion');
+    
+      // Validaciones antes de registrar
+      if (!correo || !contrasena || !telefonoUsuario || !nombreUsuario) {
+        alert("Faltan datos del usuario. Por favor, completa el formulario de registro nuevamente.");
+        return false;
+      }
+      
+      if (contrasena.length < 6) {
+        alert("La contraseña debe tener al menos 6 caracteres.");
+        return false;
+      }
+    
+      if (!contactoNombre || !contactoTelefono || !contactoRelacion) {
+        alert("Faltan datos del contacto de emergencia.");
+        return false;
+      }
+    
       try {
-        // Crear usuario
+        // Crear usuario en auth
         const { data: authData, error: authError } = await supabase.auth.signUp({
           email: correo,
           password: contrasena
         });
-
+    
         if (authError) throw authError;
-
-        // Login
+    
+        // Login inmediato
         const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
           email: correo,
           password: contrasena
         });
-
+    
         if (loginError || !loginData.session) throw loginError;
-
+    
         await supabase.auth.setSession({
           access_token: loginData.session.access_token,
           refresh_token: loginData.session.refresh_token
         });
-
+    
         const uid = loginData.user.id;
-
-        // Insertar usuario
+    
+        // Insertar en tabla usuarios
         const { error: usuarioError } = await supabase
           .from('usuarios')
-          .insert([{ id: uid, nombre: nombreUsuario, correo, contrasena, telefono: telefonoUsuario }])
-          .select()
-          .single();
-
+          .insert([{ id: uid, nombre: nombreUsuario, correo, contrasena, telefono: telefonoUsuario }]);
+    
         if (usuarioError) throw usuarioError;
-
-        // Insertar contacto
-        const contactoNombre = localStorage.getItem('contactoNombre');
-        const contactoTelefono = localStorage.getItem('contactoTelefono');
-        const contactoRelacion = localStorage.getItem('contactoRelacion');
-
+    
+        // Insertar contacto de emergencia
         const { error: contactoError } = await supabase
           .from('contactos')
           .insert([{
@@ -186,16 +260,18 @@ if (formContacto) {
             telefono_contacto: contactoTelefono,
             relacion: contactoRelacion
           }]);
-
+    
         if (contactoError) throw contactoError;
-
+    
         return true;
+    
       } catch (error) {
         console.error('Error registrando usuario o contacto:', error);
-        alert('Ocurrió un error al registrar los datos.');
+        alert('Ocurrió un error al registrar los datos. Revisa los campos e intenta de nuevo.');
         return false;
       }
     }
+    
 
     btnSi.onclick = async () => {
       modal.classList.add('hidden');
@@ -353,4 +429,31 @@ if (formEncuesta) {
      }
    });
   }
+  updateSessionUI();
 });
+
+async function updateSessionUI() {
+  const { data: { user } } = await supabase.auth.getUser();
+  const navList = document.querySelector('nav ul');
+
+  if (!navList) return;
+
+  // Remover el último <li> si es de sesión
+  const lastLi = navList.querySelector('li:last-child');
+  if (lastLi) lastLi.remove();
+
+  const loginLi = document.createElement('li');
+  if (user) {
+    loginLi.innerHTML = `<a href="#" id="logoutBtn">Cerrar sesión</a>`;
+    navList.appendChild(loginLi);
+
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+      e.preventDefault();
+      await supabase.auth.signOut();
+      location.reload();
+    });
+  } else {
+    loginLi.innerHTML = `<a href="login.html">Iniciar Sesión</a>`;
+    navList.appendChild(loginLi);
+  }
+}
