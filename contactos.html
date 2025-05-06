@@ -4,47 +4,70 @@
   <meta charset="UTF-8">
   <title>Contacto de Emergencia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Estilos -->
   <link rel="stylesheet" href="styles/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <section class="contacto-emergencia-section">
-    <h2>Contacto de Emergencia</h2>
-    <form id="contacto-emergencia-form">
-      <input type="text" name="nombre-contacto" placeholder="Nombre del contacto" required>
+  <header>
+    <div class="logo">
+      <img src="Logo.jpg" alt="Logo FEMX">
+      <span class="logo-text">FEMX</span>
+    </div>
+    <!-- Botón para mostrar/ocultar la navegación en móviles -->
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      ☰
+    </button>
+    <nav>
+      <ul>
+        <li><a href="informacion.html">Información</a></li>
+        <li><a href="contactos.html">Contacto de Emergencia</a></li>
+        <li><a href="encuesta.html">Encuesta de Acoso</a></li>
+        <li><a href="glosario.html">Glosario</a></li>
+        <li><a href="login.html">Iniciar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
 
-      <select name="relacion-contacto" required>
-        <option value="">Selecciona relación</option>
-        <option value="Madre">Madre</option>
-        <option value="Padre">Padre</option>
-        <option value="Hermano/a">Hermano/a</option>
-        <option value="Pareja">Pareja</option>
-        <option value="Amigo/a">Amigo/a</option>
-        <option value="Otro">Otro</option>
-      </select>
+  <main>
+    <section class="contacto-emergencia-section">
+      <h2>Contacto de Emergencia</h2>
+      <form id="contacto-emergencia-form">
+        <input type="text" name="nombre-contacto" placeholder="Nombre del contacto" required>
 
-      <input type="tel" name="telefono-contacto" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
+        <select name="relacion-contacto" required>
+          <option value="">Selecciona relación</option>
+          <option value="Madre">Madre</option>
+          <option value="Padre">Padre</option>
+          <option value="Hermano/a">Hermano/a</option>
+          <option value="Pareja">Pareja</option>
+          <option value="Amigo/a">Amigo/a</option>
+          <option value="Otro">Otro</option>
+        </select>
 
-      <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
-    </form>
-  </section>
+        <input type="tel" name="telefono-contacto" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
 
-  <p style="text-align: center; margin-top: 1rem;">
-    ¿Ya tienes cuenta?
-    <a href="login.html">Inicia sesión</a>
-  </p>
+        <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
+      </form>
+    </section>
+
+    <p style="text-align: center; margin-top: 1rem;">
+      ¿Ya tienes cuenta?
+      <a href="login.html">Inicia sesión</a>
+    </p>
+  </main>
+
   <div id="modal-encuesta" class="hidden">
     <div class="modal-contenido">
       <p id="texto-modal"></p>
-      <button id="btn-si">Si</button>
+      <button id="btn-si">Sí</button>
       <button id="btn-no">No</button>
     </div>
   </div>
 
-  <!-- Lógica en main.js -->
+  <!-- Script -->
   <script type="module" src="scripts/main.js"></script>
 
 </body>
