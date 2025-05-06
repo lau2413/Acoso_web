@@ -10,15 +10,29 @@ import { setupNavegacion } from './navegacion.js';
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
 
-  setupPanico();
-  setupRegistro();
-  setupContacto();
-  setupEncuesta();
-  setupNavegacion();
+  if (document.querySelector('.boton-panico')) {
+    setupPanico();
+  }
+
+  if (document.querySelector('#registro-form')) {
+    setupRegistro();
+  }
+
+  if (document.querySelector('#contacto-emergencia-form')) {
+    setupContacto();
+  }
+
+  if (document.querySelector('#formulario-encuesta')) {
+    setupEncuesta();
+  }
+
+  if (document.querySelector('.nav-toggle')) {
+    setupNavegacion();
+  }
 
   if (document.querySelector('#formulario_login')) {
     LogIn();
   }
 
-  updateSessionUI();
+  updateSessionUI(); // solo si no causa problemas, de lo contrario, también ponle una condición
 });

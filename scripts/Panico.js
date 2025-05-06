@@ -48,7 +48,7 @@ export function setupPanico() {
       .eq('id_usuario', user.id)
 
     if (contactoError || !contactos || contactos.length === 0) {
-      alert("No se encontró un contacto de emergencia para este usuario.");
+      alert("No se encontró un contacto de emergencia para este usuario.", user.id);
       return;
     }
 
