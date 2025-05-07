@@ -36,3 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateSessionUI(); // solo si no causa problemas, de lo contrario, también ponle una condición
 });
+// Transición de imágenes en el slider
+document.addEventListener('DOMContentLoaded', () => {
+  const images = document.querySelectorAll('.slides img');
+  let current = 0;
+
+  function showSlide(index) {
+    images.forEach((img, i) => {
+      img.classList.toggle('active', i === index);
+    });
+  }
+
+  if (images.length > 0) {
+    showSlide(current); // mostrar la primera imagen al cargar
+    setInterval(() => {
+      current = (current + 1) % images.length;
+      showSlide(current);
+    }, 3000); // cambia cada 3 segundos
+  }
+});
