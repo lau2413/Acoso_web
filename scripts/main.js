@@ -7,81 +7,53 @@ import { setupContacto } from './contacto.js';
 import { setupEncuesta } from './encuesta.js';
 import { setupNavegacion } from './navegacion.js';
 
-// Función principal del slider
-function initializeSlider() {
+// Configuración del Slider
+function setupSlider() {
   const slides = document.querySelectorAll('.hero-slider .slide');
   let currentSlide = 0;
-  const intervalTime = 5000; // 5 segundos
-  let slideInterval;
-
-  // Mostrar slide actual
+  const slideInterval = 5000; // 5 segundos
+  
   function showSlide(index) {
     slides.forEach((slide, i) => {
-      slide.classList.remove('active');
-      if (i === index) {
-        slide.classList.add('active');
-      }
+      slide.classList.toggle('active', i === index);
     });
   }
-
-  // Siguiente slide
+  
   function nextSlide() {
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide(currentSlide);
   }
-
-  // Iniciar slider
-  function startSlider() {
-    showSlide(currentSlide);
-    slideInterval = setInterval(nextSlide, intervalTime);
-  }
-
-  // Pausar al hacer hover
-  const sliderContainer = document.querySelector('.hero-slider');
-  if (sliderContainer) {
-    sliderContainer.addEventListener('mouseenter', () => {
-      clearInterval(slideInterval);
-    });
-    sliderContainer.addEventListener('mouseleave', () => {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(nextSlide, intervalTime);
+  
+  // Iniciar solo si hay slides
+  if (slides.length > 0) {
+    showSlide(0); // Mostrar primera slide
+    
+    // Configurar intervalo
+    let interval = setInterval(nextSlide, slideInterval);
+    
+    // Pausar al hacer hover
+    const slider = document.querySelector('.hero-slider');
+    slider.addEventListener('mouseenter', () => clearInterval(interval));
+    slider.addEventListener('mouseleave', () => {
+      interval = setInterval(nextSlide, slideInterval);
     });
   }
-
-  startSlider();
 }
 
-// Inicialización cuando el DOM está listo
+// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
-
-  // Inicializar slider
-  initializeSlider();
-
-  // Configurar funcionalidades
-  if (document.getElementById('boton-panico')) {
-    setupPanico();
-  }
-
-  if (document.querySelector('#registro-form')) {
-    setupRegistro();
-  }
-
-  if (document.querySelector('#contacto-emergencia-form')) {
-    setupContacto();
-  }
-
-  if (document.querySelector('#formulario-encuesta')) {
-    setupEncuesta();
-  }
-
-  if (document.querySelector('.nav-toggle')) {
-    setupNavegacion();
-  }
-
-  if (document.querySelector('#formulario_login')) {
-    LogIn();
-  }
-
+  
+  // Iniciar slider
+  setupSlider();
+  
+  // Configurar otras funcionalidades
+  if (document.getElementById('boton-panico')) setupPanico();
+  if (document.querySelector('#registro-form')) setupRegistro();
+  if (document.querySelector('#contacto-emergencia-form')) setupContacto();
+  if (document.querySelector('#formulario-encuesta')) setupEncuesta();
+  if (document.querySelector('.nav-toggle')) setupNavegacion();
+  if (document.querySelector('#formulario_login')) LogIn();
+  
   updateSessionUI();
 });
