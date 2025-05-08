@@ -8,37 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<section class="hero-slider">
-  <div class="slide active">
-    <img src="images/76216.jpg" alt="Mensaje 1">
-    <div class="overlay-text">
-      <h2>Vivas, libres y sin miedo</h2>
-    </div>
-  </div>
-  <div class="slide">
-    <img src="images/20943399.jpg" alt="Mensaje 2">
-    <div class="overlay-text">
-      <h2>Denunciar también es resistir</h2>
-    </div>
-  </div>
-  <div class="slide">
-    <img src="images/mujer-de-dibujos-animados-con-globo-de-texto-en-blanco.jpg" alt="Mensaje 3">
-    <div class="overlay-text">
-      <h2>Preguntas frecuentes</h2>
-    </div>
-  </div>
-</section>
-
-
   <header>
     <div class="logo">
       <img src="Logo.jpg" alt="Logo FEMX">
       <span class="logo-text">FEMX</span>
     </div>
-    <!-- Botón para mostrar/ocultar la navegación en móviles -->
-    <button class="nav-toggle" aria-label="Toggle navigation">
-      ☰
-    </button>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
@@ -51,6 +26,27 @@
     </nav>
   </header>
 
+  <section class="hero-slider">
+    <div class="slide active">
+      <img src="images/76216.jpg" alt="Mujeres empoderadas">
+      <div class="overlay-text">
+        <h2>Vivas, libres y sin miedo</h2>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="images/20943399.jpg" alt="Mujer denunciando">
+      <div class="overlay-text">
+        <h2>Denunciar también es resistir</h2>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="images/mujer-de-dibujos-animados-con-globo-de-texto-en-blanco.jpg" alt="Preguntas frecuentes">
+      <div class="overlay-text">
+        <h2>Preguntas frecuentes</h2>
+      </div>
+    </div>
+  </section>
+
   <main>
     <section id="panico-section">
       <div class="panic-button-container">
@@ -62,21 +58,17 @@
     </section>
   </main>
 
-  <!-- ===== MODAL DE EMERGENCIA CON SLIDER ===== -->
-<div id="modal-emergencia" class="modal hidden">
-  <div class="modal-content">
-    <h2>¿Qué nivel de acoso estás viviendo?</h2>
-    <input type="range" id="slider-acoso" min="0" max="5" step="1" value="0">
-    <p id="nivel-acoso">Nivel 0: Leve</p>
-    <button id="enviar-alerta">Enviar Alerta</button>
-    <button class="secondary" id="cerrar-modal">Cancelar</button>
+  <!-- Modal de Emergencia -->
+  <div id="modal-emergencia" class="modal hidden">
+    <div class="modal-content">
+      <h2>¿Qué nivel de acoso estás viviendo?</h2>
+      <input type="range" id="slider-acoso" min="0" max="5" step="1" value="0">
+      <p id="nivel-acoso">Nivel 0: Leve</p>
+      <button id="enviar-alerta">Enviar Alerta</button>
+      <button class="secondary" id="cerrar-modal">Cancelar</button>
+    </div>
   </div>
-</div>
-</section>
-</main>
 
-
-<script type="module" src="scripts/main.js"></script>
-
+  <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
