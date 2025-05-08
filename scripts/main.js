@@ -10,8 +10,8 @@ import { setupNavegacion } from './navegacion.js';
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
 
-  if (document.querySelector('.boton-panico')) {
-    setupPanico();
+  if (document.getElementById('boton-panico')) {
+  setupPanico();
   }
 
   if (document.querySelector('#registro-form')) {
