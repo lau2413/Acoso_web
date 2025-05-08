@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
 
   if (document.getElementById('boton-panico')) {
-  setupPanico();
+    setupPanico();
   }
 
   if (document.querySelector('#registro-form')) {
@@ -36,21 +36,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateSessionUI(); // solo si no causa problemas
 
-  // Transición de imágenes en el slider
-  const images = document.querySelectorAll('.slides img');
-  let current = 0;
+  // Slider mejorado
+  const slides = document.querySelectorAll('.hero-slider .slide');
+  let currentSlide = 0;
+  const slideInterval = 5000; // 5 segundos (puedes ajustar)
 
   function showSlide(index) {
-    images.forEach((img, i) => {
-      img.classList.toggle('active', i === index);
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
     });
   }
 
-  if (images.length > 0) {
-    showSlide(current); // mostrar la primera imagen al cargar
-    setInterval(() => {
-      current = (current + 1) % images.length;
-      showSlide(current);
-    }, 3000); // cambia cada 3 segundos
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  // Iniciar slider solo si hay slides
+  if (slides.length > 0) {
+    // Asegurarse que solo la primera slide tenga 'active' al inicio
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active');
+    });
+    showSlide(currentSlide);
+    
+    // Configurar intervalo para cambio automático
+    const sliderIntervalId = setInterval(nextSlide, slideInterval);
+    
+    // Opcional: Pausar el slider al hacer hover
+    const sliderContainer = document.querySelector('.hero-slider');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', () => {
+        clearInterval(sliderIntervalId);
+      });
+      
+      sliderContainer.addEventListener('mouseleave', () => {
+        sliderIntervalId = setInterval(nextSlide, slideInterval);
+      });
+    }
   }
 });
