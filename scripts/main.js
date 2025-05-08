@@ -7,11 +7,11 @@ import { setupContacto } from './contacto.js';
 import { setupEncuesta } from './encuesta.js';
 import { setupNavegacion } from './navegacion.js';
 
-// Función principal del slider
+// Función principal del slider con enlace clickable
 function initializeSlider() {
   const slides = document.querySelectorAll('.hero-slider .slide');
   let currentSlide = 0;
-  const intervalTime = 5000; // 5 segundos
+  const intervalTime = 5000; // Cambia cada 5 segundos
   let slideInterval;
 
   // Mostrar slide actual
@@ -24,19 +24,19 @@ function initializeSlider() {
     });
   }
 
-  // Siguiente slide
+  // Avanzar al siguiente slide
   function nextSlide() {
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide(currentSlide);
   }
 
-  // Iniciar slider
+  // Iniciar el slider
   function startSlider() {
     showSlide(currentSlide);
     slideInterval = setInterval(nextSlide, intervalTime);
   }
 
-  // Pausar al hacer hover
+  // Pausar el slider al hacer hover (excepto en el slide clickable)
   const sliderContainer = document.querySelector('.hero-slider');
   if (sliderContainer) {
     sliderContainer.addEventListener('mouseenter', () => {
@@ -48,14 +48,26 @@ function initializeSlider() {
     });
   }
 
+  // Iniciar el slider
   startSlider();
+
+  // Manejar clic en el slide de "Preguntas frecuentes" (alternativa al enlace HTML)
+  const faqSlide = document.querySelector('.slide:nth-child(3)');
+  if (faqSlide) {
+    faqSlide.addEventListener('click', (e) => {
+      // Evitar conflicto si ya hay un enlace
+      if (!e.target.closest('a')) {
+        window.location.href = 'informacion.html';
+      }
+    });
+  }
 }
 
-// Inicialización cuando el DOM está listo
+// Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
 
-  // Inicializar slider
+  // Iniciar slider
   initializeSlider();
 
   // Configurar funcionalidades
@@ -82,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('#formulario_login')) {
     LogIn();
   }
+
+  updateSessionUI(); // Actualizar estado de sesión si es necesario
+});
 
   updateSessionUI();
 });
