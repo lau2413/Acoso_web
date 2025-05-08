@@ -1,4 +1,4 @@
-// main.js
+// Importaciones
 import { LogIn, updateSessionUI } from './auth.js';
 import { supabase } from './supabase.js';
 import { setupPanico } from './Panico.js';
@@ -7,9 +7,58 @@ import { setupContacto } from './contacto.js';
 import { setupEncuesta } from './encuesta.js';
 import { setupNavegacion } from './navegacion.js';
 
+// Función principal del slider
+function initializeSlider() {
+  const slides = document.querySelectorAll('.hero-slider .slide');
+  let currentSlide = 0;
+  const intervalTime = 5000; // 5 segundos
+  let slideInterval;
+
+  // Mostrar slide actual
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) {
+        slide.classList.add('active');
+      }
+    });
+  }
+
+  // Siguiente slide
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  // Iniciar slider
+  function startSlider() {
+    showSlide(currentSlide);
+    slideInterval = setInterval(nextSlide, intervalTime);
+  }
+
+  // Pausar al hacer hover
+  const sliderContainer = document.querySelector('.hero-slider');
+  if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+    sliderContainer.addEventListener('mouseleave', () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, intervalTime);
+    });
+  }
+
+  startSlider();
+}
+
+// Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
 
+  // Inicializar slider
+  initializeSlider();
+
+  // Configurar funcionalidades
   if (document.getElementById('boton-panico')) {
     setupPanico();
   }
@@ -34,45 +83,5 @@ document.addEventListener('DOMContentLoaded', () => {
     LogIn();
   }
 
-  updateSessionUI(); // solo si no causa problemas
-
-  // Slider mejorado
-  const slides = document.querySelectorAll('.hero-slider .slide');
-  let currentSlide = 0;
-  const slideInterval = 5000; // 5 segundos (puedes ajustar)
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-    });
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  // Iniciar slider solo si hay slides
-  if (slides.length > 0) {
-    // Asegurarse que solo la primera slide tenga 'active' al inicio
-    slides.forEach((slide, index) => {
-      slide.classList.remove('active');
-    });
-    showSlide(currentSlide);
-    
-    // Configurar intervalo para cambio automático
-    const sliderIntervalId = setInterval(nextSlide, slideInterval);
-    
-    // Opcional: Pausar el slider al hacer hover
-    const sliderContainer = document.querySelector('.hero-slider');
-    if (sliderContainer) {
-      sliderContainer.addEventListener('mouseenter', () => {
-        clearInterval(sliderIntervalId);
-      });
-      
-      sliderContainer.addEventListener('mouseleave', () => {
-        sliderIntervalId = setInterval(nextSlide, slideInterval);
-      });
-    }
-  }
+  updateSessionUI();
 });
