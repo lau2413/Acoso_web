@@ -1,74 +1,87 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Protección Segura</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="Logo.jpg" alt="Logo FEMX">
-      <span class="logo-text">FEMX</span>
-    </div>
-    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="login.html">Iniciar Sesión</a></li>
-        <li><a href="informacion.html">Información</a></li>
-        <li><a href="contactos.html">Contacto de Emergencia</a></li>
-        <li><a href="encuesta.html">Encuesta de Acoso</a></li>
-        <li><a href="glosario.html">Glosario</a></li>
-      </ul>
-    </nav>
-  </header>
+// Importaciones
+import { LogIn, updateSessionUI } from './auth.js';
+import { supabase } from './supabase.js';
+import { setupPanico } from './Panico.js';
+import { setupRegistro } from './registro.js';
+import { setupContacto } from './contacto.js';
+import { setupEncuesta } from './encuesta.js';
+import { setupNavegacion } from './navegacion.js';
 
-  <section class="hero-slider">
-    <div class="slide active">
-      <img src="images/76216.jpg" alt="Mujeres empoderadas">
-      <div class="overlay-text">
-        <h2>Vivas, libres y sin miedo</h2>
-      </div>
-    </div>
-    <div class="slide">
-      <img src="images/20943399.jpg" alt="Mujer denunciando">
-      <div class="overlay-text">
-        <h2>Denunciar también es resistir</h2>
-      </div>
-    </div>
-    <div class="slide">
-      <img src="images/mujer-de-dibujos-animados-con-globo-de-texto-en-blanco.jpg" alt="Preguntas frecuentes">
-      <div class="overlay-text">
-        <h2>Preguntas frecuentes</h2>
-      </div>
-    </div>
-  </section>
+// Función principal del slider
+function initializeSlider() {
+  const slides = document.querySelectorAll('.hero-slider .slide');
+  let currentSlide = 0;
+  const intervalTime = 5000; // 5 segundos
+  let slideInterval;
 
-  <main>
-    <section id="panico-section">
-      <div class="panic-button-container">
-        <div class="card">
-          <button id="boton-panico">¡PÁNICO!</button>
-          <p>Presiona el botón para realizar el reporte.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+  // Mostrar slide actual
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) {
+        slide.classList.add('active');
+      }
+    });
+  }
 
-  <!-- Modal de Emergencia -->
-  <div id="modal-emergencia" class="modal hidden">
-    <div class="modal-content">
-      <h2>¿Qué nivel de acoso estás viviendo?</h2>
-      <input type="range" id="slider-acoso" min="0" max="5" step="1" value="0">
-      <p id="nivel-acoso">Nivel 0: Leve</p>
-      <button id="enviar-alerta">Enviar Alerta</button>
-      <button class="secondary" id="cerrar-modal">Cancelar</button>
-    </div>
-  </div>
+  // Siguiente slide
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
 
-  <script type="module" src="scripts/main.js"></script>
-</body>
-</html>
+  // Iniciar slider
+  function startSlider() {
+    showSlide(currentSlide);
+    slideInterval = setInterval(nextSlide, intervalTime);
+  }
+
+  // Pausar al hacer hover
+  const sliderContainer = document.querySelector('.hero-slider');
+  if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+    sliderContainer.addEventListener('mouseleave', () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, intervalTime);
+    });
+  }
+
+  startSlider();
+}
+
+// Inicialización cuando el DOM está listo
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Página cargada correctamente');
+
+  // Inicializar slider
+  initializeSlider();
+
+  // Configurar funcionalidades
+  if (document.getElementById('boton-panico')) {
+    setupPanico();
+  }
+
+  if (document.querySelector('#registro-form')) {
+    setupRegistro();
+  }
+
+  if (document.querySelector('#contacto-emergencia-form')) {
+    setupContacto();
+  }
+
+  if (document.querySelector('#formulario-encuesta')) {
+    setupEncuesta();
+  }
+
+  if (document.querySelector('.nav-toggle')) {
+    setupNavegacion();
+  }
+
+  if (document.querySelector('#formulario_login')) {
+    LogIn();
+  }
+
+  updateSessionUI();
+});
