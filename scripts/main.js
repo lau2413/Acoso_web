@@ -34,10 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     LogIn();
   }
 
-  updateSessionUI(); // solo si no causa problemas, de lo contrario, también ponle una condición
-});
-// Transición de imágenes en el slider
-document.addEventListener('DOMContentLoaded', () => {
+  updateSessionUI(); // solo si no causa problemas
+
+  // Transición de imágenes en el slider
   const images = document.querySelectorAll('.slides img');
   let current = 0;
 
