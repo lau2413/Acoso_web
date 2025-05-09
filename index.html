@@ -57,15 +57,27 @@
     </section>
   </main>
 
-  <div id="modal-emergencia" class="modal hidden">
-    <div class="modal-content">
-      <h2>¿Qué nivel de acoso estás viviendo?</h2>
-      <input type="range" id="slider-acoso" min="0" max="5" step="1" value="0">
-      <p id="nivel-acoso">Nivel 0: Leve</p>
-      <button id="enviar-alerta">Enviar Alerta</button>
-      <button class="secondary" id="cerrar-modal">Cancelar</button>
+ <div id="modal-emergencia" class="modal hidden">
+  <div class="modal-content">
+    <h2>Identifica el nivel de acoso</h2>
+    <div class="thermometer-container">
+      <input type="range" id="slider-acoso" min="1" max="5" step="1" value="1">
+      <div class="thermometer-labels">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+      </div>
     </div>
+    <div id="nivel-descripcion">
+      <h3 id="nivel-titulo">Nivel 1: Leve</h3>
+      <p id="nivel-detalle">Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas</p>
+    </div>
+    <button id="enviar-alerta">Enviar Alerta</button>
+    <button class="secondary" id="cerrar-modal">Cancelar</button>
   </div>
+</div>
 
   <script type="module" src="scripts/main.js"></script>
 </body>
