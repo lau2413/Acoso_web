@@ -10,26 +10,57 @@ export function setupPanico() {
   const modalEmergencia = document.getElementById('modal-emergencia');
   const slider = document.getElementById('slider-acoso');
   const enviarAlerta = document.getElementById('enviar-alerta');
-  const nivel = document.getElementById('nivel-acoso');
+  const nivelTitulo = document.getElementById('nivel-titulo');
+  const nivelDetalle = document.getElementById('nivel-detalle');
   const cerrarModal = document.getElementById('cerrar-modal');
+
+  // Definición de los niveles de acoso
+  const nivelesAcoso = {
+    1: {
+      titulo: "Nivel 1: Leve",
+      descripcion: "Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas",
+      color: "#ffcc00"
+    },
+    2: {
+      titulo: "Nivel 2: Moderado",
+      descripcion: "Llamadas, cartas o invitaciones con intenciones sexuales",
+      color: "#ff9900"
+    },
+    3: {
+      titulo: "Nivel 3: Fuerte",
+      descripcion: "Manoseos, tocamientos no consentidos, acorralar",
+      color: "#ff6600"
+    },
+    4: {
+      titulo: "Nivel 4: Grave",
+      descripcion: "Presiones físicas o psicológicas para tener contacto sexual",
+      color: "#ff3300"
+    },
+    5: {
+      titulo: "Nivel 5: Severo",
+      descripcion: "Forzar relaciones sexuales, violencia sexual explícita",
+      color: "#cc0000"
+    }
+  };
 
   btnPanico?.addEventListener('click', () => modalEmergencia?.classList.remove('hidden'));
   cerrarModal?.addEventListener('click', () => modalEmergencia?.classList.add('hidden'));
 
-  if (nivel && slider) {
-    const val = parseInt(slider.value);
-    nivel.textContent = `Nivel ${val}: ${val <= 2 ? 'Leve' : 'Grave'}`;
-    nivel.style.color = val <= 2 ? 'orange' : 'red';
+  // Actualizar la descripción al cargar
+  if (slider && nivelTitulo && nivelDetalle) {
+    const nivelActual = parseInt(slider.value);
+    nivelTitulo.textContent = nivelesAcoso[nivelActual].titulo;
+    nivelDetalle.textContent = nivelesAcoso[nivelActual].descripcion;
+    nivelTitulo.style.color = nivelesAcoso[nivelActual].color;
   }
 
+  // Actualizar al mover el slider
   slider?.addEventListener('input', () => {
-    const val = parseInt(slider.value);
-    let texto = `Nivel ${val}: `;
-    texto += (val <= 2) ? 'Leve' : 'Grave';
-    nivel.textContent = texto;
-    nivel.style.color = (val <= 2) ? 'orange' : 'red';
+    const nivelActual = parseInt(slider.value);
+    nivelTitulo.textContent = nivelesAcoso[nivelActual].titulo;
+    nivelDetalle.textContent = nivelesAcoso[nivelActual].descripcion;
+    nivelTitulo.style.color = nivelesAcoso[nivelActual].color;
   });
-
   enviarAlerta?.addEventListener('click', async () => {
     if (!navigator.geolocation) {
       alert("Tu navegador no soporta geolocalización.");
