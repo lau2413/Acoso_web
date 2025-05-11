@@ -1067,10 +1067,18 @@ label:hover {
 }
 .titulo-panico {
   font-family: 'Roboto', sans-serif;
-  font-size: 24px;
+  font-size: 32px; /* más grande */
   font-weight: 700;
   text-align: center;
-  margin-bottom: 10px;
   color: purple;
+  margin-bottom: 20px;
+  width: 100%; /* para ocupar todo el ancho del contenedor */
 }
+
+.panic-button-container, .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
