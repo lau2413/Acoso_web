@@ -1,12 +1,13 @@
 // navegacion.js
 export function setupNavegacion() {
     const navToggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('nav');
+    const navList = document.querySelector('nav ul');
     const navLinks = document.querySelectorAll('nav a');
   
     if (navToggle) {
       navToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
+        console.log("Botón clickeado");
+        navList.classList.toggle('active');
       });
     }
   
