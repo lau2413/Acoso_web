@@ -1,9 +1,9 @@
 // panico.js
 import { supabase } from './supabase.js';
 
-const TWILIO_SID = "ACc38625a993719beb95e6ac9154570709";
-const TWILIO_TOKEN = "82d829c04c269e2c3791605f45bfc93c";
-const TWILIO_NUMBER = "+13163892927";
+// Configuración para WhatsApp Cloud API (solo para pruebas)
+const WHATSAPP_TOKEN = 'EAAUGl1HX7KsBO4YWG55ZBjnkv6WZBdfkMxQMlVLeMl7CFFCZCeQIvnz6ZBRTB3ecgBFVTKklL9s4ExnzmZBj0yP7NdSKoJkekxbMsO5l4V2MwTWgxppz0R4ZBjOvvttLcNP4pkfjpzZCgQZC5FFTBDytuH2xcKWpU8MCKviWgw0U4xlqRKhZCjl8fKdN1RE5UQJJu9NE5dg0i8CbcQyBLAEiAQT4ZD'; // ← reemplázalo por el real
+const PHONE_NUMBER_ID = '690685430789757';
 
 export function setupPanico() {
   const btnPanico = document.getElementById('boton-panico');
@@ -61,6 +61,7 @@ export function setupPanico() {
     nivelDetalle.textContent = nivelesAcoso[nivelActual].descripcion;
     nivelTitulo.style.color = nivelesAcoso[nivelActual].color;
   });
+
   enviarAlerta?.addEventListener('click', async () => {
     if (!navigator.geolocation) {
       alert("Tu navegador no soporta geolocalización.");
@@ -76,48 +77,64 @@ export function setupPanico() {
     const { data: contactos, error: contactoError } = await supabase
       .from('contactos')
       .select('telefono_contacto')
-      .eq('id_usuario', user.id)
+      .eq('id_usuario', user.id);
 
     if (contactoError || !contactos || contactos.length === 0) {
-      alert("No se encontró un contacto de emergencia para este usuario.", user.id);
+      alert("No se encontró un contacto de emergencia para este usuario.");
       return;
     }
 
-    const numeroEmergencia = contactos[0].telefono_contacto;
+    let numeroEmergencia = contactos[0].telefono_contacto;
     if (!numeroEmergencia.startsWith("+")) {
-      alert("El número del contacto debe estar en formato internacional, ejemplo +573001234567");
-      return;
+      numeroEmergencia = '+57' + numeroEmergencia;
     }
 
     navigator.geolocation.getCurrentPosition(async (position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const link = `https://www.google.com/maps?q=${lat},${lon}`;
-      const mensaje = `🚨 ¡Alerta! Necesito ayuda. Esta es mi ubicación: ${link}`;
+
+      const val = parseInt(slider.value);
+      const gravedad = val <= 2 ? 'leve' : 'grave';
+      const mensaje = `🚨 ¡ALERTA ${gravedad.toUpperCase()}! Necesito ayuda. Esta es mi ubicación: ${link}`;
 
       try {
-        const response = await fetch(
-          'https://turbo-cod-x5wq5wqjvpp73pxrv-3000.app.github.dev',
-          {
-            method: 'POST',
-            headers: {
-              'Authorization': 'Basic ' + btoa(`${TWILIO_SID}:${TWILIO_TOKEN}`),
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-              'To': numeroEmergencia,
-              'From': TWILIO_NUMBER,
-              'Body': mensaje,
-            }),
-          }
-        );
-
+        const response = await fetch(`https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to: numeroEmergencia.replace('+', ''), // WhatsApp requiere solo números
+            type: 'template',
+            template: {
+              name: 'alerta_emergencia',
+              language: { code: 'es_CO' },
+              components: [{
+                type: 'body',
+                parameters: [{
+                  type: 'text',
+                  text: link // ubicación dinámica que reemplaza {{1}}
+                }]
+              }]
+            }
+          })
+        });
         const data = await response.json();
-        console.log("SMS enviado:", data.sid || data);
-        alert("¡Mensaje de emergencia enviado con ubicación!");
+
+        if (!response.ok) {
+          console.error("Error WhatsApp API:", data);
+          alert(`Error al enviar el mensaje: ${data.error?.message}`);
+        } else {
+          console.log("Mensaje enviado:", data);
+          alert("¡Mensaje de emergencia enviado por WhatsApp!");
+          console.log("Respuesta completa de la API:", data);
+        }
       } catch (error) {
-        console.error("Error al enviar el mensaje:", error);
-        alert("Error al enviar el mensaje de alerta.");
+        console.error("Error al conectar con WhatsApp Cloud API:", error);
+        alert("No se pudo enviar el mensaje de alerta.");
       }
     }, (error) => {
       console.error("No se pudo obtener la ubicación:", error);
