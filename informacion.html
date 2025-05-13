@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="styles/styles.css" />
   <link rel="stylesheet" href="styles/informacion.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,122 +22,69 @@
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
+        <li><a href="login.html">Iniciar Sesión</a></li>
+        <li><a href="informacion.html">Información</a></li>
         <li><a href="contactos.html">Contacto de Emergencia</a></li>
+        <li><a href="Tutorial.html">Tutorial</a></li>
         <li><a href="glosario.html">Glosario</a></li>
-        <li><a href="encuesta.html">Encuesta de Acoso</a></li>
-        <li><a href = "Tutorial.html">Tutorial</a></li>
-        <li><a href="login.html">Cerrar Sesión</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <section class="info-section">
-      <h2>Comprendiendo el Acoso Sexual</h2>
-      <p>El acoso sexual es una forma de violencia de género que puede manifestarse en diversos contextos, incluyendo el ámbito educativo. Es fundamental reconocer sus diferentes niveles y manifestaciones para prevenirlo y erradicarlo.</p>
+  <main class="info-section">
+    <div class="info-header">
+      <h1>Información sobre Acoso</h1>
+      <p>Conoce más sobre el acoso, sus formas y cómo podemos prevenirlo juntos</p>
+    </div>
 
-      <h3>Niveles de Acoso Sexual</h3>
-      <ul>
-        <li><strong>Leve:</strong> Comentarios o insinuaciones de carácter sexual no deseados.</li>
-        <li><strong>Moderado:</strong> Contacto físico no consentido o propuestas sexuales persistentes.</li>
-        <li><strong>Grave:</strong> Coerción sexual, amenazas o cualquier forma de violencia sexual.</li>
+    <div class="info-card">
+      <h2>¿Qué es el Acoso?</h2>
+      <p>El acoso es cualquier comportamiento no deseado que hace que una persona se sienta intimidada, degradada, humillada o amenazada. Puede tomar muchas formas y ocurrir en diversos contextos.</p>
+    </div>
+
+    <div class="info-card">
+      <h2>Tipos de Acoso</h2>
+      <ul class="info-list">
+        <li>Acoso verbal: comentarios inapropiados, silbidos, etc.</li>
+        <li>Acoso físico: tocamientos no deseados, seguimiento</li>
+        <li>Acoso digital: mensajes no deseados, cyberbullying</li>
+        <li>Acoso visual: miradas incómodas, gestos inapropiados</li>
       </ul>
-      <p>Estos niveles están adaptados de investigaciones como "Cuentos que no son cuentos": acoso sexual, violencia naturalizada en las aulas universitarias.</p>
+    </div>
 
-      <!-- Nueva sección: Qué hacer si eres víctima -->
-      <div class="action-card">
-        <h3>¿Qué hacer si eres víctima de acoso sexual?</h3>
-        <div class="card-content">
-          <p>Si has sufrido acoso sexual, sigue estos pasos:</p>
-          <ol>
-            <li>Busca un lugar seguro</li>
-            <li>Preserva cualquier evidencia (mensajes, fotos, etc.)</li>
-            <li>Denuncia inmediatamente a las autoridades</li>
-            <li>Busca apoyo psicológico</li>
-          </ol>
-          <p class="resource-link">
-            Más información en: 
-            <a href="https://www.minjusticia.gov.co/programas-co/LegalApp/Paginas/Qu-hacer-en-caso-de-ser-victima-o-conocer-de-un-abuso-o-violencia-de-tipo-sexual.aspx" target="_blank" rel="noopener noreferrer">
-              Guía del Ministerio de Justicia
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <!-- Nueva sección: Protocolo de acoso sexual -->
-      <div class="action-card">
-        <h3>Protocolo de Acoso Sexual</h3>
-        <div class="card-content">
-          <p>Conoce los protocolos institucionales para manejar casos de acoso sexual:</p>
-          <ul>
-            <li>Derechos de las víctimas</li>
-            <li>Procedimientos de denuncia</li>
-            <li>Mecanismos de protección</li>
-          </ul>
-          <p class="resource-link">
-            Documento completo: 
-            <a href="https://www.procuraduria.gov.co/Documents/septiembre%202023/PROTOCOLO%20ACOSO%20SEXUAL%20-%20PGN.pdf" target="_blank" rel="noopener noreferrer">
-              Protocolo de la Procuraduría General
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <!-- Nueva sección: Dónde acudir -->
-      <div class="action-card">
-        <h3>¿Dónde acudir?</h3>
-        <div class="card-content">
-          <p>Centros de atención especializada:</p>
-          <ul>
-            <li>Comisarías de familia</li>
-            <li>Fiscalía General de la Nación</li>
-            <li>Centros de salud</li>
-          </ul>
-          <p class="resource-link">
-            Directorio completo: 
-            <a href="https://bogota.gov.co/mi-ciudad/salud/donde-acudir-en-caso-de-ser-victima-de-violencia-o-acoso-laboral" target="_blank" rel="noopener noreferrer">
-              Guía de Bogotá
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <!-- Nueva sección: Ubicación de secretarías -->
-      <div class="action-card">
-        <h3>Ubicación de Secretarías de la Mujer</h3>
-        <div class="card-content">
-          <div class="location-grid">
-            <div class="location-item">
-              <h4>Bogotá</h4>
-              <p>Secretaría Distrital de la Mujer</p>
-              <a href="https://www.sdmujer.gov.co/ley-de-transparencia-y-acceso-a-la-informacion-publica/mecanismos-de-contacto/localizacion-fisica-sucursales-o-regionales-horarios-y-dias-de-atencion" target="_blank" rel="noopener noreferrer">
-                Ver ubicaciones y horarios
-              </a>
-            </div>
-            <div class="location-item">
-              <h4>Medellín</h4>
-              <p>Secretaría de las Mujeres</p>
-              <a href="https://www.medellin.gov.co/es/secretaria-mujeres/que-hace/" target="_blank" rel="noopener noreferrer">
-                Información de contacto
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Importancia de la Educación y Prevención</h3>
-      <p>La educación sobre el acoso sexual y la implementación de protocolos institucionales son esenciales para crear entornos seguros. Nuestra aplicación "Protección Segura" busca empoderar a las personas proporcionando herramientas para identificar, reportar y prevenir situaciones de acoso.</p>
-
-      <h3>Referencias</h3>
-      <ul>
-        <li><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=7436434" target="_blank" rel="noopener noreferrer">"Cuentos que no son cuentos": acoso sexual, violencia naturalizada en las aulas universitarias</a></li>
-        <li><a href="https://www.ilo.org/sites/default/files/wcmsp5/groups/public/%40americas/%40ro-lima/%40sro-san_jose/documents/publication/wcms_227404.pdf" target="_blank" rel="noopener noreferrer">El hostigamiento o acoso sexual - OIT</a></li>
-        <li><a href="https://www.gob.mx/issste/es/articulos/hostigamiento-sexual-y-el-acoso-sexual-una-mirada-institucional?idiom=es" target="_blank" rel="noopener noreferrer">Hostigamiento y acoso sexual: una mirada institucional - ISSSTE</a></li>
+    <div class="info-card">
+      <h2>Señales de Alerta</h2>
+      <ul class="info-list">
+        <li>Comportamiento persistente no deseado</li>
+        <li>Invasión del espacio personal</li>
+        <li>Comentarios inapropiados repetitivos</li>
+        <li>Amenazas directas o indirectas</li>
       </ul>
-    </section>
+    </div>
+
+    <div class="info-resources">
+      <div class="resource-card">
+        <h3>Líneas de Ayuda</h3>
+        <p>Contactos de emergencia y recursos de apoyo inmediato.</p>
+        <a href="#" class="resource-link">Ver contactos <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="resource-card">
+        <h3>Recursos Legales</h3>
+        <p>Información sobre tus derechos y opciones legales.</p>
+        <a href="#" class="resource-link">Conoce más <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="resource-card">
+        <h3>Apoyo Psicológico</h3>
+        <p>Recursos para el bienestar emocional y mental.</p>
+        <a href="#" class="resource-link">Buscar ayuda <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
   </main>
 
   <script src="js/main.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </body>
 </html>
 
