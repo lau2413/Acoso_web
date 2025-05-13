@@ -11,26 +11,25 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="images/Logo.jpg" alt="Logo FEMX">
-      <span class="logo-text">FEMX</span>
-    </div>
-    <!-- Botón para mostrar/ocultar la navegación en móviles -->
-    <button class="nav-toggle" aria-label="Toggle navigation">
-      ☰
-    </button>
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="informacion.html">Información</a></li>
-        <li><a href="encuesta.html">Encuesta de Acoso</a></li>
-        <li><a href = "Tutorial.html">Tutorial</a></li>
-        <li><a href="glosario.html">Glosario</a></li>
-        <li><a href="login.html">Cerrar Sesión</a></li>
-      </ul>
-    </nav>
-  </header>
+<header role="banner">
+  <div class="logo" aria-label="Logo FEMX">
+    <img src="images/Logo.jpg" alt="Logo FEMX" height="60">
+    <span class="logo-text">FEMX</span>
+  </div>
+  <button class="nav-toggle" aria-controls="main-navigation" aria-expanded="false" aria-label="Alternar menú de navegación">☰</button>
+  <nav id="main-navigation" role="navigation">
+    <ul>
+      <li><a href="index.html" aria-current="page">Inicio</a></li>
+      <li><a href="informacion.html">Información</a></li>
+      <li><a href="contactos.html">Contacto de Emergencia</a></li>
+      <li><a href="encuesta.html">Encuesta</a></li>
+      <li><a href="Tutorial.html">Tutorial</a></li>
+      <li><a href="glosario.html">Glosario</a></li>
+      <li><a href="login.html">Cerrar Sesión</a></li>
+    </ul>
+  </nav>
+</header>
+
 
   <main>
     <section class="contacto-emergencia-section">
