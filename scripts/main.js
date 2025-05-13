@@ -7,6 +7,60 @@ import { setupContacto } from './contacto.js';
 import { setupEncuesta } from './encuesta.js';
 import { setupNavegacion } from './navegacion.js';
 
+// Configuración del menú móvil
+function setupMobileMenu() {
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav');
+  const header = document.querySelector('header');
+  let lastScroll = 0;
+
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.setAttribute('aria-expanded', 
+        nav.classList.contains('active') ? 'true' : 'false'
+      );
+    });
+
+    // Cerrar menú al hacer click en un enlace
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+        nav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Efecto de scroll
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+      header.style.boxShadow = '0 2px 20px rgba(106, 48, 147, 0.1)';
+      return;
+    }
+    
+    if (currentScroll > lastScroll) {
+      // Scroll hacia abajo
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      // Scroll hacia arriba
+      header.style.transform = 'translateY(0)';
+      header.style.boxShadow = '0 4px 30px rgba(106, 48, 147, 0.15)';
+    }
+    
+    lastScroll = currentScroll;
+  });
+}
+
 // Configuración del Slider
 function setupSlider() {
   const slides = document.querySelectorAll('.hero-slider .slide');
@@ -43,6 +97,9 @@ function setupSlider() {
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Página cargada correctamente');
+  
+  // Iniciar menú móvil
+  setupMobileMenu();
   
   // Iniciar slider
   setupSlider();
