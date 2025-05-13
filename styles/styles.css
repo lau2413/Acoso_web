@@ -2021,7 +2021,7 @@ footer {
   box-shadow: 0 0 0 3px rgba(106, 48, 147, 0.1);
 }
 
-/* Estilo para el botón de mostrar contraseña */
+/* Estilo para el grupo de contraseña */
 .password-input-group {
   position: relative;
   display: flex;
@@ -2030,7 +2030,7 @@ footer {
 
 .password-input-group input {
   width: 100%;
-  padding-right: 45px; /* Aumentamos el padding derecho para dejar espacio al botón */
+  padding-right: 45px; /* Espacio para el botón */
 }
 
 .toggle-password {
@@ -2043,23 +2043,19 @@ footer {
   color: var(--primary);
   cursor: pointer;
   padding: 8px;
-  z-index: 1; /* Aseguramos que esté por encima pero sin interferir */
-  pointer-events: auto; /* Aseguramos que el botón sea clickeable */
+  width: auto; /* Cambiamos de 100% a auto */
+  box-shadow: none;
+  z-index: 2;
 }
 
 .toggle-password:hover {
-  color: var(--accent);
+  transform: translateY(-50%); /* Mantenemos la posición vertical al hacer hover */
+  box-shadow: none;
 }
 
+/* Aseguramos que el botón no herede estilos no deseados */
 .toggle-password i {
-  font-size: 1.2rem;
-}
-
-/* Aseguramos que el input tenga su propio espacio */
-#loginPassword,
-#contrasena {
-  padding-right: 45px !important; /* Forzamos el espacio para el botón */
-  width: 100%;
+  pointer-events: none;
 }
 
 /* Estilos para los botones */
