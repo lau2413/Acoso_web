@@ -14,7 +14,8 @@ function setupPanico() {
   const enviarAlerta = document.getElementById('enviar-alerta');
   const nivelAcoso = document.getElementById('nivel-acoso');
   const cerrarModal = document.getElementById('cerrar-modal');
-  let isProcessing = false; // Flag to prevent double submissions
+  let isProcessing = false;
+  let alertShown = false; // New flag to track if alert was shown
 
   // Verificar que todos los elementos necesarios existen
   if (!btnPanico || !modalEmergencia || !slider || !enviarAlerta || !nivelAcoso || !cerrarModal) {
@@ -58,11 +59,11 @@ function setupPanico() {
       modalEmergencia.style.opacity = '0';
       modalEmergencia.style.visibility = 'hidden';
       
-      // Esperar a que termine la transición antes de ocultar completamente
       setTimeout(() => {
         modalEmergencia.style.display = 'none';
         modalEmergencia.classList.add('hidden');
-        isProcessing = false; // Reset the processing flag when modal is hidden
+        isProcessing = false;
+        alertShown = false; // Reset alert flag when modal is fully hidden
       }, 300);
       
       console.log('Modal ocultado exitosamente');
@@ -147,6 +148,7 @@ function setupPanico() {
       console.error('Geolocalización no soportada');
       alert("Tu navegador no soporta geolocalización.");
       isProcessing = false;
+      alertShown = false;
       enviarAlerta.disabled = false;
       return;
     }
@@ -264,11 +266,14 @@ function setupPanico() {
         throw new Error('Algunas alertas no pudieron ser enviadas');
       }
 
-      // 7. Mostrar mensaje de éxito
-      if (nivelActual >= 3) {
-        alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
-      } else {
-        alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
+      // 7. Mostrar mensaje de éxito solo si no se ha mostrado ya
+      if (!alertShown) {
+        alertShown = true;
+        if (nivelActual >= 3) {
+          alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
+        } else {
+          alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
+        }
       }
 
       ocultarModal();
@@ -277,6 +282,7 @@ function setupPanico() {
       console.error("Error al procesar la alerta:", error);
       alert(error.message || "Ocurrió un error inesperado. Por favor, intenta de nuevo.");
       isProcessing = false;
+      alertShown = false;
       enviarAlerta.disabled = false;
     }
   });
