@@ -65,6 +65,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .termino:hover {
@@ -73,13 +74,18 @@
 }
 
 .termino-header {
-    padding: 20px;
     background: linear-gradient(to right, var(--primary), var(--secondary));
+    padding: 20px;
     color: white;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.termino-header:hover {
+    background: linear-gradient(to right, var(--secondary), var(--primary));
 }
 
 .termino-header h3 {
@@ -91,17 +97,23 @@
 }
 
 .expand-btn {
+    background: none;
+    border: none;
+    color: white;
     cursor: pointer;
+    padding: 5px;
     transition: transform 0.3s ease;
 }
 
-.termino.expanded .expand-btn {
+.termino.expanded .expand-btn i {
     transform: rotate(180deg);
 }
 
 .termino-content {
     padding: 20px;
     display: none;
+    background: white;
+    border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .termino.expanded .termino-content {
@@ -113,18 +125,16 @@
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid var(--light);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .reference-link {
     color: var(--primary);
     text-decoration: none;
     font-size: 0.9rem;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 5px;
+    transition: color 0.3s ease;
 }
 
 .reference-link:hover {
@@ -175,6 +185,22 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Estilos para el estado activo */
+.termino.expanded {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Mejoras en la respuesta táctil */
+.termino-header {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+    .termino-header:hover {
+        opacity: 0.9;
     }
 }
 
