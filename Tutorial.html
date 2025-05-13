@@ -131,6 +131,24 @@
     </section>
   </main>
 
+  <div class="tutorial-container">
+    <h1>Tutorial de uso</h1>
+    <div class="tutorial-step">
+        <h2>1. Botón de pánico</h2>
+        <p>En caso de emergencia, presiona el botón de pánico ubicado en la parte superior de la página.</p>
+        <div class="image-container">
+            <img src="images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
+        </div>
+    </div>
+    <!-- Repite el patrón para cada paso del tutorial -->
+  </div>
+
+  <!-- Agregar el modal para la imagen expandida -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="expandedImage">
+  </div>
+
   <script>
     // Añadir interactividad a las tarjetas
     document.querySelectorAll('.tutorial-card').forEach(card => {
@@ -139,6 +157,7 @@
       });
     });
   </script>
+  <script src="scripts/tutorial.js"></script>
 </body>
 </html>
 
