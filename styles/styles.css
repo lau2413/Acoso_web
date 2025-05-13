@@ -376,15 +376,19 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 1100;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease;
 }
 
 .modal.hidden {
-  display: none !important;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .modal-content {
@@ -394,25 +398,20 @@ a:hover {
   width: 90%;
   max-width: 500px;
   position: relative;
-  animation: modalSlideIn 0.3s ease;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.modal.hidden .modal-content {
+  transform: scale(0.8);
 }
 
 .modal h2 {
   color: var(--primary);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
   text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
 .modal p {
@@ -429,29 +428,28 @@ a:hover {
 
 #slider-acoso {
   width: 100%;
-  height: 10px;
+  margin: 20px 0;
   -webkit-appearance: none;
-  background: linear-gradient(to right, #ffcc00, #ff9900, #ff6600, #cc0000);
+  height: 10px;
   border-radius: 5px;
+  background: linear-gradient(to right, #4CAF50, #FFC107, #FF5722);
   outline: none;
-  margin: 1rem 0;
 }
 
 #slider-acoso::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
-  background: white;
-  border: 2px solid var(--primary);
+  appearance: none;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
+  background: var(--primary);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
 }
 
 #slider-acoso::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: var(--secondary);
 }
 
 .thermometer-labels {
