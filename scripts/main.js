@@ -104,25 +104,53 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Iniciar menú móvil
   setupMobileMenu();
   
-  // Iniciar slider
-  setupSlider();
-  
-  // Configurar pánico primero, ya que es crítico
-  console.log('Configurando botón de pánico...');
-  const botonPanico = document.getElementById('boton-panico');
-  if (botonPanico) {
-    console.log('Botón de pánico encontrado, inicializando...');
-    setupPanico();
-  } else {
-    console.error('Botón de pánico no encontrado en el DOM');
+  // Iniciar slider si estamos en la página principal
+  const heroSlider = document.querySelector('.hero-slider');
+  if (heroSlider) {
+    setupSlider();
   }
   
-  // Configurar otras funcionalidades
-  if (document.querySelector('#registro-form')) setupRegistro();
-  if (document.querySelector('#contacto-emergencia-form')) setupContacto();
-  if (document.querySelector('#formulario-encuesta')) setupEncuesta();
-  if (document.querySelector('.nav-toggle')) setupNavegacion();
-  if (document.querySelector('#formulario_login')) LogIn();
+  // Configurar pánico si estamos en la página principal
+  console.log('Configurando botón de pánico...');
+  const botonPanico = document.getElementById('boton-panico');
+  const modalEmergencia = document.getElementById('modal-emergencia');
+  if (botonPanico && modalEmergencia) {
+    console.log('Botón de pánico y modal encontrados, inicializando...');
+    setupPanico();
+  } else {
+    console.log('Página actual no requiere configuración de pánico');
+  }
+  
+  // Configurar otras funcionalidades solo si los elementos existen
+  const registroForm = document.querySelector('#registro-form');
+  if (registroForm) {
+    console.log('Inicializando registro...');
+    setupRegistro();
+  }
+
+  const contactoForm = document.querySelector('#contacto-emergencia-form');
+  if (contactoForm) {
+    console.log('Inicializando contacto de emergencia...');
+    setupContacto();
+  }
+
+  const encuestaForm = document.querySelector('#formulario-encuesta');
+  if (encuestaForm) {
+    console.log('Inicializando encuesta...');
+    setupEncuesta();
+  }
+
+  const navToggle = document.querySelector('.nav-toggle');
+  if (navToggle) {
+    console.log('Inicializando navegación...');
+    setupNavegacion();
+  }
+
+  const loginForm = document.querySelector('#formulario_login');
+  if (loginForm) {
+    console.log('Inicializando login...');
+    LogIn();
+  }
   
   // Actualizar UI de sesión
   await updateSessionUI();

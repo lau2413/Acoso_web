@@ -16,15 +16,20 @@ export function setupPanico() {
   const nivelDetalle = document.getElementById('nivel-detalle');
   const cerrarModal = document.getElementById('cerrar-modal');
 
-  console.log('Elementos encontrados:', {
-    btnPanico: !!btnPanico,
-    modalEmergencia: !!modalEmergencia,
-    slider: !!slider,
-    enviarAlerta: !!enviarAlerta,
-    nivelTitulo: !!nivelTitulo,
-    nivelDetalle: !!nivelDetalle,
-    cerrarModal: !!cerrarModal
-  });
+  // Verificar que todos los elementos necesarios existen
+  if (!btnPanico || !modalEmergencia || !slider || !enviarAlerta || !nivelTitulo || !nivelDetalle || !cerrarModal) {
+    console.error('Faltan elementos necesarios para el botón de pánico');
+    console.log('Elementos encontrados:', {
+      btnPanico: !!btnPanico,
+      modalEmergencia: !!modalEmergencia,
+      slider: !!slider,
+      enviarAlerta: !!enviarAlerta,
+      nivelTitulo: !!nivelTitulo,
+      nivelDetalle: !!nivelDetalle,
+      cerrarModal: !!cerrarModal
+    });
+    return;
+  }
 
   // Definición de los niveles de acoso
   const nivelesAcoso = {
@@ -50,50 +55,50 @@ export function setupPanico() {
     }
   };
 
-  if (btnPanico) {
-    console.log('Agregando event listener al botón de pánico');
-    btnPanico.addEventListener('click', () => {
-      console.log('Botón de pánico clickeado');
-      if (modalEmergencia) {
-        console.log('Mostrando modal de emergencia');
-        modalEmergencia.classList.remove('hidden');
-        // Asegurarse de que el slider esté en el valor inicial
-        if (slider) {
-          slider.value = 1;
-          actualizarNivelAcoso(1);
-        }
-      } else {
-        console.error('Modal de emergencia no encontrado');
-      }
-    });
+  function mostrarModal() {
+    console.log('Mostrando modal de emergencia');
+    modalEmergencia.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevenir scroll
+    slider.value = 1;
+    actualizarNivelAcoso(1);
   }
 
-  if (cerrarModal) {
-    cerrarModal.addEventListener('click', () => {
-      console.log('Cerrando modal');
-      if (modalEmergencia) {
-        modalEmergencia.classList.add('hidden');
-      }
-    });
+  function ocultarModal() {
+    console.log('Ocultando modal de emergencia');
+    modalEmergencia.classList.add('hidden');
+    document.body.style.overflow = ''; // Restaurar scroll
   }
 
   function actualizarNivelAcoso(nivel) {
     console.log('Actualizando nivel de acoso:', nivel);
-    if (nivelTitulo && nivelDetalle) {
-      nivelTitulo.textContent = nivelesAcoso[nivel].titulo;
-      nivelDetalle.textContent = nivelesAcoso[nivel].descripcion;
-      nivelTitulo.style.color = nivelesAcoso[nivel].color;
-    }
+    nivelTitulo.textContent = nivelesAcoso[nivel].titulo;
+    nivelDetalle.textContent = nivelesAcoso[nivel].descripcion;
+    nivelTitulo.style.color = nivelesAcoso[nivel].color;
   }
 
-  // Actualizar al mover el slider
-  if (slider) {
-    slider.addEventListener('input', () => {
-      const nivelActual = parseInt(slider.value);
-      console.log('Slider movido a nivel:', nivelActual);
-      actualizarNivelAcoso(nivelActual);
-    });
-  }
+  // Event Listeners
+  btnPanico.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('Botón de pánico clickeado');
+    mostrarModal();
+  });
+
+  cerrarModal.addEventListener('click', (e) => {
+    e.preventDefault();
+    ocultarModal();
+  });
+
+  // Cerrar modal al hacer clic fuera
+  modalEmergencia.addEventListener('click', (e) => {
+    if (e.target === modalEmergencia) {
+      ocultarModal();
+    }
+  });
+
+  slider.addEventListener('input', () => {
+    const nivelActual = parseInt(slider.value);
+    actualizarNivelAcoso(nivelActual);
+  });
 
   if (enviarAlerta) {
     enviarAlerta.addEventListener('click', async () => {

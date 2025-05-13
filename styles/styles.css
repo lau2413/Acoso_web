@@ -376,7 +376,7 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -390,6 +390,7 @@ a:hover {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  display: none;
 }
 
 .modal-content {
@@ -405,8 +406,17 @@ a:hover {
   transition: transform 0.3s ease;
 }
 
-.modal.hidden .modal-content {
-  transform: scale(0.9);
+.modal h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal p {
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 @keyframes modalFadeIn {
