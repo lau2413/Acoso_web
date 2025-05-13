@@ -37,7 +37,7 @@
         <div class="progress" id="survey-progress"></div>
       </div>
       <div class="progress-text">
-        <span id="current-question">1</span>/10
+        <span id="questions-completed">0</span>/10 preguntas completadas
       </div>
     </div>
 
@@ -50,7 +50,7 @@
     <form id="encuesta-form">
       <div class="questions-container">
         <!-- Pregunta 1 -->
-        <div class="question-container active" data-question="1">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 1</span>
           </div>
@@ -64,115 +64,133 @@
         </div>
 
         <!-- Pregunta 2 -->
-        <div class="question-container" data-question="2" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 2</span>
           </div>
           <p>¿Alguien ha insistido en acompañarte o seguirte a pesar de tu negativa?</p>
-          <label><input type="radio" name="q2" value="5"> No</label>
-          <label><input type="radio" name="q2" value="6"> Sí, desconocidos</label>
-          <label><input type="radio" name="q2" value="7"> Sí, conocidos</label>
-          <label><input type="radio" name="q2" value="8"> Sí, ambas situaciones</label>
+          <div class="options-container">
+            <label><input type="radio" name="q2" value="5"> No</label>
+            <label><input type="radio" name="q2" value="6"> Sí, desconocidos</label>
+            <label><input type="radio" name="q2" value="7"> Sí, conocidos</label>
+            <label><input type="radio" name="q2" value="8"> Sí, ambas situaciones</label>
+          </div>
         </div>
 
         <!-- Pregunta 3 -->
-        <div class="question-container" data-question="3" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 3</span>
           </div>
           <p>¿Has evitado ciertos lugares por miedo a encontrarte con alguien que te incomode?</p>
-          <label><input type="radio" name="q3" value="9"> No</label>
-          <label><input type="radio" name="q3" value="10"> Sí, desconocidos</label>
-          <label><input type="radio" name="q3" value="11"> Sí, conocidos</label>
-          <label><input type="radio" name="q3" value="12"> Sí, ambas situaciones</label>
+          <div class="options-container">
+            <label><input type="radio" name="q3" value="9"> No</label>
+            <label><input type="radio" name="q3" value="10"> Sí, desconocidos</label>
+            <label><input type="radio" name="q3" value="11"> Sí, conocidos</label>
+            <label><input type="radio" name="q3" value="12"> Sí, ambas situaciones</label>
+          </div>
         </div>
 
         <!-- Pregunta 4 -->
-        <div class="question-container" data-question="4" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 4</span>
           </div>
           <p>¿Alguien ha invadido tu espacio personal de forma que te hizo sentir atrapado/a?</p>
-          <label><input type="radio" name="q4" value="13"> No</label>
-          <label><input type="radio" name="q4" value="14"> Sí, en la calle</label>
-          <label><input type="radio" name="q4" value="15"> Sí, en reuniones sociales</label>
-          <label><input type="radio" name="q4" value="16"> Sí, ambos contextos</label>
+          <div class="options-container">
+            <label><input type="radio" name="q4" value="13"> No</label>
+            <label><input type="radio" name="q4" value="14"> Sí, en la calle</label>
+            <label><input type="radio" name="q4" value="15"> Sí, en reuniones sociales</label>
+            <label><input type="radio" name="q4" value="16"> Sí, ambos contextos</label>
+          </div>
         </div>
 
         <!-- Pregunta 5 -->
-        <div class="question-container" data-question="5" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 5</span>
           </div>
           <p>¿Has recibido o te han tomado fotos sin permiso?</p>
-          <label><input type="radio" name="q5" value="17"> No</label>
-          <label><input type="radio" name="q5" value="18"> Sí, desconocidos</label>
-          <label><input type="radio" name="q5" value="19"> Sí, conocidos</label>
-          <label><input type="radio" name="q5" value="20"> Sí, ambos</label>
+          <div class="options-container">
+            <label><input type="radio" name="q5" value="17"> No</label>
+            <label><input type="radio" name="q5" value="18"> Sí, desconocidos</label>
+            <label><input type="radio" name="q5" value="19"> Sí, conocidos</label>
+            <label><input type="radio" name="q5" value="20"> Sí, ambos</label>
+          </div>
         </div>
 
         <!-- Pregunta 6 -->
-        <div class="question-container" data-question="6" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 6</span>
           </div>
           <p>¿Te has sentido obligado/a a responder "amablemente" ante comentarios incómodos por miedo?</p>
-          <label><input type="radio" name="q6" value="21"> No</label>
-          <label><input type="radio" name="q6" value="22"> Sí, con desconocidos</label>
-          <label><input type="radio" name="q6" value="23"> Sí, con conocidos</label>
-          <label><input type="radio" name="q6" value="24"> Sí, ambos casos</label>
+          <div class="options-container">
+            <label><input type="radio" name="q6" value="21"> No</label>
+            <label><input type="radio" name="q6" value="22"> Sí, con desconocidos</label>
+            <label><input type="radio" name="q6" value="23"> Sí, con conocidos</label>
+            <label><input type="radio" name="q6" value="24"> Sí, ambos casos</label>
+          </div>
         </div>
 
         <!-- Pregunta 7 -->
-        <div class="question-container" data-question="7" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 7</span>
           </div>
           <p>¿Te han hecho sentir culpable por expresar incomodidad?</p>
-          <label><input type="radio" name="q7" value="25"> No</label>
-          <label><input type="radio" name="q7" value="26"> Sí, desconocidos</label>
-          <label><input type="radio" name="q7" value="27"> Sí, conocidos</label>
-          <label><input type="radio" name="q7" value="28"> Sí, ambos</label>
+          <div class="options-container">
+            <label><input type="radio" name="q7" value="25"> No</label>
+            <label><input type="radio" name="q7" value="26"> Sí, desconocidos</label>
+            <label><input type="radio" name="q7" value="27"> Sí, conocidos</label>
+            <label><input type="radio" name="q7" value="28"> Sí, ambos</label>
+          </div>
         </div>
 
         <!-- Pregunta 8 -->
-        <div class="question-container" data-question="8" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 8</span>
           </div>
           <p>¿Has compartido tu ubicación con alguien por miedo?</p>
-          <label><input type="radio" name="q8" value="29"> No</label>
-          <label><input type="radio" name="q8" value="30"> Sí, ocasionalmente</label>
-          <label><input type="radio" name="q8" value="31"> Sí, frecuentemente</label>
+          <div class="options-container">
+            <label><input type="radio" name="q8" value="29"> No</label>
+            <label><input type="radio" name="q8" value="30"> Sí, ocasionalmente</label>
+            <label><input type="radio" name="q8" value="31"> Sí, frecuentemente</label>
+          </div>
         </div>
 
         <!-- Pregunta 9 -->
-        <div class="question-container" data-question="9" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 9</span>
           </div>
           <p>¿Te has sentido observado/a de forma persistente?</p>
-          <label><input type="radio" name="q9" value="32"> No</label>
-          <label><input type="radio" name="q9" value="33"> Sí, desconocidos</label>
-          <label><input type="radio" name="q9" value="34"> Sí, conocidos</label>
-          <label><input type="radio" name="q9" value="35"> Sí, ambos</label>
+          <div class="options-container">
+            <label><input type="radio" name="q9" value="32"> No</label>
+            <label><input type="radio" name="q9" value="33"> Sí, desconocidos</label>
+            <label><input type="radio" name="q9" value="34"> Sí, conocidos</label>
+            <label><input type="radio" name="q9" value="35"> Sí, ambos</label>
+          </div>
         </div>
 
         <!-- Pregunta 10 -->
-        <div class="question-container" data-question="10" style="display: none;">
+        <div class="question-container">
           <div class="question-header">
             <span class="question-number">Pregunta 10</span>
           </div>
           <p>¿Qué función de nuestra app te sería más útil?</p>
-          <label><input type="radio" name="q10" value="36"> Botón de pánico con alerta</label>
-          <label><input type="radio" name="q10" value="37"> Ruta acompañada virtual</label>
-          <label><input type="radio" name="q10" value="38"> Conexión con autoridades</label>
-          <label><input type="radio" name="q10" value="39"> Comunidad de apoyo</label>
-          <label><input type="radio" name="q10" value="40"> Información educativa</label>
+          <div class="options-container">
+            <label><input type="radio" name="q10" value="36"> Botón de pánico con alerta</label>
+            <label><input type="radio" name="q10" value="37"> Ruta acompañada virtual</label>
+            <label><input type="radio" name="q10" value="38"> Conexión con autoridades</label>
+            <label><input type="radio" name="q10" value="39"> Comunidad de apoyo</label>
+            <label><input type="radio" name="q10" value="40"> Información educativa</label>
+          </div>
         </div>
 
         <!-- Comentarios adicionales opcionales -->
-        <div class="question-container optional-comment" style="display: none;">
+        <div class="question-container optional-comment">
           <p>¿Hay algo más que quieras compartir sobre tus experiencias? (Opcional)</p>
           <textarea name="additional_comments" rows="4" placeholder="Tu opinión es importante para nosotros..."></textarea>
         </div>
@@ -183,9 +201,7 @@
       </div>
 
       <div class="form-navigation">
-        <button type="button" id="prev-btn" class="nav-button">Anterior</button>
-        <button type="button" id="next-btn" class="nav-button">Siguiente</button>
-        <button type="submit" id="submit-btn" class="nav-button" style="display: none;">Finalizar</button>
+        <button type="submit" id="submit-btn" class="nav-button">Finalizar Encuesta</button>
       </div>
     </form>
   </div>

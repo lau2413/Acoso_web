@@ -1,78 +1,41 @@
 // encuesta.js
 import { supabase } from './supabase.js';
 
-function updateQuestionStatus() {
-  const total = 10;
-  const answered = document.querySelectorAll('input[type="radio"]:checked').length;
-  document.getElementById('questions-completed').textContent = `${answered}/${total}`;
-}
-
-function highlightUnansweredQuestions() {
-  document.querySelectorAll('.question-container').forEach((container, index) => {
-    const isAnswered = container.querySelector('input[type="radio"]:checked');
-    container.classList.toggle('unanswered', !isAnswered);
-  });
-}
-
 export function setupEncuesta() {
   const form = document.getElementById('encuesta-form');
-  const questions = document.querySelectorAll('.question-container');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const submitBtn = document.getElementById('submit-btn');
   const progressBar = document.getElementById('survey-progress');
-  const currentQuestionSpan = document.getElementById('current-question');
+  const questionsCompletedSpan = document.getElementById('questions-completed');
+  const submitBtn = document.getElementById('submit-btn');
 
-  let currentQuestionIndex = 0;
-
-  function showQuestion(index) {
-    // Ocultar todas las preguntas
-    questions.forEach(q => {
-      q.style.display = 'none';
-      q.classList.remove('active');
-    });
+  function updateProgress() {
+    const totalQuestions = 10;
+    const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+    const progress = (answeredQuestions / totalQuestions) * 100;
     
-    // Mostrar la pregunta actual
-    questions[index].style.display = 'block';
-    questions[index].classList.add('active');
+    progressBar.style.width = `${progress}%`;
+    questionsCompletedSpan.textContent = answeredQuestions;
     
-    // Actualizar navegación
-    prevBtn.disabled = index === 0;
-    nextBtn.style.display = index === questions.length - 1 ? 'none' : 'block';
-    submitBtn.style.display = index === questions.length - 1 ? 'block' : 'none';
-    
-    // Actualizar progreso
-    currentQuestionIndex = index;
-    currentQuestionSpan.textContent = index + 1;
-    progressBar.style.width = `${((index + 1) / questions.length) * 100}%`;
+    // Mostrar/ocultar botón de enviar
+    submitBtn.style.display = answeredQuestions === totalQuestions ? 'block' : 'none';
   }
 
-  // Event Listeners
-  nextBtn.addEventListener('click', () => {
-    const currentQuestion = questions[currentQuestionIndex];
-    const isAnswered = currentQuestion.querySelector('input[type="radio"]:checked');
-    
-    if (!isAnswered) {
-      alert('Por favor, selecciona una respuesta antes de continuar.');
-      return;
-    }
-    
-    if (currentQuestionIndex < questions.length - 1) {
-      showQuestion(currentQuestionIndex + 1);
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentQuestionIndex > 0) {
-      showQuestion(currentQuestionIndex - 1);
+  // Actualizar progreso cuando se selecciona una respuesta
+  form.addEventListener('change', (e) => {
+    if (e.target.type === 'radio') {
+      updateProgress();
+      
+      // Efecto visual en la pregunta respondida
+      const questionContainer = e.target.closest('.question-container');
+      questionContainer.classList.add('answered');
     }
   });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    
-    if (currentQuestionIndex !== questions.length - 1) {
-      alert('Por favor, completa la encuesta antes de enviar.');
+
+    const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+    if (answeredQuestions < 10) {
+      alert('Por favor, responde todas las preguntas antes de enviar.');
       return;
     }
 
@@ -90,15 +53,12 @@ export function setupEncuesta() {
       const respuestas = [];
 
       // Recolectar todas las respuestas
-      questions.forEach((question, index) => {
-        const checkedInput = question.querySelector('input[type="radio"]:checked');
-        if (checkedInput) {
-          respuestas.push({
-            id_usuario: uid,
-            id_opcion: parseInt(checkedInput.value),
-            id_pregunta: index + 1
-          });
-        }
+      document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+        respuestas.push({
+          id_usuario: uid,
+          id_opcion: parseInt(input.value),
+          id_pregunta: parseInt(input.name.replace('q', ''))
+        });
       });
 
       const { error: respuestaError } = await supabase
@@ -116,12 +76,9 @@ export function setupEncuesta() {
     }
   });
 
-  // Inicializar
-  showQuestion(0);
+  // Inicializar progreso
+  updateProgress();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateQuestionStatus();
-  highlightUnansweredQuestions();
-  setupEncuesta();
-});
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', setupEncuesta);
