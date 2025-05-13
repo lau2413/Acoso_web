@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="styles/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-  <script type="module" src="scripts/main.js" defer></script>
-  <script type="module" src="scripts/Panico.js" defer></script>
 </head>
 <body>
   <header>
@@ -29,30 +27,16 @@
     </nav>
   </header>
 
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>Seguras, libres<br>y sin miedo</h1>
-      <p class="hero-description">Tu seguridad es nuestra prioridad.<br>Estamos aquí para apoyarte.</p>
-      
-      <div class="hero-panic-button">
-        <button id="boton-panico">¡PÁNICO!</button>
-        <p class="panic-description">Presiona el botón para ayuda inmediata</p>
-      </div>
-    </div>
-    <div class="hero-slider">
-      <div class="slide active">
-        <img src="images/76216.jpg" alt="Mujeres empoderadas">
-      </div>
-      <div class="slide">
-        <img src="images/20943399.jpg" alt="Mujer denunciando">
-      </div>
-      <div class="slide">
-        <img src="images/mujeres.jpg" alt="No estas sola">
-      </div>
-    </div>
-  </section>
-
   <main>
+    <section id="panico-section">
+      <div class="panic-button-container">
+        <div class="card">
+          <button id="boton-panico">¡PÁNICO!</button>
+          <p>Presiona el botón para realizar el reporte.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="features-section">
       <div class="features-grid">
         <div class="feature-card">
@@ -96,28 +80,24 @@
     </section>
   </main>
 
+  <!-- ===== MODAL DE EMERGENCIA CON SLIDER ===== -->
   <div id="modal-emergencia" class="modal hidden">
     <div class="modal-content">
-      <h2>Nivel de Acoso</h2>
-      <p>Por favor, indica el nivel de acoso que estás experimentando:</p>
-      
-      <div class="thermometer-container">
-        <input type="range" id="slider-acoso" min="1" max="4" value="1" step="1">
-        <div class="thermometer-labels">
+      <h2 id="nivel-titulo">Nivel 1: Leve</h2>
+      <p id="nivel-detalle">Selecciona el nivel de acoso que estás experimentando</p>
+      <div class="slider-container">
+        <input type="range" id="slider-acoso" min="1" max="4" step="1" value="1">
+        <div class="slider-labels">
           <span>Leve</span>
           <span>Moderado</span>
           <span>Fuerte</span>
           <span>Severo</span>
         </div>
       </div>
-
-      <div id="nivel-descripcion">
-        <h3 id="nivel-titulo">Nivel 1: Leve</h3>
-        <p id="nivel-detalle">Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas</p>
+      <div class="modal-buttons">
+        <button id="enviar-alerta" class="primary-button">Enviar Alerta</button>
+        <button id="cerrar-modal" class="secondary-button">Cancelar</button>
       </div>
-
-      <button id="enviar-alerta" class="btn-primary">Enviar Alerta</button>
-      <button id="cerrar-modal" class="btn-secondary">Cancelar</button>
     </div>
   </div>
 
@@ -166,5 +146,7 @@
       <p>&copy; 2025 FEMX - Todos los derechos reservados</p>
     </div>
   </footer>
+
+  <script type="module" src="scripts/main.js"></script>
 </body>
 </html>

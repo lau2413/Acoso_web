@@ -376,375 +376,155 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .modal.hidden {
-  display: none !important;
+  display: none;
+  opacity: 0;
 }
 
 .modal-content {
-  background: white;
+  background-color: white;
   padding: 2rem;
-  border-radius: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   width: 90%;
   max-width: 500px;
   position: relative;
-  animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .modal h2 {
-  color: var(--primary);
-  font-size: 1.5rem;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
 }
 
-.modal p {
-  color: var(--text);
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-/* Estilos para el slider y etiquetas */
-.thermometer-container {
+.slider-container {
   margin: 2rem 0;
-  padding: 0 1rem;
 }
 
 #slider-acoso {
   width: 100%;
-  height: 10px;
+  height: 6px;
   -webkit-appearance: none;
   background: linear-gradient(to right, #ffcc00, #ff9900, #ff6600, #cc0000);
-  border-radius: 5px;
+  border-radius: 3px;
   outline: none;
-  margin: 1rem 0;
 }
 
 #slider-acoso::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   background: white;
-  border: 2px solid var(--primary);
+  border: 2px solid #6a3093;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
 }
 
 #slider-acoso::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
 }
 
-.thermometer-labels {
+.slider-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  padding: 0 12px;
+  margin-top: 0.5rem;
+  padding: 0 10px;
 }
 
-.thermometer-labels span {
+.slider-labels span {
   font-size: 0.9rem;
-  color: var(--text);
-  font-weight: 500;
+  color: #666;
 }
 
-#nivel-descripcion {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 10px;
-  margin: 1.5rem 0;
-}
-
-#nivel-titulo {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  font-size: 1.2rem;
-}
-
-#nivel-detalle {
-  color: var(--text);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.btn-primary, .btn-secondary {
-  width: 100%;
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-secondary {
-  background: #e9ecef;
-  color: var(--text);
-}
-
-.btn-primary:hover {
-  background: #ff3366;
-  transform: translateY(-2px);
-}
-
-.btn-secondary:hover {
-  background: #dee2e6;
-}
-
-/* === Modales === */
-.modal {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background-color: transparent;
-  display: block;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.modal-content {
-  background-color: var(--white);
-  padding: 30px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 800px;
-  margin: 20px auto;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-}
-
-.questions-container {
-  margin: 30px 0;
-}
-
-.question-container {
-  display: block;
-  background: white;
-  border: 1px solid #e6d0ff;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.question-container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(106, 48, 147, 0.1);
-}
-
-.question-container.answered {
-  border-color: var(--secondary);
-  background-color: #faf5ff;
-}
-
-.question-header {
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--light);
-}
-
-.question-number {
-  font-weight: 600;
-  color: var(--primary);
-}
-
-.options-container label {
-  display: block;
-  padding: 12px 16px;
-  margin: 8px 0;
-  background: var(--light);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.options-container label:hover {
-  background: #f0e0ff;
-  transform: translateX(5px);
-}
-
-.options-container label:has(input[type="radio"]:checked) {
-  background: var(--primary);
-  color: white;
-  transform: scale(1.02);
-}
-
-.progress-container {
-  margin: 20px 0 30px;
-}
-
-.progress-bar {
-  height: 8px;
-  background: var(--light);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  background: linear-gradient(to right, var(--accent), var(--secondary));
-  transition: width 0.3s ease;
-  width: 0;
-}
-
-.progress-text {
-  text-align: center;
-  margin-top: 10px;
-  font-weight: 600;
-  color: var(--primary);
-}
-
-#submit-btn {
-  display: none;
-  width: 100%;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
-  color: white;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(106, 48, 147, 0.2);
-}
-
-#submit-btn:active {
-  transform: translateY(0);
-}
-
-/* Radio buttons - Versión mejorada */
-label {
-  display: block;
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 16px;
-  user-select: none;
-  text-align: left;
-  color: var(--text);
-  transition: all 0.2s ease;
-}
-
-label:hover {
-  color: var(--primary);
-}
-
-
-/* === Radio Buttons === */
-input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.radio-custom {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #f5e9ff;
-  border-radius: 50%;
-  border: 2px solid var(--primary);
-  transition: all 0.2s ease;
-}
-
-input[type="radio"]:checked ~ .radio-custom {
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--accent);
-}
-
-label:hover .radio-custom {
-  transform: scale(1.1);
-  box-shadow: 0 0 0 2px var(--secondary);
-}
-
-/* === Botón de Pánico === */
-#boton-panico {
-  background: linear-gradient(135deg, #ff4d8d 0%, #ff2d6d 100%);
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 30px;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  margin: 20px auto;
+.modal-buttons {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.primary-button, .secondary-button {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 6px;
   border: none;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(255, 77, 141, 0.4);
-  animation: pulse 2s infinite;
+  transition: all 0.2s ease;
+}
+
+.primary-button {
+  background-color: #6a3093;
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: #7b3dad;
+}
+
+.secondary-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.secondary-button:hover {
+  background-color: #e0e0e0;
+}
+
+#boton-panico {
+  background-color: #cc0000;
+  color: white;
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 100;
+  box-shadow: 0 4px 15px rgba(204, 0, 0, 0.3);
 }
 
 #boton-panico:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(255, 77, 141, 0.6);
-}
-
-#boton-panico:active {
-  transform: scale(0.95);
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 20px rgba(255, 77, 141, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
-  }
+  box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
 }
 
 .panic-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
-  margin-top: 0;
+  padding: 3rem 0;
+}
+
+.card {
+  text-align: center;
+}
+
+.card p {
+  margin-top: 1rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  #boton-panico {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.25rem;
+  }
 }
 
 /* === Contacto Emergencia === */
@@ -960,13 +740,14 @@ select:focus {
   height: 100%;
   background: linear-gradient(to right, var(--accent), var(--secondary));
   transition: width 0.3s ease;
+  width: 0;
 }
 
 .progress-text {
   text-align: center;
+  margin-top: 10px;
   font-weight: 600;
   color: var(--primary);
-  font-size: 1.1em;
 }
 
 /* === Información === */
