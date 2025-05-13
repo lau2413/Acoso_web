@@ -1747,21 +1747,46 @@ footer {
     outline: none;
 }
 
+/* Ajuste para el grupo de input de contraseña */
 .password-input-group {
     position: relative;
+    width: 100%;
+}
+
+.password-input-group input {
+    width: 100%;
+    padding-right: 40px; /* Espacio para el botón del ojo */
 }
 
 .toggle-password {
     position: absolute;
-    right: 15px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--primary);
     cursor: pointer;
-    padding: 0;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--secondary);
+}
+
+.toggle-password i {
     font-size: 1.1rem;
+}
+
+/* Asegurarse que el botón no tenga estilos de botón por defecto */
+.toggle-password:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .auth-submit-btn {
