@@ -19,67 +19,60 @@ export function setupRegistro() {
         return;
       }
 
-      // Verificar si el correo ya existe en tu tabla 'usuarios'
-      const { data: existingUser, error: checkError } = await supabase
-        .from("usuarios")
-        .select("correo")
-        .eq("correo", correo)
-        .maybeSingle();
+      try {
+        // Primero verificar si el correo ya existe
+        const { data: existingUser, error: checkError } = await supabase
+          .from("usuarios")
+          .select("correo")
+          .eq("correo", correo)
+          .maybeSingle();
 
-      if (checkError) {
-        alert("Error al verificar el correo: " + checkError.message);
-        return;
-      }
-
-      // Registro en Supabase Auth
-      const { data: authData, error: signUpError } = await supabase.auth.signUp({
-        email: correo,
-        password: contrasena,
-      });
-
-      if (signUpError) {
-        alert("Error al registrar usuario: " + signUpError.message);
-        return;
-      }
-
-      // Insertar datos adicionales en tu tabla 'usuarios'
-      const { data: insertData, error: insertError } = await supabase
-        .from("usuarios")
-        .insert([
-          {
-            nombre: nombre,
-            correo: correo,
-            contrasena: contrasena,
-            telefono: telefono,
-            id: authData.user.id, // FK con el UUID de auth.users
-          },
-        ]);
-
-      if (insertError) {
-        // Eliminar el usuario si ocurre un error al insertar
-        await supabase.auth.admin.deleteUser(authData.user.id); // Usar authData.user.id en lugar de userId
-          
-        if (
-          insertError.message.includes("duplicate key value") &&
-          insertError.message.includes("telefono")
-        ) {
-          alert("El número de teléfono ya está registrado.");
-        } else {
-          alert("Error al guardar datos del usuario: " + insertError.message);
+        if (checkError) {
+          throw new Error("Error al verificar el correo: " + checkError.message);
         }
-        return;
-      }
-        
-      if (existingUser) {
-        alert("El correo ya está registrado.");
-        return;
-      }
 
-      // Guardar el ID del usuario en localStorage para usarlo en otras partes
-      localStorage.setItem("uid", authData.user.id);
+        if (existingUser) {
+          alert("El correo ya está registrado.");
+          return;
+        }
 
-      alert("Registro exitoso.");
-      window.location.href = "contactos.html";
+        // Si el correo no existe, proceder con el registro
+        const { data: authData, error: signUpError } = await supabase.auth.signUp({
+          email: correo,
+          password: contrasena,
+        });
+
+        if (signUpError) {
+          throw new Error("Error al registrar usuario: " + signUpError.message);
+        }
+
+        // Insertar datos adicionales en la tabla 'usuarios'
+        const { error: insertError } = await supabase
+          .from("usuarios")
+          .insert([
+            {
+              nombre: nombre,
+              correo: correo,
+              contrasena: contrasena,
+              telefono: telefono,
+              id: authData.user.id,
+            },
+          ]);
+
+        if (insertError) {
+          // Si hay error al insertar, eliminar el usuario de auth
+          await supabase.auth.admin.deleteUser(authData.user.id);
+          throw new Error("Error al guardar datos del usuario: " + insertError.message);
+        }
+
+        // Si todo sale bien, guardar el ID y redirigir
+        localStorage.setItem("uid", authData.user.id);
+        alert("Registro exitoso.");
+        window.location.href = "contactos.html";
+
+      } catch (error) {
+        alert(error.message);
+      }
     });
   }
 }
