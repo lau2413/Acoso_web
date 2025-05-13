@@ -1855,3 +1855,91 @@ footer {
 .tutorial-card {
     opacity: 1;
 }
+
+/* Estilos para la encuesta */
+.survey-section {
+  max-width: 800px;
+  margin: 100px auto 40px;
+  padding: 40px;
+}
+
+.survey-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(106, 48, 147, 0.15);
+}
+
+.question-container {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-container label {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background: var(--light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.question-container label:hover {
+  background: #f0e0ff;
+  transform: translateX(5px);
+}
+
+.question-container input[type="radio"] {
+  margin-right: 10px;
+}
+
+.progress-container {
+  margin: 20px 0 30px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(to right, var(--secondary), var(--primary));
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: right;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-top: 8px;
+}
+
+.survey-instructions {
+  margin-bottom: 30px;
+  color: var(--text);
+}
+
+#submit-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 45, 109, 0.3);
+}
