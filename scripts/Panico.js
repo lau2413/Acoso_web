@@ -14,6 +14,7 @@ function setupPanico() {
   const enviarAlerta = document.getElementById('enviar-alerta');
   const nivelAcoso = document.getElementById('nivel-acoso');
   const cerrarModal = document.getElementById('cerrar-modal');
+  let isProcessing = false; // Flag to prevent double submissions
 
   // Verificar que todos los elementos necesarios existen
   if (!btnPanico || !modalEmergencia || !slider || !enviarAlerta || !nivelAcoso || !cerrarModal) {
@@ -61,6 +62,7 @@ function setupPanico() {
       setTimeout(() => {
         modalEmergencia.style.display = 'none';
         modalEmergencia.classList.add('hidden');
+        isProcessing = false; // Reset the processing flag when modal is hidden
       }, 300);
       
       console.log('Modal ocultado exitosamente');
@@ -98,7 +100,9 @@ function setupPanico() {
     console.log('Botón de pánico clickeado');
     e.preventDefault();
     e.stopPropagation();
-    mostrarModal();
+    if (!isProcessing) {
+      mostrarModal();
+    }
   });
 
   cerrarModal.addEventListener('click', (e) => {
@@ -130,11 +134,20 @@ function setupPanico() {
   });
 
   enviarAlerta.addEventListener('click', async () => {
+    if (isProcessing) {
+      console.log('Ya hay una alerta en proceso...');
+      return;
+    }
+
+    isProcessing = true;
+    enviarAlerta.disabled = true;
     console.log('Iniciando envío de alerta...');
     
     if (!navigator.geolocation) {
       console.error('Geolocalización no soportada');
       alert("Tu navegador no soporta geolocalización.");
+      isProcessing = false;
+      enviarAlerta.disabled = false;
       return;
     }
 
@@ -263,6 +276,8 @@ function setupPanico() {
     } catch (error) {
       console.error("Error al procesar la alerta:", error);
       alert(error.message || "Ocurrió un error inesperado. Por favor, intenta de nuevo.");
+      isProcessing = false;
+      enviarAlerta.disabled = false;
     }
   });
 
