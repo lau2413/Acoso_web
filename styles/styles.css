@@ -260,16 +260,16 @@ a:hover {
   background-color: transparent;
   display: block;
   padding: 20px;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .modal-content {
   background-color: var(--white);
-  padding: 40px;
+  padding: 30px;
   border-radius: 20px;
   width: 90%;
   max-width: 800px;
-  margin: 40px auto;
+  margin: 20px auto;
   box-shadow: 0 12px 36px rgba(0,0,0,0.2);
 }
 
@@ -1189,4 +1189,9 @@ footer {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Eliminar los estilos relacionados con la sección de opinión */
+.optional-comment {
+  display: none;
 }
