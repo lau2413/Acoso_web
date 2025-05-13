@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tutorial - FEMX</title>
   <link rel="stylesheet" href="styles/styles.css" />
-  <link rel="stylesheet" href="styles/tutorial.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="images/Logo.jpg" alt="Logo FEMX">
       <span class="logo-text">FEMX</span>
     </div>
-    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
@@ -29,111 +26,66 @@
     </nav>
   </header>
 
-  <main class="tutorial-main">
-    <div class="tutorial-container">
-      <h1 class="tutorial-title">Tutorial de uso FEMX</h1>
+  <main>
+    <section class="tutorial-section">
+      <h1>Guía de Uso FEMX</h1>
       
-      <div class="tutorial-grid">
-        <!-- Tarjeta 1: Menú Principal -->
-        <div class="tutorial-card">
-          <div class="card-icon">
-            <i class="fas fa-bars"></i>
-          </div>
-          <h3>Menú Principal</h3>
-          <div class="card-content">
-            <p>Navega fácilmente por todas las funciones de la aplicación:</p>
-            <ul class="feature-list">
-              <li><i class="fas fa-home"></i> Inicio</li>
-              <li><i class="fas fa-info-circle"></i> Información</li>
-              <li><i class="fas fa-phone"></i> Contacto de Emergencia</li>
-              <li><i class="fas fa-book"></i> Glosario</li>
-              <li><i class="fas fa-clipboard-list"></i> Encuesta de Acoso</li>
-            </ul>
-            <div class="tutorial-image-container">
-              <img src="./images/MenuPagina.jpg" alt="Menú de la aplicación" class="tutorial-image">
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 2: Registro e Inicio de Sesión -->
-        <div class="tutorial-card">
-          <div class="card-icon">
-            <i class="fas fa-user-plus"></i>
-          </div>
-          <h3>Registro e Inicio de Sesión</h3>
-          <div class="card-content">
-            <div class="steps-container">
-              <div class="step">
-                <span class="step-number">1</span>
-                <p>Haz clic en "Iniciar Sesión"</p>
-              </div>
-              <div class="step">
-                <span class="step-number">2</span>
-                <p>Completa tus datos personales</p>
-              </div>
-              <div class="step">
-                <span class="step-number">3</span>
-                <p>Registra tu contacto de emergencia</p>
-              </div>
-            </div>
-            <div class="tutorial-image-container">
-              <img src="./images/FormRegistro.jpg" alt="Formulario de registro" class="tutorial-image">
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3: Botón de Pánico -->
-        <div class="tutorial-card">
-          <div class="card-icon">
-            <i class="fas fa-exclamation-circle"></i>
-          </div>
-          <h3>Botón de Pánico</h3>
-          <div class="card-content">
-            <div class="panic-steps">
-              <div class="panic-step">
-                <div class="step-icon"><i class="fas fa-search"></i></div>
-                <p>Localiza el botón rojo de pánico en la página principal</p>
-              </div>
-              <div class="panic-step">
-                <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
-                <p>Haz clic para activar la alerta</p>
-              </div>
-            </div>
-            <div class="tutorial-image-container">
-              <img src="./images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 4: Encuesta -->
-        <div class="tutorial-card">
-          <div class="card-icon">
-            <i class="fas fa-clipboard-check"></i>
-          </div>
-          <h3>Encuesta de Acoso</h3>
-          <div class="card-content">
-            <div class="survey-info">
-              <p>Evalúa tu situación respondiendo preguntas simples:</p>
-              <ul class="survey-steps">
-                <li>Respuestas confidenciales</li>
-                <li>Resultados inmediatos</li>
-                <li>Recomendaciones personalizadas</li>
-              </ul>
-            </div>
-            <div class="tutorial-image-container">
-              <img src="./images/encuesta.jpg" alt="Encuesta de acoso" class="tutorial-image">
-            </div>
-          </div>
-        </div>
+      <!-- Menú Principal -->
+      <div class="tutorial-item">
+        <h2><i class="fas fa-bars"></i> Menú Principal</h2>
+        <p>Desde aquí podrás acceder a todas las funciones:</p>
+        <ul>
+          <li>Inicio - Página principal</li>
+          <li>Información - Recursos y ayuda</li>
+          <li>Contacto de Emergencia - Números importantes</li>
+          <li>Glosario - Términos y definiciones</li>
+          <li>Encuesta de Acoso - Evaluación de situaciones</li>
+        </ul>
+        <img src="images/MenuPagina.jpg" alt="Menú de navegación" class="tutorial-image">
       </div>
-    </div>
 
-    <!-- Modal para las imágenes -->
-    <div id="imageModal" class="modal">
-      <span class="close">&times;</span>
-      <img class="modal-content" id="expandedImage">
-    </div>
+      <!-- Registro -->
+      <div class="tutorial-item">
+        <h2><i class="fas fa-user-plus"></i> Registro de Usuario</h2>
+        <p>Para acceder a todas las funciones:</p>
+        <ol>
+          <li>Haz clic en "Iniciar Sesión"</li>
+          <li>Completa el formulario con tus datos</li>
+          <li>Agrega un contacto de emergencia</li>
+        </ol>
+        <img src="images/FormRegistro.jpg" alt="Formulario de registro" class="tutorial-image">
+      </div>
+
+      <!-- Botón de Pánico -->
+      <div class="tutorial-item">
+        <h2><i class="fas fa-exclamation-circle"></i> Botón de Pánico</h2>
+        <p>En caso de emergencia:</p>
+        <ol>
+          <li>Localiza el botón rojo en la página principal</li>
+          <li>Presiónalo para enviar una alerta inmediata</li>
+        </ol>
+        <img src="images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
+      </div>
+
+      <!-- Encuesta -->
+      <div class="tutorial-item">
+        <h2><i class="fas fa-clipboard-list"></i> Encuesta de Acoso</h2>
+        <p>Para evaluar tu situación:</p>
+        <ul>
+          <li>Responde las preguntas con honestidad</li>
+          <li>Tus respuestas son confidenciales</li>
+          <li>Recibirás recomendaciones personalizadas</li>
+        </ul>
+        <img src="images/encuesta.jpg" alt="Encuesta" class="tutorial-image">
+      </div>
+    </section>
   </main>
+
+  <!-- Modal para las imágenes -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="expandedImage">
+  </div>
 
   <script>
     // Código para el modal de imágenes
@@ -142,7 +94,6 @@
     const closeBtn = document.getElementsByClassName('close')[0];
     const images = document.getElementsByClassName('tutorial-image');
 
-    // Agregar evento click a todas las imágenes
     Array.from(images).forEach(img => {
       img.onclick = function() {
         modal.style.display = "block";
@@ -150,19 +101,16 @@
       }
     });
 
-    // Cerrar modal al hacer click en la X
     closeBtn.onclick = function() {
       modal.style.display = "none";
     }
 
-    // Cerrar modal al hacer click fuera de la imagen
     modal.onclick = function(event) {
       if (event.target === modal) {
         modal.style.display = "none";
       }
     }
 
-    // Cerrar modal con la tecla ESC
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
         modal.style.display = "none";
