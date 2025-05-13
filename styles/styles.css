@@ -2036,8 +2036,7 @@ footer {
 .toggle-password {
   position: absolute;
   right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 12px; /* Ajustamos la posición vertical */
   background: none;
   border: none;
   color: var(--primary);
@@ -2047,6 +2046,7 @@ footer {
   align-items: center;
   justify-content: center;
   transition: color 0.3s ease;
+  transform: none; /* Quitamos el transform que estaba causando el problema */
 }
 
 .toggle-password:hover {
