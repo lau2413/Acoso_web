@@ -79,16 +79,16 @@ function setupPanico() {
     let texto = "";
     switch(nivel) {
       case "1":
-        texto = "Nivel 1 - Leve: Acoso verbal o visual";
+        texto = "Leve - Chistes,conversaciones de contenido sexual,acoso verbal, miradas o gestos lascivos";
         break;
       case "2":
-        texto = "Nivel 2 - Moderado: Acoso persistente";
+        texto = "Moderado - Acoso persistente, llamadas, cartas o invitaciones con intecciones sexuales";
         break;
       case "3":
-        texto = "Nivel 3 - Fuerte: Contacto físico no consentido";
+        texto = "Fuerte - Amenazas directas,petición de favores sexuales, manoseos,contacto fisico no permitido";
         break;
       case "4":
-        texto = "Nivel 4 - Grave: Peligro inminente";
+        texto = "Grave - Presiones para tener contacto sexual,intimidación sexual directa";
         break;
       default:
         texto = "Selecciona un nivel de acoso";
