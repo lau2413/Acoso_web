@@ -11,17 +11,30 @@ export async function updateSessionUI() {
 
   const loginLi = document.createElement('li');
   if (user) {
-    loginLi.innerHTML = `<a href="login.html">Cerrar Sesión</a>`;
+    loginLi.innerHTML = `<a href="#" id="logoutBtn">Cerrar Sesión</a>`;
     navList.appendChild(loginLi);
 
     document.getElementById("logoutBtn").addEventListener("click", async (e) => {
       e.preventDefault();
-      await supabase.auth.signOut();
-      location.reload();
+      await handleLogout();
     });
   } else {
     loginLi.innerHTML = `<a href="login.html">Iniciar Sesión</a>`;
     navList.appendChild(loginLi);
+  }
+}
+
+export async function handleLogout() {
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+    
+    localStorage.removeItem('uid');
+    
+    window.location.href = 'login.html';
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+    alert('Error al cerrar sesión. Por favor intenta de nuevo.');
   }
 }
 
@@ -50,6 +63,10 @@ export function LogIn() {
           console.error('Error de login:', loginError);
           alert('Correo o contraseña incorrectos. Inténtalo de nuevo.');
           return;
+        }
+
+        if (loginData?.user) {
+          localStorage.setItem('uid', loginData.user.id);
         }
 
         alert('Inicio de sesión exitoso');
