@@ -57,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   updateSessionUI();
 
-  // Función para manejar la visibilidad de la contraseña
+  // Función para manejar la visibilidad de la contraseña - Mejorada
   const togglePasswordButtons = document.querySelectorAll('.toggle-password');
   
   togglePasswordButtons.forEach(button => {
     button.addEventListener('click', function() {
-      const passwordInput = this.previousElementSibling;
+      const passwordInput = this.parentElement.querySelector('input[type="password"], input[type="text"]');
       const icon = this.querySelector('i');
       
       if (passwordInput.type === 'password') {
