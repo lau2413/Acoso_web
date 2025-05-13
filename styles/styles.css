@@ -1865,7 +1865,7 @@ footer {
 
 .survey-content {
   background: white;
-  padding: 40px;
+  padding: 0; /* Quitamos el padding general */
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(106, 48, 147, 0.15);
   max-height: 600px;
@@ -1873,34 +1873,21 @@ footer {
   position: relative;
 }
 
-/* Estilo personalizado para la barra de scroll */
-.survey-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.survey-content::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-.survey-content::-webkit-scrollbar-thumb {
-  background: var(--secondary);
-  border-radius: 4px;
-}
-
-.survey-content::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
 /* Ajuste de la barra de progreso */
 .progress-container {
   position: sticky;
   top: 0;
   background: white;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  z-index: 1;
+  padding: 20px 40px; /* Agregamos padding a los lados */
+  margin: 0; /* Quitamos márgenes */
+  z-index: 10;
   border-bottom: 1px solid rgba(106, 48, 147, 0.1);
+  border-radius: 20px 20px 0 0; /* Bordes redondeados solo arriba */
+}
+
+/* Contenedor para el resto del contenido */
+.survey-main-content {
+  padding: 20px 40px 40px; /* Padding para el contenido principal */
 }
 
 .survey-instructions {
@@ -1909,7 +1896,7 @@ footer {
   color: var(--text);
 }
 
-/* El resto de los estilos se mantienen igual */
+/* Aseguramos que las preguntas estén bien espaciadas */
 .question-container {
   background: white;
   padding: 25px;
