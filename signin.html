@@ -7,107 +7,84 @@
   
   <!-- Estilos -->
   <link rel="stylesheet" href="styles/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body>
+  <!-- Header con la barra de navegación -->
+  <header>
+    <div class="logo">
+      <img src="images/Logo.jpg" alt="Logo FEMX">
+      <span class="logo-text">FEMX</span>
+    </div>
+  </header>
+
   <div class="auth-container">
     <div class="auth-card">
       <div class="auth-header">
         <img src="images/Logo.jpg" alt="Logo FEMX" class="auth-logo">
         <h1>Crear Cuenta</h1>
-        <p class="auth-description">Únete a nuestra comunidad para acceder a todas las funcionalidades</p>
+        <p class="auth-description">Únete a nuestra comunidad y accede a recursos de ayuda</p>
       </div>
 
       <form id="registro-form" class="auth-form">
         <div class="form-group">
           <label for="nombre">
-            <i class="fas fa-user"></i> Nombre completo
+            <i class="fas fa-user"></i>
+            Nombre Completo
           </label>
-          <input 
-            type="text" 
-            id="nombre" 
-            name="nombre" 
-            placeholder="Ingresa tu nombre completo"
-            required
-          >
+          <input type="text" id="nombre" name="nombre" required>
         </div>
 
         <div class="form-group">
           <label for="email">
-            <i class="fas fa-envelope"></i> Correo electrónico
+            <i class="fas fa-envelope"></i>
+            Correo Electrónico
           </label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            placeholder="ejemplo@correo.com"
-            required
-          >
+          <input type="email" id="email" name="email" required>
         </div>
 
         <div class="form-group">
           <label for="telefono">
-            <i class="fas fa-phone"></i> Teléfono
+            <i class="fas fa-phone"></i>
+            Teléfono
           </label>
-          <input 
-            type="tel" 
-            id="telefono" 
-            name="telefono" 
-            placeholder="10 dígitos"
-            pattern="[0-9]{10}"
-            required
-          >
+          <input type="tel" id="telefono" name="telefono" required>
         </div>
 
         <div class="form-group">
           <label for="contrasena">
-            <i class="fas fa-lock"></i> Contraseña
+            <i class="fas fa-lock"></i>
+            Contraseña
           </label>
           <div class="password-input-group">
-            <input 
-              type="password" 
-              id="contrasena" 
-              name="contrasena" 
-              placeholder="Mínimo 8 caracteres"
-              required
-            >
-            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+            <input type="password" id="contrasena" name="contrasena" required>
+            <button type="button" class="toggle-password">
               <i class="fas fa-eye"></i>
             </button>
           </div>
         </div>
 
         <button type="submit" class="auth-submit-btn">
-          <i class="fas fa-user-plus"></i> Crear cuenta
+          <i class="fas fa-user-plus"></i>
+          Registrarse
         </button>
 
         <div class="auth-links">
           <a href="login.html" class="auth-link">
-            <i class="fas fa-sign-in-alt"></i> ¿Ya tienes cuenta? Inicia sesión
+            <i class="fas fa-arrow-left"></i>
+            Ya tengo una cuenta
           </a>
         </div>
       </form>
     </div>
   </div>
 
-  <script type="module" src="scripts/main.js"></script>
-  <script>
-    // Toggle password visibility
-    document.querySelector('.toggle-password').addEventListener('click', function() {
-      const password = document.querySelector('#contrasena');
-      const icon = this.querySelector('i');
-      
-      if (password.type === 'password') {
-        password.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        password.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  </script>
+  <!-- Scripts -->
+  <script type="module" src="scripts/registro.js"></script>
 </body>
 </html>
