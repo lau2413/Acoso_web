@@ -7,7 +7,8 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="styles/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body>
 
@@ -30,15 +31,33 @@
   </nav>
 </header>
 
+<main>
+  <section class="contacto-emergencia-section">
+    <div class="contacto-header">
+      <h2><i class="fas fa-phone-alt"></i> Contacto de Emergencia</h2>
+      <p class="contacto-description">Registra un contacto de confianza para situaciones de emergencia</p>
+    </div>
 
-  <main>
-    <section class="contacto-emergencia-section">
-      <h2>Contacto de Emergencia</h2>
-      <form id="contacto-emergencia-form">
-        <input type="text" name="nombre-contacto" placeholder="Nombre del contacto" required>
+    <form id="contacto-emergencia-form" class="contacto-form">
+      <div class="form-group">
+        <label for="nombre-contacto">
+          <i class="fas fa-user"></i> Nombre del contacto
+        </label>
+        <input 
+          type="text" 
+          id="nombre-contacto" 
+          name="nombre-contacto" 
+          placeholder="Ingresa el nombre completo" 
+          required
+        >
+      </div>
 
-        <select name="relacion-contacto" required>
-          <option value="">Selecciona relación</option>
+      <div class="form-group">
+        <label for="relacion-contacto">
+          <i class="fas fa-heart"></i> Relación
+        </label>
+        <select id="relacion-contacto" name="relacion-contacto" required>
+          <option value="">Selecciona la relación</option>
           <option value="Madre">Madre</option>
           <option value="Padre">Padre</option>
           <option value="Hermano/a">Hermano/a</option>
@@ -46,29 +65,39 @@
           <option value="Amigo/a">Amigo/a</option>
           <option value="Otro">Otro</option>
         </select>
+      </div>
 
-        <input type="tel" name="telefono-contacto" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
+      <div class="form-group">
+        <label for="telefono-contacto">
+          <i class="fas fa-mobile-alt"></i> Teléfono
+        </label>
+        <input 
+          type="tel" 
+          id="telefono-contacto" 
+          name="telefono-contacto" 
+          placeholder="Ingresa 10 dígitos" 
+          pattern="[0-9]{10}" 
+          required
+        >
+      </div>
 
-        <button type="submit" class="contacto-emergencia-btn">Guardar Contacto</button>
-      </form>
-    </section>
+      <button type="submit" class="contacto-emergencia-btn">
+        <i class="fas fa-save"></i> Guardar Contacto
+      </button>
+    </form>
+  </section>
+</main>
 
-    <p style="text-align: center; margin-top: 1rem;">
-      ¿Ya tienes cuenta?
-      <a href="login.html">Inicia sesión</a>
-    </p>
-  </main>
-
-  <div id="modal-encuesta" class="hidden">
-    <div class="modal-contenido">
-      <p id="texto-modal"></p>
-      <button id="btn-si">Sí</button>
-      <button id="btn-no">No</button>
-    </div>
+<div id="modal-encuesta" class="hidden">
+  <div class="modal-contenido">
+    <p id="texto-modal"></p>
+    <button id="btn-si">Sí</button>
+    <button id="btn-no">No</button>
   </div>
+</div>
 
-  <!-- Script -->
-  <script type="module" src="scripts/main.js"></script>
+<!-- Script -->
+<script type="module" src="scripts/main.js"></script>
 
 </body>
 </html>
