@@ -39,7 +39,12 @@
           <i class="fas fa-home"></i>
         </div>
         <h2>Página Principal</h2>
-        <p>Aquí encontrarás el botón de pánico y acceso rápido a todas las funciones.</p>
+        <p>En la página principal encontrarás el botón de pánico, que es la función principal de la aplicación. Este botón te permite:</p>
+        <ul>
+          <li>Enviar una alerta inmediata a tus contactos de emergencia</li>
+          <li>Compartir tu ubicación actual</li>
+          <li>Activar una alarma sonora si lo necesitas</li>
+        </ul>
         <div class="tutorial-image-container">
           <img src="images/tutorial1.png" alt="Página Principal" class="tutorial-image">
           <div class="image-overlay">
@@ -53,7 +58,13 @@
           <i class="fas fa-user-shield"></i>
         </div>
         <h2>Contactos de Emergencia</h2>
-        <p>Configura tus contactos de confianza para situaciones de emergencia.</p>
+        <p>En esta sección podrás:</p>
+        <ul>
+          <li>Agregar contactos de confianza</li>
+          <li>Establecer el orden de prioridad de los contactos</li>
+          <li>Configurar mensajes personalizados</li>
+          <li>Editar o eliminar contactos existentes</li>
+        </ul>
         <div class="tutorial-image-container">
           <img src="images/tutorial2.png" alt="Contactos de Emergencia" class="tutorial-image">
           <div class="image-overlay">
@@ -62,7 +73,45 @@
         </div>
       </div>
 
-      <!-- Repite para cada sección del tutorial -->
+      <div class="tutorial-card">
+        <div class="tutorial-icon">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <h2>Encuesta de Acoso</h2>
+        <p>La encuesta te permite:</p>
+        <ul>
+          <li>Evaluar situaciones de acoso</li>
+          <li>Recibir orientación personalizada</li>
+          <li>Acceder a recursos de ayuda</li>
+          <li>Reportar incidentes de manera anónima</li>
+        </ul>
+        <div class="tutorial-image-container">
+          <img src="images/tutorial3.png" alt="Encuesta de Acoso" class="tutorial-image">
+          <div class="image-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="tutorial-card">
+        <div class="tutorial-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <h2>Información y Recursos</h2>
+        <p>En esta sección encontrarás:</p>
+        <ul>
+          <li>Información sobre tipos de acoso</li>
+          <li>Recursos legales disponibles</li>
+          <li>Contactos de organizaciones de apoyo</li>
+          <li>Guías de prevención y actuación</li>
+        </ul>
+        <div class="tutorial-image-container">
+          <img src="images/tutorial4.png" alt="Información y Recursos" class="tutorial-image">
+          <div class="image-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -72,36 +121,7 @@
     <img class="modal-content" id="expandedImage">
   </div>
 
-  <script>
-    // Código para el modal de imágenes
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('expandedImage');
-    const closeBtn = document.getElementsByClassName('close')[0];
-    const images = document.getElementsByClassName('tutorial-image');
-
-    Array.from(images).forEach(img => {
-      img.onclick = function() {
-        modal.style.display = "block";
-        modalImg.src = this.src;
-      }
-    });
-
-    closeBtn.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    modal.onclick = function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    }
-
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        modal.style.display = "none";
-      }
-    });
-  </script>
+  <script src="scripts/tutorial.js"></script>
 </body>
 </html>
 
