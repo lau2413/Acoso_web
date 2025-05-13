@@ -2406,3 +2406,33 @@ footer {
     padding: 30px;
   }
 }
+
+/* Estilos para enlaces deshabilitados en el footer */
+.footer-links.disabled {
+  opacity: 0.7;
+}
+
+.footer-links.disabled span {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.footer-links.disabled li {
+  position: relative;
+}
+
+.footer-links.disabled li:hover::after {
+  content: 'Requiere inicio de sesión';
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  margin-right: 10px;
+  z-index: 1000;
+}
