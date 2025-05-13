@@ -6,8 +6,11 @@ export async function checkSession() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
     
-    // Si no hay sesión y no estamos en login.html, redirigir al login
-    if (!session && !window.location.pathname.includes('login.html')) {
+    // Si no hay sesión y no estamos en login.html o signin.html, redirigir al login
+    const currentPath = window.location.pathname;
+    if (!session && 
+        !currentPath.includes('login.html') && 
+        !currentPath.includes('signin.html')) {
       window.location.href = 'login.html';
       return false;
     }
