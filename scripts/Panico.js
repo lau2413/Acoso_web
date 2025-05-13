@@ -39,10 +39,9 @@ function setupPanico() {
       modalEmergencia.style.opacity = '1';
       modalEmergencia.style.visibility = 'visible';
       modalEmergencia.classList.remove('hidden');
-      slider.value = 0;
-      actualizarNivelAcoso(0);
+      slider.value = 1;
+      actualizarNivelAcoso(1);
       
-      // Forzar un reflow para asegurar que las transiciones funcionen
       modalEmergencia.offsetHeight;
       
       console.log('Modal mostrado exitosamente');
@@ -159,7 +158,12 @@ function setupPanico() {
       console.log('Buscando contactos de emergencia para usuario:', user.id);
       const { data: contactos, error: contactoError } = await supabase
         .from('contactos')
-        .select('id_contacto, nombre_contacto, telefono_contacto')
+        .select(`
+          id_contacto,
+          nombre_contacto,
+          telefono_contacto,
+          relacion
+        `)
         .eq('id_usuario', user.id);
 
       if (contactoError) {
