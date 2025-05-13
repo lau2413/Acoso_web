@@ -66,15 +66,35 @@ function setupSlider() {
   const slides = document.querySelectorAll('.hero-slider .slide');
   let currentSlide = 0;
   const slideInterval = 5000; // 5 segundos
+  let isTransitioning = false;
   
   function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    const currentActive = document.querySelector('.hero-slider .slide.active');
+    if (currentActive) {
+      currentActive.classList.remove('active');
+    }
+    
+    // Pequeña pausa para asegurar que la transición sea suave
+    requestAnimationFrame(() => {
+      slides[index].classList.add('active');
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800); // Coincide con la duración de la transición CSS
     });
   }
   
   function nextSlide() {
+    if (isTransitioning) return;
     currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+  
+  function prevSlide() {
+    if (isTransitioning) return;
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     showSlide(currentSlide);
   }
   
@@ -89,7 +109,15 @@ function setupSlider() {
     const slider = document.querySelector('.hero-slider');
     slider.addEventListener('mouseenter', () => clearInterval(interval));
     slider.addEventListener('mouseleave', () => {
-      interval = setInterval(nextSlide, slideInterval);
+      if (!isTransitioning) {
+        interval = setInterval(nextSlide, slideInterval);
+      }
+    });
+    
+    // Opcional: Agregar navegación con teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
     });
   }
 }
