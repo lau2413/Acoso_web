@@ -1,15 +1,39 @@
 // encuesta.js
 import { supabase } from './supabase.js';
 
+function updateQuestionStatus() {
+  const total = 10;
+  const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+  document.getElementById('questions-completed').textContent = `${answered}/${total}`;
+}
+
+function highlightUnansweredQuestions() {
+  document.querySelectorAll('.question-container').forEach((container, index) => {
+    const isAnswered = container.querySelector('input[type="radio"]:checked');
+    container.classList.toggle('unanswered', !isAnswered);
+  });
+}
+
 export function setupEncuesta() {
   const formEncuesta = document.getElementById('encuesta-form');
   const avanzarBtn = document.getElementById('avanzar-btn');
 
   if (!formEncuesta) return;
 
-  formEncuesta.addEventListener('change', () => {
-    const respuestasSeleccionadas = formEncuesta.querySelectorAll('input[type="radio"]:checked');
-    avanzarBtn.style.display = respuestasSeleccionadas.length === 10 ? "block" : "none";
+  formEncuesta.addEventListener('change', (e) => {
+    if (e.target.type === 'radio') {
+      updateQuestionStatus();
+      highlightUnansweredQuestions();
+      
+      const respuestasSeleccionadas = formEncuesta.querySelectorAll('input[type="radio"]:checked');
+      avanzarBtn.style.display = respuestasSeleccionadas.length === 10 ? "block" : "none";
+      
+      const questionContainer = e.target.closest('.question-container');
+      questionContainer.style.transform = 'scale(1.02)';
+      setTimeout(() => {
+        questionContainer.style.transform = 'scale(1)';
+      }, 200);
+    }
   });
 
   formEncuesta.addEventListener('submit', async (event) => {
@@ -54,4 +78,13 @@ export function setupEncuesta() {
       alert('Ocurrió un error al enviar tus respuestas. Intenta de nuevo.');
     }
   });
+
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    window.history.back();
+  });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateQuestionStatus();
+  highlightUnansweredQuestions();
+});
