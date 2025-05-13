@@ -75,22 +75,16 @@ function setupPanico() {
     let texto = "Nivel " + nivel + ": ";
     switch(nivel) {
       case "0":
-        texto += "Leve - Situación incómoda";
+        texto += "Leve - Situación incómoda o acoso verbal";
         break;
       case "1":
-        texto += "Moderado - Acoso verbal";
+        texto += "Moderado - Acoso persistente";
         break;
       case "2":
-        texto += "Medio - Acoso persistente";
+        texto += "Fuerte - Amenazas directas";
         break;
       case "3":
-        texto += "Alto - Amenazas directas";
-        break;
-      case "4":
         texto += "Grave - Peligro inminente";
-        break;
-      case "5":
-        texto += "Crítico - Emergencia inmediata";
         break;
       default:
         texto = "Nivel no definido";
@@ -173,7 +167,48 @@ function setupPanico() {
         const link = `https://www.google.com/maps?q=${lat},${lon}`;
 
         const nivelActual = parseInt(slider.value);
-        const esGrave = nivelActual >= 3;
+        const esGrave = nivelActual >= 2; // Cambiado a 2 para que sea Fuerte o Grave
+        
+        // Crear registro de acoso
+        const { data: acoso, error: acosoError } = await supabase
+          .from('acoso')
+          .insert({
+            id_usuario: user.id,
+            id_tipo_acoso: nivelActual + 1, // Los IDs empiezan en 1
+            latitud: lat,
+            longitud: lon
+          })
+          .select()
+          .single();
+
+        if (acosoError) throw acosoError;
+
+        // Crear alertas para cada contacto
+        const alertasPromises = contactos.map(contacto => 
+          supabase.from('alertas').insert({
+            id_acoso: acoso.id,
+            id_contacto: contacto.id,
+            tipo_alerta: 'contacto_emergencia'
+          })
+        );
+
+        // Si el nivel es fuerte o grave, crear alertas para autoridades
+        if (esGrave) {
+          alertasPromises.push(
+            supabase.from('alertas').insert([
+              {
+                id_acoso: acoso.id,
+                tipo_alerta: 'policia'
+              },
+              {
+                id_acoso: acoso.id,
+                tipo_alerta: 'linea_123'
+              }
+            ])
+          );
+        }
+
+        await Promise.all(alertasPromises);
         
         if (esGrave) {
           alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
