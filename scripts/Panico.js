@@ -136,6 +136,12 @@ function setupPanico() {
     actualizarNivelAcoso(nivelActual);
   });
 
+  nuevoEnviarAlerta.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    enviarAlertaHandler();
+  });
+
   async function enviarAlertaHandler() {
     if (isProcessing) {
       console.log('Ya hay una alerta en proceso...');
@@ -291,8 +297,6 @@ function setupPanico() {
       nuevoCerrarModal.style.pointerEvents = '';
     }
   }
-
-  nuevoEnviarAlerta.addEventListener('click', enviarAlertaHandler);
 
   console.log('Configuración del pánico completada');
 }
