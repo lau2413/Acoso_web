@@ -36,15 +36,21 @@
     <div class="tutorial-grid">
       <div class="tutorial-card">
         <div class="tutorial-icon">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-exclamation-circle"></i>
         </div>
-        <h2>Página Principal</h2>
-        <p>En la página principal encontrarás el botón de pánico, que es la función principal de la aplicación. Este botón te permite:</p>
+        <h2>Botón de Pánico</h2>
+        <p>Al activar el botón de pánico podrás:</p>
         <ul>
-          <li>Enviar una alerta inmediata a tus contactos de emergencia</li>
+          <li>Enviar alertas a tus contactos</li>
           <li>Compartir tu ubicación actual</li>
           <li>Activar una alarma sonora si lo necesitas</li>
         </ul>
+        <div class="tutorial-image-container">
+          <img src="images/boton.png" alt="Página Principal" class="tutorial-image">
+          <div class="image-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
       </div>
 
       <div class="tutorial-card">
@@ -59,6 +65,12 @@
           <li>Configurar mensajes personalizados</li>
           <li>Editar o eliminar contactos existentes</li>
         </ul>
+        <div class="tutorial-image-container">
+          <img src="images/contactos.png" alt="Contactos de Emergencia" class="tutorial-image">
+          <div class="image-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
       </div>
 
       <div class="tutorial-card">
@@ -90,6 +102,12 @@
       </div>
     </div>
   </main>
+
+  <!-- Modal para las imágenes -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="expandedImage">
+  </div>
 
   <script src="scripts/tutorial.js"></script>
 </body>
