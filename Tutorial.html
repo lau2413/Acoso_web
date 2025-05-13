@@ -29,16 +29,13 @@
     </nav>
   </header>
 
-  <main>
-    <section class="tutorial-section">
-      <div class="tutorial-header">
-        <h1>Guía de Uso FEMX</h1>
-        <p class="tutorial-intro">Aprende a utilizar todas las funciones de nuestra aplicación para tu seguridad</p>
-      </div>
-
+  <main class="tutorial-main">
+    <div class="tutorial-container">
+      <h1 class="tutorial-title">Tutorial de uso FEMX</h1>
+      
       <div class="tutorial-grid">
-        <!-- Sección 1: Menú -->
-        <div class="tutorial-card" data-section="menu">
+        <!-- Tarjeta 1: Menú Principal -->
+        <div class="tutorial-card">
           <div class="card-icon">
             <i class="fas fa-bars"></i>
           </div>
@@ -51,16 +48,15 @@
               <li><i class="fas fa-phone"></i> Contacto de Emergencia</li>
               <li><i class="fas fa-book"></i> Glosario</li>
               <li><i class="fas fa-clipboard-list"></i> Encuesta de Acoso</li>
-              <li><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</li>
             </ul>
-            <div class="tutorial-image">
-              <img src="images/MenuPagina.jpg" alt="Menú de la aplicación">
+            <div class="tutorial-image-container">
+              <img src="./images/MenuPagina.jpg" alt="Menú de la aplicación" class="tutorial-image">
             </div>
           </div>
         </div>
 
-        <!-- Sección 2: Registro -->
-        <div class="tutorial-card" data-section="registro">
+        <!-- Tarjeta 2: Registro e Inicio de Sesión -->
+        <div class="tutorial-card">
           <div class="card-icon">
             <i class="fas fa-user-plus"></i>
           </div>
@@ -80,14 +76,14 @@
                 <p>Registra tu contacto de emergencia</p>
               </div>
             </div>
-            <div class="tutorial-image">
-              <img src="images/FormRegistro.jpg" alt="Formulario de registro">
+            <div class="tutorial-image-container">
+              <img src="./images/FormRegistro.jpg" alt="Formulario de registro" class="tutorial-image">
             </div>
           </div>
         </div>
 
-        <!-- Sección 3: Botón de Pánico -->
-        <div class="tutorial-card" data-section="panico">
+        <!-- Tarjeta 3: Botón de Pánico -->
+        <div class="tutorial-card">
           <div class="card-icon">
             <i class="fas fa-exclamation-circle"></i>
           </div>
@@ -102,61 +98,32 @@
                 <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
                 <p>Haz clic para activar la alerta</p>
               </div>
-              <div class="panic-step">
-                <div class="step-icon"><i class="fas fa-sliders-h"></i></div>
-                <p>Selecciona el nivel de emergencia (1-5)</p>
-              </div>
+            </div>
+            <div class="tutorial-image-container">
+              <img src="./images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
             </div>
           </div>
         </div>
 
-        <!-- Sección 4: Encuesta -->
-        <div class="tutorial-card" data-section="encuesta">
+        <!-- Tarjeta 4: Encuesta -->
+        <div class="tutorial-card">
           <div class="card-icon">
             <i class="fas fa-clipboard-check"></i>
           </div>
           <h3>Encuesta de Acoso</h3>
           <div class="card-content">
             <div class="survey-info">
-              <p>Evalúa tu situación respondiendo 10 preguntas simples</p>
+              <p>Evalúa tu situación respondiendo preguntas simples:</p>
               <ul class="survey-steps">
                 <li>Respuestas confidenciales</li>
                 <li>Resultados inmediatos</li>
                 <li>Recomendaciones personalizadas</li>
               </ul>
             </div>
+            <div class="tutorial-image-container">
+              <img src="./images/encuesta.jpg" alt="Encuesta de acoso" class="tutorial-image">
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="tutorial-container">
-      <h1>Tutorial de uso</h1>
-      
-      <!-- Paso 1: Botón de Pánico -->
-      <div class="tutorial-step">
-        <h2>1. Botón de pánico</h2>
-        <p>En caso de emergencia, presiona el botón de pánico ubicado en la parte superior de la página.</p>
-        <div class="image-container">
-          <img src="./images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
-        </div>
-      </div>
-
-      <!-- Paso 2: Menú de Navegación -->
-      <div class="tutorial-step">
-        <h2>2. Menú de Navegación</h2>
-        <p>Utiliza el menú superior para acceder a todas las funciones de la aplicación.</p>
-        <div class="image-container">
-          <img src="./images/MenuPagina.jpg" alt="Menú de navegación" class="tutorial-image">
-        </div>
-      </div>
-
-      <!-- Paso 3: Registro -->
-      <div class="tutorial-step">
-        <h2>3. Registro de Usuario</h2>
-        <p>Complete el formulario de registro para acceder a todas las funcionalidades.</p>
-        <div class="image-container">
-          <img src="./images/FormRegistro.jpg" alt="Formulario de registro" class="tutorial-image">
         </div>
       </div>
     </div>

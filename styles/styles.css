@@ -1543,3 +1543,142 @@ footer {
 .close:hover {
     color: #bbb;
 }
+
+/* Estilos para el tutorial */
+.tutorial-main {
+    padding-top: 100px; /* Espacio para el header fijo */
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.tutorial-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tutorial-title {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.tutorial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-icon i {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.tutorial-card h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.card-content {
+    margin-top: 20px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.feature-list li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-list i {
+    color: var(--accent);
+}
+
+.tutorial-image-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.tutorial-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.tutorial-image:hover {
+    transform: scale(1.05);
+}
+
+.steps-container, .panic-steps {
+    margin-bottom: 20px;
+}
+
+.step, .panic-step {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tutorial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tutorial-card {
+        padding: 20px;
+    }
+
+    .tutorial-title {
+        font-size: 2rem;
+    }
+}
