@@ -1,5 +1,5 @@
 // Importaciones
-import { LogIn, updateSessionUI } from './auth.js';
+import { LogIn, updateSessionUI, checkSession } from './auth.js';
 import { supabase } from './supabase.js';
 import { setupPanico } from './Panico.js';
 import { setupRegistro } from './registro.js';
@@ -95,8 +95,11 @@ function setupSlider() {
 }
 
 // Inicialización
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   console.log('Página cargada correctamente');
+  
+  // Verificar sesión primero
+  await checkSession();
   
   // Iniciar menú móvil
   setupMobileMenu();
@@ -112,7 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.nav-toggle')) setupNavegacion();
   if (document.querySelector('#formulario_login')) LogIn();
   
-  updateSessionUI();
+  // Actualizar UI de sesión
+  await updateSessionUI();
 
   // Función para manejar la visibilidad de la contraseña - Mejorada
   const togglePasswordButtons = document.querySelectorAll('.toggle-password');

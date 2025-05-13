@@ -1,9 +1,27 @@
 // auth.js
 import { supabase } from './supabase.js';
 
-export async function updateSessionUI() {
+// Función para verificar si hay una sesión activa
+export async function checkSession() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
+    
+    // Si no hay sesión y no estamos en login.html, redirigir al login
+    if (!session && !window.location.pathname.includes('login.html')) {
+      window.location.href = 'login.html';
+      return false;
+    }
+    
+    return session;
+  } catch (error) {
+    console.error('Error al verificar sesión:', error);
+    return false;
+  }
+}
+
+export async function updateSessionUI() {
+  try {
+    const session = await checkSession();
     const navList = document.querySelector('nav ul');
     if (!navList) return;
 
@@ -42,7 +60,7 @@ export async function handleLogout() {
     if (error) throw error;
     
     // Limpiar el almacenamiento local
-    localStorage.removeItem('uid');
+    localStorage.clear(); // Limpiamos todo el localStorage
     
     // Redirigir al login
     window.location.href = 'login.html';
@@ -68,25 +86,24 @@ export function LogIn() {
       }
 
       try {
-        const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email: correo,
           password: contrasena
         });
 
-        if (loginError) {
-          console.error('Error de login:', loginError);
+        if (error) {
+          console.error('Error de login:', error);
           alert('Correo o contraseña incorrectos. Inténtalo de nuevo.');
           return;
         }
 
-        if (loginData?.user) {
-          localStorage.setItem('uid', loginData.user.id);
-          // Actualizar la UI inmediatamente después del login
-          await updateSessionUI();
+        if (data?.session) {
+          // Guardar la sesión en localStorage
+          localStorage.setItem('supabase.auth.token', data.session.access_token);
+          
+          alert('Inicio de sesión exitoso');
+          window.location.href = 'index.html';
         }
-
-        alert('Inicio de sesión exitoso');
-        window.location.href = 'index.html';
 
       } catch (error) {
         console.error('Error al intentar iniciar sesión:', error);
