@@ -1751,46 +1751,40 @@ footer {
 .password-input-group {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: center;
 }
 
 .password-input-group input {
     width: 100%;
-    padding-right: 40px; /* Espacio para el botón del ojo */
+    padding-right: 45px; /* Aumentamos el espacio para el botón */
+    z-index: 1; /* Asegura que el input esté por encima */
 }
 
 .toggle-password {
     position: absolute;
     right: 10px;
-    height: 100%; /* Ajusta la altura para que coincida con el input */
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--primary);
     cursor: pointer;
-    padding: 0 8px;
+    padding: 8px;
+    z-index: 2; /* Asegura que el botón esté por encima pero sin interferir */
+    pointer-events: auto; /* Permite hacer clic en el botón */
+    width: 40px; /* Ancho fijo para el botón */
+    height: 40px; /* Altura fija para el botón */
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
-    transition: color 0.3s ease;
-    margin: 0; /* Elimina cualquier margen */
-    top: 0; /* Alinea desde arriba */
-    bottom: 0; /* Alinea desde abajo */
-}
-
-.toggle-password:hover {
-    color: var(--secondary);
 }
 
 .toggle-password i {
     font-size: 1.1rem;
 }
 
-/* Asegurarse que el botón no tenga estilos de botón por defecto */
-.toggle-password:focus {
-    outline: none;
-    box-shadow: none;
+/* Asegurarse que el input tenga prioridad para el texto */
+.password-input-group input:focus {
+    z-index: 3; /* Mayor z-index cuando está enfocado */
 }
 
 .auth-submit-btn {
