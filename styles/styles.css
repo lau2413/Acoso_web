@@ -46,7 +46,7 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000;
+  z-index: 9999;
   box-shadow: 0 2px 20px rgba(106, 48, 147, 0.1);
   transition: all 0.3s ease;
 }
@@ -61,6 +61,9 @@ header:hover {
   align-items: center;
   gap: 1rem;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
 }
 
 .logo:hover {
@@ -91,6 +94,8 @@ nav {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  position: relative;
+  z-index: 9999;
 }
 
 nav ul {
@@ -112,6 +117,8 @@ nav a {
   border-radius: 8px;
   transition: all 0.3s ease;
   position: relative;
+  z-index: 9999;
+  pointer-events: auto;
 }
 
 nav a::after {
@@ -146,6 +153,8 @@ nav a:hover::after {
   padding: 0.5rem;
   transition: all 0.3s ease;
   width: auto;
+  position: relative;
+  z-index: 10000;
 }
 
 .nav-toggle:hover {
@@ -183,10 +192,12 @@ nav a:hover::after {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transition: all 0.3s ease-in-out;
+    z-index: 9998;
   }
 
   nav.active {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    pointer-events: auto;
   }
 
   nav ul {
@@ -1869,6 +1880,8 @@ footer {
     max-width: 1200px;
     margin: 100px auto 40px;
     padding: 40px;
+    position: relative;
+    z-index: 1;
 }
 
 .tutorial-header {
@@ -1967,6 +1980,7 @@ footer {
     margin-top: 20px;
     border-radius: 15px;
     overflow: hidden;
+    z-index: 1;
 }
 
 .tutorial-image {
@@ -2374,4 +2388,68 @@ footer {
   white-space: nowrap;
   margin-right: 10px;
   z-index: 1000;
+}
+
+/* Ajustar el z-index de los elementos del tutorial para que no interfieran */
+.tutorial-section {
+  position: relative;
+  z-index: 1;
+}
+
+.tutorial-image-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Asegurar que el modal del tutorial no bloquee la navegación cuando está cerrado */
+.modal:not(.active) {
+  pointer-events: none;
+}
+
+/* Cuando el modal está activo, asegurar que solo el contenido del modal sea interactivo */
+.modal.active {
+  pointer-events: auto;
+}
+
+/* Ajustar el z-index del botón de pánico para que no interfiera con la navegación */
+#boton-panico {
+  position: relative;
+  z-index: 100;
+}
+
+/* Asegurar que los elementos del header sean clickeables */
+.logo, 
+.nav-toggle,
+nav ul,
+nav li {
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+/* Mejorar la interactividad de los enlaces de navegación */
+nav a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+nav a:hover {
+  transform: translateY(-2px);
+}
+
+/* Asegurar que el menú móvil funcione correctamente */
+@media (max-width: 768px) {
+  nav {
+    z-index: 9998;
+  }
+
+  .nav-toggle {
+    z-index: 10000;
+  }
+
+  nav.active {
+    pointer-events: auto;
+  }
 }
