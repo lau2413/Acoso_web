@@ -2,25 +2,37 @@
 import { supabase } from './supabase.js';
 
 export async function updateSessionUI() {
-  const { data: { user } } = await supabase.auth.getUser();
-  const navList = document.querySelector('nav ul');
-  if (!navList) return;
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const navList = document.querySelector('nav ul');
+    if (!navList) return;
 
-  const lastLi = navList.querySelector('li:last-child');
-  if (lastLi) lastLi.remove();
+    // Buscar el último elemento li (donde está el botón de sesión)
+    const lastLi = navList.querySelector('li:last-child');
+    if (lastLi) lastLi.remove();
 
-  const loginLi = document.createElement('li');
-  if (user) {
-    loginLi.innerHTML = `<a href="#" id="logoutBtn">Cerrar Sesión</a>`;
-    navList.appendChild(loginLi);
+    const loginLi = document.createElement('li');
+    
+    if (session) {
+      // Usuario está autenticado
+      loginLi.innerHTML = `<a href="#" id="logoutBtn">Cerrar Sesión</a>`;
+      navList.appendChild(loginLi);
 
-    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-      await handleLogout();
-    });
-  } else {
-    loginLi.innerHTML = `<a href="login.html">Iniciar Sesión</a>`;
-    navList.appendChild(loginLi);
+      // Agregar el event listener para el cierre de sesión
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await handleLogout();
+        });
+      }
+    } else {
+      // Usuario no está autenticado
+      loginLi.innerHTML = `<a href="login.html">Iniciar Sesión</a>`;
+      navList.appendChild(loginLi);
+    }
+  } catch (error) {
+    console.error('Error al actualizar UI de sesión:', error);
   }
 }
 
@@ -29,8 +41,10 @@ export async function handleLogout() {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     
+    // Limpiar el almacenamiento local
     localStorage.removeItem('uid');
     
+    // Redirigir al login
     window.location.href = 'login.html';
   } catch (error) {
     console.error('Error al cerrar sesión:', error);
@@ -67,6 +81,8 @@ export function LogIn() {
 
         if (loginData?.user) {
           localStorage.setItem('uid', loginData.user.id);
+          // Actualizar la UI inmediatamente después del login
+          await updateSessionUI();
         }
 
         alert('Inicio de sesión exitoso');
