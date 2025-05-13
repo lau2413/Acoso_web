@@ -34,11 +34,17 @@ function setupPanico() {
   function mostrarModal() {
     console.log('Intentando mostrar modal de emergencia');
     try {
+      document.body.classList.add('modal-open');
       modalEmergencia.style.display = 'flex';
+      modalEmergencia.style.opacity = '1';
+      modalEmergencia.style.visibility = 'visible';
       modalEmergencia.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
       slider.value = 0;
       actualizarNivelAcoso(0);
+      
+      // Forzar un reflow para asegurar que las transiciones funcionen
+      modalEmergencia.offsetHeight;
+      
       console.log('Modal mostrado exitosamente');
     } catch (error) {
       console.error('Error al mostrar el modal:', error);
@@ -48,9 +54,16 @@ function setupPanico() {
   function ocultarModal() {
     console.log('Intentando ocultar modal de emergencia');
     try {
-      modalEmergencia.style.display = 'none';
-      modalEmergencia.classList.add('hidden');
-      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
+      modalEmergencia.style.opacity = '0';
+      modalEmergencia.style.visibility = 'hidden';
+      
+      // Esperar a que termine la transición antes de ocultar completamente
+      setTimeout(() => {
+        modalEmergencia.style.display = 'none';
+        modalEmergencia.classList.add('hidden');
+      }, 300);
+      
       console.log('Modal ocultado exitosamente');
     } catch (error) {
       console.error('Error al ocultar el modal:', error);
