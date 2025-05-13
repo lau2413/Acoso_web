@@ -107,8 +107,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Iniciar slider
   setupSlider();
   
+  // Configurar pánico primero, ya que es crítico
+  console.log('Configurando botón de pánico...');
+  const botonPanico = document.getElementById('boton-panico');
+  if (botonPanico) {
+    console.log('Botón de pánico encontrado, inicializando...');
+    setupPanico();
+  } else {
+    console.error('Botón de pánico no encontrado en el DOM');
+  }
+  
   // Configurar otras funcionalidades
-  if (document.getElementById('boton-panico')) setupPanico();
   if (document.querySelector('#registro-form')) setupRegistro();
   if (document.querySelector('#contacto-emergencia-form')) setupContacto();
   if (document.querySelector('#formulario-encuesta')) setupEncuesta();
