@@ -33,58 +33,60 @@
 
 <main>
   <section class="contacto-emergencia-section">
-    <div class="contacto-header">
-      <h2><i class="fas fa-phone-alt"></i> Contacto de Emergencia</h2>
-      <p class="contacto-description">Registra un contacto de confianza para situaciones de emergencia</p>
+    <div class="contacto-content">
+      <div class="contacto-header">
+        <h2><i class="fas fa-phone-alt"></i> Contacto de Emergencia</h2>
+        <p class="contacto-description">Registra un contacto de confianza para situaciones de emergencia</p>
+      </div>
+
+      <form id="contacto-emergencia-form" class="contacto-form">
+        <div class="form-group">
+          <label for="nombre-contacto">
+            <i class="fas fa-user"></i> Nombre del contacto
+          </label>
+          <input 
+            type="text" 
+            id="nombre-contacto" 
+            name="nombre-contacto" 
+            placeholder="Ingresa el nombre completo" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="relacion-contacto">
+            <i class="fas fa-heart"></i> Relación
+          </label>
+          <select id="relacion-contacto" name="relacion-contacto" required>
+            <option value="">Selecciona la relación</option>
+            <option value="Madre">Madre</option>
+            <option value="Padre">Padre</option>
+            <option value="Hermano/a">Hermano/a</option>
+            <option value="Pareja">Pareja</option>
+            <option value="Amigo/a">Amigo/a</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="telefono-contacto">
+            <i class="fas fa-mobile-alt"></i> Teléfono
+          </label>
+          <input 
+            type="tel" 
+            id="telefono-contacto" 
+            name="telefono-contacto" 
+            placeholder="Ingresa 10 dígitos" 
+            pattern="[0-9]{10}" 
+            required
+          >
+        </div>
+
+        <button type="submit" class="contacto-emergencia-btn">
+          <i class="fas fa-save"></i> Guardar Contacto
+        </button>
+      </form>
     </div>
-
-    <form id="contacto-emergencia-form" class="contacto-form">
-      <div class="form-group">
-        <label for="nombre-contacto">
-          <i class="fas fa-user"></i> Nombre del contacto
-        </label>
-        <input 
-          type="text" 
-          id="nombre-contacto" 
-          name="nombre-contacto" 
-          placeholder="Ingresa el nombre completo" 
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="relacion-contacto">
-          <i class="fas fa-heart"></i> Relación
-        </label>
-        <select id="relacion-contacto" name="relacion-contacto" required>
-          <option value="">Selecciona la relación</option>
-          <option value="Madre">Madre</option>
-          <option value="Padre">Padre</option>
-          <option value="Hermano/a">Hermano/a</option>
-          <option value="Pareja">Pareja</option>
-          <option value="Amigo/a">Amigo/a</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="telefono-contacto">
-          <i class="fas fa-mobile-alt"></i> Teléfono
-        </label>
-        <input 
-          type="tel" 
-          id="telefono-contacto" 
-          name="telefono-contacto" 
-          placeholder="Ingresa 10 dígitos" 
-          pattern="[0-9]{10}" 
-          required
-        >
-      </div>
-
-      <button type="submit" class="contacto-emergencia-btn">
-        <i class="fas fa-save"></i> Guardar Contacto
-      </button>
-    </form>
   </section>
 </main>
 
