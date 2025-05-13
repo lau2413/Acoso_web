@@ -75,15 +75,18 @@ function setupPanico() {
     let texto = "Nivel " + nivel + ": ";
     switch(nivel) {
       case "0":
-        texto += "Leve - Situación incómoda o acoso verbal";
+        texto += "Nivel no definido";
         break;
       case "1":
-        texto += "Moderado - Acoso persistente";
+        texto += "Leve - Situación incómoda o acoso verbal";
         break;
       case "2":
-        texto += "Fuerte - Amenazas directas";
+        texto += "Moderado - Acoso persistente";
         break;
       case "3":
+        texto += "Fuerte - Amenazas directas";
+        break;
+      case "4":
         texto += "Grave - Peligro inminente";
         break;
       default:
