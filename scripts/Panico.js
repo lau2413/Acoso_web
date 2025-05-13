@@ -15,7 +15,6 @@ function setupPanico() {
   const nivelAcoso = document.getElementById('nivel-acoso');
   const cerrarModal = document.getElementById('cerrar-modal');
   let isProcessing = false;
-  let alertShown = false; // New flag to track if alert was shown
 
   // Verificar que todos los elementos necesarios existen
   if (!btnPanico || !modalEmergencia || !slider || !enviarAlerta || !nivelAcoso || !cerrarModal) {
@@ -52,7 +51,7 @@ function setupPanico() {
     }
   }
 
-  function ocultarModal() {
+  function ocultarModal(cerrar = false) {
     console.log('Intentando ocultar modal de emergencia');
     try {
       document.body.classList.remove('modal-open');
@@ -266,23 +265,23 @@ function setupPanico() {
         throw new Error('Algunas alertas no pudieron ser enviadas');
       }
 
-      // 7. Mostrar mensaje de éxito solo si no se ha mostrado ya
-      if (!alertShown) {
-        alertShown = true;
-        if (nivelActual >= 3) {
-          alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
-        } else {
-          alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
-        }
-      }
+      // 7. Mostrar mensaje de éxito y cerrar modal
+      const mensaje = nivelActual >= 3 
+        ? `¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`
+        : `¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`;
 
-      ocultarModal();
+      // Primero ocultamos el modal
+      ocultarModal(true);
+      
+      // Después de un pequeño delay mostramos el alert
+      setTimeout(() => {
+        alert(mensaje);
+      }, 400);
 
     } catch (error) {
       console.error("Error al procesar la alerta:", error);
       alert(error.message || "Ocurrió un error inesperado. Por favor, intenta de nuevo.");
       isProcessing = false;
-      alertShown = false;
       enviarAlerta.disabled = false;
     }
   });
