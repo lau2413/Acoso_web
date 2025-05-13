@@ -27,59 +27,43 @@
     </nav>
   </header>
 
-  <main>
-    <section class="tutorial-section">
-      <h1>Guía de Uso FEMX</h1>
-      
-      <!-- Menú Principal -->
-      <div class="tutorial-item">
-        <h2><i class="fas fa-bars"></i> Menú Principal</h2>
-        <p>Desde aquí podrás acceder a todas las funciones:</p>
-        <ul>
-          <li>Inicio - Página principal</li>
-          <li>Información - Recursos y ayuda</li>
-          <li>Contacto de Emergencia - Números importantes</li>
-          <li>Glosario - Términos y definiciones</li>
-          <li>Encuesta de Acoso - Evaluación de situaciones</li>
-        </ul>
-        <img src="images/MenuPagina.jpg" alt="Menú de navegación" class="tutorial-image">
+  <main class="tutorial-section">
+    <div class="tutorial-header">
+      <h1>Tutorial de Uso</h1>
+      <p class="tutorial-description">Aprende a utilizar todas las funciones de nuestra aplicación</p>
+    </div>
+
+    <div class="tutorial-grid">
+      <div class="tutorial-card">
+        <div class="tutorial-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <h2>Página Principal</h2>
+        <p>Aquí encontrarás el botón de pánico y acceso rápido a todas las funciones.</p>
+        <div class="tutorial-image-container">
+          <img src="images/tutorial1.png" alt="Página Principal" class="tutorial-image">
+          <div class="image-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
       </div>
 
-      <!-- Registro -->
-      <div class="tutorial-item">
-        <h2><i class="fas fa-user-plus"></i> Registro de Usuario</h2>
-        <p>Para acceder a todas las funciones:</p>
-        <ol>
-          <li>Haz clic en "Iniciar Sesión"</li>
-          <li>Completa el formulario con tus datos</li>
-          <li>Agrega un contacto de emergencia</li>
-        </ol>
-        <img src="images/FormRegistro.jpg" alt="Formulario de registro" class="tutorial-image">
+      <div class="tutorial-card">
+        <div class="tutorial-icon">
+          <i class="fas fa-user-shield"></i>
+        </div>
+        <h2>Contactos de Emergencia</h2>
+        <p>Configura tus contactos de confianza para situaciones de emergencia.</p>
+        <div class="tutorial-image-container">
+          <img src="images/tutorial2.png" alt="Contactos de Emergencia" class="tutorial-image">
+          <div class="image-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
       </div>
 
-      <!-- Botón de Pánico -->
-      <div class="tutorial-item">
-        <h2><i class="fas fa-exclamation-circle"></i> Botón de Pánico</h2>
-        <p>En caso de emergencia:</p>
-        <ol>
-          <li>Localiza el botón rojo en la página principal</li>
-          <li>Presiónalo para enviar una alerta inmediata</li>
-        </ol>
-        <img src="images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
-      </div>
-
-      <!-- Encuesta -->
-      <div class="tutorial-item">
-        <h2><i class="fas fa-clipboard-list"></i> Encuesta de Acoso</h2>
-        <p>Para evaluar tu situación:</p>
-        <ul>
-          <li>Responde las preguntas con honestidad</li>
-          <li>Tus respuestas son confidenciales</li>
-          <li>Recibirás recomendaciones personalizadas</li>
-        </ul>
-        <img src="images/encuesta.jpg" alt="Encuesta" class="tutorial-image">
-      </div>
-    </section>
+      <!-- Repite para cada sección del tutorial -->
+    </div>
   </main>
 
   <!-- Modal para las imágenes -->

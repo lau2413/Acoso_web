@@ -29,4 +29,28 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         modal.style.display = "none";
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const imageContainers = document.querySelectorAll('.tutorial-image-container');
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    document.body.appendChild(modal);
+
+    imageContainers.forEach(container => {
+        container.addEventListener('click', function() {
+            const img = this.querySelector('.tutorial-image');
+            modal.innerHTML = `
+                <span class="modal-close">&times;</span>
+                <img src="${img.src}" class="modal-content" alt="${img.alt}">
+            `;
+            modal.classList.add('active');
+        });
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal')) {
+            modal.classList.remove('active');
+        }
+    });
 }); 
