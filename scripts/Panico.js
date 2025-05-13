@@ -43,102 +43,125 @@ export function setupPanico() {
     }
   };
 
-  btnPanico?.addEventListener('click', () => modalEmergencia?.classList.remove('hidden'));
-  cerrarModal?.addEventListener('click', () => modalEmergencia?.classList.add('hidden'));
+  if (btnPanico) {
+    btnPanico.addEventListener('click', () => {
+      if (modalEmergencia) {
+        modalEmergencia.classList.remove('hidden');
+        // Asegurarse de que el slider esté en el valor inicial
+        if (slider) {
+          slider.value = 1;
+          actualizarNivelAcoso(1);
+        }
+      } else {
+        console.error('Modal de emergencia no encontrado');
+      }
+    });
+  }
 
-  // Actualizar la descripción al cargar
-  if (slider && nivelTitulo && nivelDetalle) {
-    const nivelActual = parseInt(slider.value);
-    nivelTitulo.textContent = nivelesAcoso[nivelActual].titulo;
-    nivelDetalle.textContent = nivelesAcoso[nivelActual].descripcion;
-    nivelTitulo.style.color = nivelesAcoso[nivelActual].color;
+  if (cerrarModal) {
+    cerrarModal.addEventListener('click', () => {
+      if (modalEmergencia) {
+        modalEmergencia.classList.add('hidden');
+      }
+    });
+  }
+
+  function actualizarNivelAcoso(nivel) {
+    if (nivelTitulo && nivelDetalle) {
+      nivelTitulo.textContent = nivelesAcoso[nivel].titulo;
+      nivelDetalle.textContent = nivelesAcoso[nivel].descripcion;
+      nivelTitulo.style.color = nivelesAcoso[nivel].color;
+    }
   }
 
   // Actualizar al mover el slider
-  slider?.addEventListener('input', () => {
-    const nivelActual = parseInt(slider.value);
-    nivelTitulo.textContent = nivelesAcoso[nivelActual].titulo;
-    nivelDetalle.textContent = nivelesAcoso[nivelActual].descripcion;
-    nivelTitulo.style.color = nivelesAcoso[nivelActual].color;
-  });
-
-  enviarAlerta?.addEventListener('click', async () => {
-    if (!navigator.geolocation) {
-      alert("Tu navegador no soporta geolocalización.");
-      return;
-    }
-
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    if (userError || !user) {
-      alert("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
-      return;
-    }
-
-    const { data: contactos, error: contactoError } = await supabase
-      .from('contactos')
-      .select('telefono_contacto')
-      .eq('id_usuario', user.id);
-
-    if (contactoError || !contactos || contactos.length === 0) {
-      alert("No se encontró un contacto de emergencia para este usuario.");
-      return;
-    }
-
-    let numeroEmergencia = contactos[0].telefono_contacto;
-    if (!numeroEmergencia.startsWith("+")) {
-      numeroEmergencia = '+57' + numeroEmergencia;
-    }
-
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const link = `https://www.google.com/maps?q=${lat},${lon}`;
-
-      const val = parseInt(slider.value);
-      const gravedad = val <= 2 ? 'leve' : 'grave';
-      const mensaje = `🚨 ¡ALERTA ${gravedad.toUpperCase()}! Necesito ayuda. Esta es mi ubicación: ${link}`;
-
-      try {
-        const response = await fetch(`https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            messaging_product: 'whatsapp',
-            to: numeroEmergencia.replace('+', ''), // WhatsApp requiere solo números
-            type: 'template',
-            template: {
-              name: 'alerta_emergencia',
-              language: { code: 'es_CO' },
-              components: [{
-                type: 'body',
-                parameters: [{
-                  type: 'text',
-                  text: link // ubicación dinámica que reemplaza {{1}}
-                }]
-              }]
-            }
-          })
-        });
-        const data = await response.json();
-
-        if (!response.ok) {
-          console.error("Error WhatsApp API:", data);
-          alert(`Error al enviar el mensaje: ${data.error?.message}`);
-        } else {
-          console.log("Mensaje enviado:", data);
-          alert("¡Mensaje de emergencia enviado por WhatsApp!");
-          console.log("Respuesta completa de la API:", data);
-        }
-      } catch (error) {
-        console.error("Error al conectar con WhatsApp Cloud API:", error);
-        alert("No se pudo enviar el mensaje de alerta.");
-      }
-    }, (error) => {
-      console.error("No se pudo obtener la ubicación:", error);
-      alert("Error al obtener la ubicación.");
+  if (slider) {
+    slider.addEventListener('input', () => {
+      const nivelActual = parseInt(slider.value);
+      actualizarNivelAcoso(nivelActual);
     });
-  });
+  }
+
+  if (enviarAlerta) {
+    enviarAlerta.addEventListener('click', async () => {
+      if (!navigator.geolocation) {
+        alert("Tu navegador no soporta geolocalización.");
+        return;
+      }
+
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError || !user) {
+        alert("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
+        return;
+      }
+
+      const { data: contactos, error: contactoError } = await supabase
+        .from('contactos')
+        .select('telefono_contacto')
+        .eq('id_usuario', user.id);
+
+      if (contactoError || !contactos || contactos.length === 0) {
+        alert("No se encontró un contacto de emergencia para este usuario.");
+        return;
+      }
+
+      let numeroEmergencia = contactos[0].telefono_contacto;
+      if (!numeroEmergencia.startsWith("+")) {
+        numeroEmergencia = '+57' + numeroEmergencia;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const link = `https://www.google.com/maps?q=${lat},${lon}`;
+
+        const val = parseInt(slider.value);
+        const gravedad = val <= 2 ? 'leve' : 'grave';
+        const mensaje = `🚨 ¡ALERTA ${gravedad.toUpperCase()}! Necesito ayuda. Esta es mi ubicación: ${link}`;
+
+        try {
+          const response = await fetch(`https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              messaging_product: 'whatsapp',
+              to: numeroEmergencia.replace('+', ''),
+              type: 'template',
+              template: {
+                name: 'alerta_emergencia',
+                language: { code: 'es_CO' },
+                components: [{
+                  type: 'body',
+                  parameters: [{
+                    type: 'text',
+                    text: link
+                  }]
+                }]
+              }
+            })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            console.error("Error WhatsApp API:", data);
+            alert(`Error al enviar el mensaje: ${data.error?.message}`);
+          } else {
+            console.log("Mensaje enviado:", data);
+            alert("¡Mensaje de emergencia enviado por WhatsApp!");
+            modalEmergencia.classList.add('hidden');
+          }
+        } catch (error) {
+          console.error("Error al conectar con WhatsApp Cloud API:", error);
+          alert("No se pudo enviar el mensaje de alerta.");
+        }
+      }, (error) => {
+        console.error("No se pudo obtener la ubicación:", error);
+        alert("Error al obtener la ubicación.");
+      });
+    });
+  }
 }

@@ -369,7 +369,135 @@ a:hover {
   display: none !important;
 }
 
-/* Modal - Versión mejorada */
+/* === Modal de Emergencia === */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal-content h2 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.thermometer-container {
+  margin: 2rem 0;
+}
+
+#slider-acoso {
+  width: 100%;
+  height: 20px;
+  -webkit-appearance: none;
+  background: linear-gradient(to right, #ffcc00, #ff9900, #ff6600, #ff3300, #cc0000);
+  border-radius: 10px;
+  outline: none;
+}
+
+#slider-acoso::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#slider-acoso::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.thermometer-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.thermometer-labels span {
+  font-weight: bold;
+  color: var(--text);
+}
+
+#nivel-descripcion {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #f8f9fa;
+}
+
+#nivel-titulo {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+#nivel-detalle {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+#enviar-alerta {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+#enviar-alerta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+#cerrar-modal {
+  width: 100%;
+  padding: 1rem;
+  background: #f8f9fa;
+  color: var(--text);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#cerrar-modal:hover {
+  background: #e9ecef;
+}
 
 /* === Modales === */
 .modal {
