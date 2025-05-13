@@ -933,3 +933,99 @@ button, a, input, select, .termino, nav a, label, .modal-content {
     transform: scale(1);
   }
 }
+
+
+/* === Estilo Figma Profesional === */
+
+/* Tipografía moderna y refinada */
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0.3px;
+  color: var(--text);
+  background: linear-gradient(135deg, #f8e9ff 0%, #f0d6ff 100%);
+}
+
+/* Tarjetas con profundidad elegante */
+.card {
+  background-color: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 12px 48px rgba(106, 48, 147, 0.12);
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 60px rgba(106, 48, 147, 0.18);
+}
+
+/* Navegación sticky y elegante */
+header {
+  background: white;
+  border-bottom: 1px solid #e9dfff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Botones de alto contraste y suaves */
+button {
+  border-radius: 14px;
+  font-size: 15px;
+  padding: 14px 26px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(160, 68, 255, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(160, 68, 255, 0.2);
+}
+
+/* Inputs con borde interior y hover animado */
+input, select {
+  background-color: #fdfbff;
+  border: 2px solid #e4d4ff;
+  padding: 14px 20px;
+  border-radius: 12px;
+}
+input:hover, select:hover {
+  border-color: var(--secondary);
+}
+
+/* Transiciones visuales refinadas */
+.modal-content {
+  border-radius: 20px;
+  animation: fadeInScale 0.4s ease-out;
+}
+
+/* Fade suave */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Etiquetas con interacción más marcada */
+label {
+  font-weight: 500;
+  color: var(--text);
+}
+label:hover {
+  background-color: #f4edff;
+}
+
+/* Mejoras en el footer si existe */
+footer {
+  background-color: #f5efff;
+  text-align: center;
+  font-size: 14px;
+  padding: 30px;
+  margin-top: 3rem;
+  border-top: 1px solid #ddd0ff;
+  color: #666;
+}
