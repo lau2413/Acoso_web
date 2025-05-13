@@ -32,6 +32,8 @@ function setupPanico() {
   function mostrarModal() {
     console.log('Mostrando modal de emergencia');
     modalEmergencia.classList.remove('hidden');
+    // Forzar un reflow para asegurar que la transición funcione
+    modalEmergencia.offsetHeight;
     document.body.style.overflow = 'hidden'; // Prevenir scroll
     slider.value = 0;
     actualizarNivelAcoso(0);
@@ -48,22 +50,22 @@ function setupPanico() {
     let texto = "Nivel " + nivel + ": ";
     switch(nivel) {
       case "0":
-        texto += "Leve";
+        texto += "Leve - Situación incómoda";
         break;
       case "1":
-        texto += "Moderado";
+        texto += "Moderado - Acoso verbal";
         break;
       case "2":
-        texto += "Medio";
+        texto += "Medio - Acoso persistente";
         break;
       case "3":
-        texto += "Alto";
+        texto += "Alto - Amenazas directas";
         break;
       case "4":
-        texto += "Grave";
+        texto += "Grave - Peligro inminente";
         break;
       case "5":
-        texto += "Crítico";
+        texto += "Crítico - Emergencia inmediata";
         break;
       default:
         texto = "Nivel no definido";
@@ -74,12 +76,14 @@ function setupPanico() {
   // Event Listeners
   btnPanico.addEventListener('click', (e) => {
     e.preventDefault();
+    e.stopPropagation(); // Prevenir propagación del evento
     console.log('Botón de pánico clickeado');
     mostrarModal();
   });
 
   cerrarModal.addEventListener('click', (e) => {
     e.preventDefault();
+    e.stopPropagation(); // Prevenir propagación del evento
     ocultarModal();
   });
 
@@ -88,6 +92,11 @@ function setupPanico() {
     if (e.target === modalEmergencia) {
       ocultarModal();
     }
+  });
+
+  // Prevenir que los clics dentro del modal lo cierren
+  modalEmergencia.querySelector('.modal-content').addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 
   slider.addEventListener('input', () => {
@@ -136,10 +145,10 @@ function setupPanico() {
         
         // Simulación de envío de mensajes
         if (esGrave) {
-          // Mensaje para casos graves (niveles 3 y 4)
+          // Mensaje para casos graves (niveles 3-5)
           alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
         } else {
-          // Mensaje para casos leves (niveles 1 y 2)
+          // Mensaje para casos leves (niveles 0-2)
           alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
         }
 
@@ -147,7 +156,7 @@ function setupPanico() {
         
       }, (error) => {
         console.error("Error al obtener ubicación:", error);
-        alert("Error al obtener la ubicación.");
+        alert("Error al obtener la ubicación. Por favor, permite el acceso a tu ubicación e intenta de nuevo.");
       });
     } catch (error) {
       console.error("Error general:", error);
