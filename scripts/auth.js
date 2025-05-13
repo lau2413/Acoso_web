@@ -11,7 +11,7 @@ export async function updateSessionUI() {
 
   const loginLi = document.createElement('li');
   if (user) {
-    loginLi.innerHTML = `<a href="#" id="logoutBtn">Cerrar sesión</a>`;
+    loginLi.innerHTML = `<a href="login.html">Cerrar Sesión</a>`;
     navList.appendChild(loginLi);
 
     document.getElementById("logoutBtn").addEventListener("click", async (e) => {
