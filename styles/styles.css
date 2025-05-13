@@ -254,18 +254,13 @@ a:hover {
 
 /* === Modales === */
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
-  background-color: rgba(26, 0, 51, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  backdrop-filter: blur(5px);
+  min-height: 100vh;
+  background-color: transparent;
+  display: block;
   padding: 20px;
+  margin-top: 80px;
 }
 
 .modal-content {
@@ -283,12 +278,13 @@ a:hover {
 }
 
 .question-container {
+  display: block;
   background: white;
   border: 1px solid #e6d0ff;
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .question-container:hover {
@@ -704,7 +700,7 @@ select:focus {
 }
 
 .question-container {
-  display: none;
+  display: block;
   padding: 30px;
   background: white;
   border-radius: 16px;
