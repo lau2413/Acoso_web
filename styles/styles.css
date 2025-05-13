@@ -1831,140 +1831,27 @@ footer {
     }
 }
 
-/* Animaciones Globales para todas las páginas */
-
-/* Efecto de entrada para secciones principales */
+/* Agregar estas clases básicas */
 .info-section,
 .contacto-emergencia-section,
 .survey-section,
 .glosario-section,
 .auth-container,
 .tutorial-section {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: none;
 }
 
-/* Efecto para encabezados */
-.info-section h2,
-.contacto-header h2,
-.survey-header h2,
-.glosario-header h2,
-.auth-header h1,
-.tutorial-header h1 {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* Efecto para descripciones */
-.info-description,
-.contacto-description,
-.survey-description,
-.glosario-description,
-.auth-description,
-.tutorial-description {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* Efecto para tarjetas y elementos de contenido */
 .info-card,
 .contacto-form,
 .question-container,
 .termino,
 .auth-form,
 .tutorial-card {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: none;
 }
 
-/* Retraso escalonado para elementos múltiples */
-.info-card:nth-child(1),
-.termino:nth-child(1),
-.tutorial-card:nth-child(1) { animation-delay: 0.2s; }
-
-.info-card:nth-child(2),
-.termino:nth-child(2),
-.tutorial-card:nth-child(2) { animation-delay: 0.4s; }
-
-.info-card:nth-child(3),
-.termino:nth-child(3),
-.tutorial-card:nth-child(3) { animation-delay: 0.6s; }
-
-.info-card:nth-child(4),
-.termino:nth-child(4),
-.tutorial-card:nth-child(4) { animation-delay: 0.8s; }
-
-/* Efecto para formularios y campos */
-.form-group,
-.auth-form .form-group,
-.contacto-form .form-group {
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-.form-group:nth-child(1) { animation-delay: 0.3s; }
-.form-group:nth-child(2) { animation-delay: 0.4s; }
-.form-group:nth-child(3) { animation-delay: 0.5s; }
-.form-group:nth-child(4) { animation-delay: 0.6s; }
-
-/* Efecto para iconos */
-.tutorial-icon,
-.info-icon,
-.glosario-icon {
-    opacity: 0;
-    transform: scale(0.8);
-}
-
-/* Efecto para listas */
-.info-card ul,
-.tutorial-card ul,
-.feature-list {
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-/* Efecto para botones principales */
-.auth-submit-btn,
-.contacto-emergencia-btn,
-#submit-btn,
-#boton-panico {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-/* Animaciones base */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Efecto para la barra de progreso */
-.progress-container {
-    opacity: 0;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.tutorial-card {
+    opacity: 1;
 }
