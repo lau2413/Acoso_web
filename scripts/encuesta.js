@@ -14,9 +14,6 @@ export function setupEncuesta() {
     
     progressBar.style.width = `${progress}%`;
     questionsCompletedSpan.textContent = answeredQuestions;
-    
-    // Mostrar/ocultar botón de enviar
-    submitBtn.style.display = answeredQuestions === totalQuestions ? 'block' : 'none';
   }
 
   // Actualizar progreso cuando se selecciona una respuesta
