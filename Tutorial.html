@@ -129,35 +129,79 @@
         </div>
       </div>
     </section>
-  </main>
 
-  <div class="tutorial-container">
-    <h1>Tutorial de uso</h1>
-    <div class="tutorial-step">
+    <div class="tutorial-container">
+      <h1>Tutorial de uso</h1>
+      
+      <!-- Paso 1: Botón de Pánico -->
+      <div class="tutorial-step">
         <h2>1. Botón de pánico</h2>
         <p>En caso de emergencia, presiona el botón de pánico ubicado en la parte superior de la página.</p>
         <div class="image-container">
-            <img src="images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
+          <img src="./images/boton_panico.png" alt="Botón de pánico" class="tutorial-image">
         </div>
-    </div>
-    <!-- Repite el patrón para cada paso del tutorial -->
-  </div>
+      </div>
 
-  <!-- Agregar el modal para la imagen expandida -->
-  <div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="expandedImage">
-  </div>
+      <!-- Paso 2: Menú de Navegación -->
+      <div class="tutorial-step">
+        <h2>2. Menú de Navegación</h2>
+        <p>Utiliza el menú superior para acceder a todas las funciones de la aplicación.</p>
+        <div class="image-container">
+          <img src="./images/MenuPagina.jpg" alt="Menú de navegación" class="tutorial-image">
+        </div>
+      </div>
+
+      <!-- Paso 3: Registro -->
+      <div class="tutorial-step">
+        <h2>3. Registro de Usuario</h2>
+        <p>Complete el formulario de registro para acceder a todas las funcionalidades.</p>
+        <div class="image-container">
+          <img src="./images/FormRegistro.jpg" alt="Formulario de registro" class="tutorial-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para las imágenes -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="expandedImage">
+    </div>
+  </main>
 
   <script>
-    // Añadir interactividad a las tarjetas
-    document.querySelectorAll('.tutorial-card').forEach(card => {
-      card.addEventListener('click', () => {
-        card.classList.toggle('expanded');
-      });
+    // Código para el modal de imágenes
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('expandedImage');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const images = document.getElementsByClassName('tutorial-image');
+
+    // Agregar evento click a todas las imágenes
+    Array.from(images).forEach(img => {
+      img.onclick = function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+    });
+
+    // Cerrar modal al hacer click en la X
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Cerrar modal al hacer click fuera de la imagen
+    modal.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Cerrar modal con la tecla ESC
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        modal.style.display = "none";
+      }
     });
   </script>
-  <script src="scripts/tutorial.js"></script>
 </body>
 </html>
 
