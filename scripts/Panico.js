@@ -142,6 +142,7 @@ function setupPanico() {
       return;
     }
 
+    console.log('Iniciando proceso de alerta...');
     isProcessing = true;
     nuevoEnviarAlerta.disabled = true;
 
@@ -263,18 +264,20 @@ function setupPanico() {
         ? `¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`
         : `¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`;
 
-      // Remove event listeners temporarily
+      // Disable pointer events
       modalEmergencia.style.pointerEvents = 'none';
       nuevoCerrarModal.style.pointerEvents = 'none';
 
-      // Close modal first
+      // Show alert and then close modal
+      alert(mensaje);
       ocultarModal();
 
-      // Show alert after modal is closed
+      // Re-enable pointer events after modal is closed
       setTimeout(() => {
         modalEmergencia.style.pointerEvents = '';
         nuevoCerrarModal.style.pointerEvents = '';
-        alert(mensaje);
+        isProcessing = false;
+        nuevoEnviarAlerta.disabled = false;
       }, 400);
 
     } catch (error) {
