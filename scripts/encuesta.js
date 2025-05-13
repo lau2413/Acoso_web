@@ -14,6 +14,13 @@ export function setupEncuesta() {
     
     progressBar.style.width = `${progress}%`;
     questionsCompletedSpan.textContent = answeredQuestions;
+
+    // Mostrar u ocultar el botón de envío según si todas las preguntas están respondidas
+    if (answeredQuestions === totalQuestions) {
+      submitBtn.style.display = 'block';
+    } else {
+      submitBtn.style.display = 'none';
+    }
   }
 
   // Actualizar progreso cuando se selecciona una respuesta
