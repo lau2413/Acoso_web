@@ -1202,32 +1202,19 @@ footer {
   min-height: 600px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding: 40px 0;
   margin-top: 80px;
-  gap: 40px;
+  overflow: hidden;
 }
 
 .hero-content {
-  flex: 1;
-  max-width: 600px;
+  position: relative;
+  z-index: 2;
+  width: 50%;
+  padding: 0 60px;
   color: white;
   text-align: center;
-  padding: 20px;
-}
-
-.hero-image {
-  flex: 1;
-  max-width: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-illustration {
-  max-width: 100%;
-  height: auto;
 }
 
 .hero-content h1 {
@@ -1253,7 +1240,6 @@ footer {
   width: 50%;
   height: 100%;
   overflow: hidden;
-  opacity: 1; /* Cambiado de 0.2 a 1 */
 }
 
 .hero-slider .slide {
@@ -1276,16 +1262,16 @@ footer {
 
 /* Botón de pánico mejorado */
 .hero-panic-button {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 #boton-panico {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ff4d8d 0%, #ff2d6d 100%);
   color: white;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   border: none;
   cursor: pointer;
@@ -1296,6 +1282,48 @@ footer {
   display: block;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+#boton-panico:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 60px rgba(255, 45, 109, 0.6);
+}
+
+.panic-description {
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .hero-content {
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 40px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-slider {
+    position: relative;
+    width: 100%;
+    height: 300px;
+  }
+
+  #boton-panico {
+    width: 160px;
+    height: 160px;
+    font-size: 1.5rem;
+  }
 }
 
 /* Features section ajustado */
