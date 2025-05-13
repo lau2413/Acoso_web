@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Protección Segura</title>
   <link rel="stylesheet" href="styles/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -20,68 +20,77 @@
         <li><a href="contactos.html">Contacto de Emergencia</a></li>
         <li><a href="glosario.html">Glosario</a></li>
         <li><a href="encuesta.html">Encuesta de Acoso</a></li>
-        <li><a href = "Tutorial.html">Tutorial</a></li>
+        <li><a href="Tutorial.html">Tutorial</a></li>
         <li><a href="login.html">Cerrar Sesión</a></li>
-        
       </ul>
     </nav>
   </header>
 
-  <section class="hero-slider">
-    <div class="slide active">
-      <img src="images/76216.jpg" alt="Mujeres empoderadas">
-      <div class="overlay-text">
-        <h2>Seguras, libres y sin miedo</h2>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Seguras, libres y sin miedo</h1>
+      <p class="hero-description">Tu seguridad es nuestra prioridad. Estamos aquí para apoyarte.</p>
+    </div>
+    <div class="hero-slider">
+      <div class="slide active">
+        <img src="images/76216.jpg" alt="Mujeres empoderadas">
+      </div>
+      <div class="slide">
+        <img src="images/20943399.jpg" alt="Mujer denunciando">
+      </div>
+      <div class="slide">
+        <img src="images/mujeres.jpg" alt="No estas sola">
       </div>
     </div>
-    <div class="slide">
-      <img src="images/20943399.jpg" alt="Mujer denunciando">
-      <div class="overlay-text">
-        <h2>Alzar la voz es poder ¡Denuncia!</h2>
-      </div>
-    </div>
-    <div class="slide">
-      <img src="images/mujeres.jpg" alt="No estas sola">
-      <div class="overlay-text">
-        <h2>No estás sola, estamos para ti </h2>
-      </div>
-    </div>
-    
   </section>
 
   <main>
-    <section id="panico-section">
-      <div class="panic-button-container">
-        <div class="card">
-          <h2 class="titulo-panico">Botón de Pánico</h2>
-          <button id="boton-panico">¡PÁNICO!</button>
-          <p>Presiona el botón para realizar el reporte.</p>
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Botón de Pánico</h3>
+          <div class="panic-button-container">
+            <button id="boton-panico">¡PÁNICO!</button>
+          </div>
+          <p>Presiona el botón para realizar un reporte inmediato de emergencia</p>
+        </div>
+        
+        <div class="feature-card">
+          <h3>Recursos de Ayuda</h3>
+          <p>Accede a información importante y contactos de emergencia</p>
+          <a href="informacion.html" class="feature-link">Más información →</a>
+        </div>
+
+        <div class="feature-card">
+          <h3>Evaluación de Riesgo</h3>
+          <p>Realiza nuestra encuesta para identificar situaciones de riesgo</p>
+          <a href="encuesta.html" class="feature-link">Ir a la encuesta →</a>
         </div>
       </div>
     </section>
   </main>
 
- <div id="modal-emergencia" class="modal hidden">
-  <div class="modal-content">
-    <h2>Identifica el nivel de acoso</h2>
-    <div class="thermometer-container">
-      <input type="range" id="slider-acoso" min="1" max="5" step="1" value="1">
-      <div class="thermometer-labels">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
+  <div id="modal-emergencia" class="modal hidden">
+    <div class="modal-content">
+      <h2>Identifica el nivel de acoso</h2>
+      <div class="thermometer-container">
+        <input type="range" id="slider-acoso" min="1" max="5" step="1" value="1">
+        <div class="thermometer-labels">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+        </div>
       </div>
+      <div id="nivel-descripcion">
+        <h3 id="nivel-titulo">Nivel 1: Leve</h3>
+        <p id="nivel-detalle">Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas</p>
+      </div>
+      <button id="enviar-alerta">Enviar Alerta</button>
+      <button class="secondary" id="cerrar-modal">Cancelar</button>
     </div>
-    <div id="nivel-descripcion">
-      <h3 id="nivel-titulo">Nivel 1: Leve</h3>
-      <p id="nivel-detalle">Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas</p>
-    </div>
-    <button id="enviar-alerta">Enviar Alerta</button>
-    <button class="secondary" id="cerrar-modal">Cancelar</button>
   </div>
-</div>
 
   <script type="module" src="scripts/main.js"></script>
 </body>
