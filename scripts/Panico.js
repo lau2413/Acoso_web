@@ -140,88 +140,97 @@ function setupPanico() {
     }
 
     try {
+      // 1. Obtener usuario actual
       console.log('Obteniendo usuario actual...');
       const { data: { user }, error: userError } = await supabase.auth.getUser();
-      if (userError || !user) {
+      
+      if (userError) {
         console.error('Error al obtener usuario:', userError);
-        alert("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
-        return;
+        throw new Error('Error de autenticación. Por favor, inicia sesión nuevamente.');
+      }
+      
+      if (!user) {
+        throw new Error('No hay usuario autenticado. Por favor, inicia sesión.');
       }
 
-      console.log('Buscando contactos de emergencia...');
+      console.log('Usuario obtenido:', user.id);
+
+      // 2. Obtener contactos de emergencia
+      console.log('Buscando contactos de emergencia para usuario:', user.id);
       const { data: contactos, error: contactoError } = await supabase
         .from('contactos')
-        .select('id, telefono_contacto')
+        .select('id_contacto, nombre_contacto, telefono_contacto')
         .eq('id_usuario', user.id);
 
       if (contactoError) {
         console.error('Error al obtener contactos:', contactoError);
-        throw new Error('No se pudieron obtener los contactos de emergencia');
+        throw new Error('Error al obtener contactos de emergencia: ' + contactoError.message);
       }
 
       if (!contactos || contactos.length === 0) {
-        alert("No se encontró un contacto de emergencia para este usuario.");
-        return;
+        throw new Error('No has registrado ningún contacto de emergencia. Por favor, registra al menos uno antes de usar el botón de pánico.');
       }
 
+      console.log('Contactos encontrados:', contactos.length);
+
+      // 3. Obtener ubicación
+      console.log('Obteniendo ubicación...');
       const position = await new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
 
-      console.log('Posición obtenida:', position);
+      console.log('Posición obtenida:', position.coords);
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
 
+      // 4. Obtener nivel de acoso
       const nivelActual = parseInt(slider.value);
-      console.log('Nivel actual seleccionado:', nivelActual);
+      console.log('Nivel de acoso seleccionado:', nivelActual);
 
-      // Crear registro de acoso
+      // 5. Crear registro de acoso
+      console.log('Creando registro de acoso...');
       const { data: acoso, error: acosoError } = await supabase
         .from('acoso')
         .insert({
           id_usuario: user.id,
-          id_tipo_acoso: nivelActual, // El nivel seleccionado corresponde directamente al id_tipo_acoso
+          id_tipo_acoso: nivelActual,
           latitud: lat,
-          longitud: lon,
-          estado: 'reportado',
-          fecha_hora: new Date().toISOString()
+          longitud: lon
         })
         .select()
         .single();
 
       if (acosoError) {
         console.error('Error al crear registro de acoso:', acosoError);
-        throw new Error('No se pudo registrar el incidente');
+        throw new Error('Error al registrar el incidente: ' + acosoError.message);
       }
 
       console.log('Registro de acoso creado:', acoso);
 
-      // Crear alertas para contactos de emergencia
+      // 6. Crear alertas
+      console.log('Creando alertas...');
       const alertasPromesas = contactos.map(contacto => {
         return supabase
           .from('alertas')
           .insert({
             id_acoso: acoso.id,
-            id_contacto: contacto.id,
-            tipo_alerta: 'contacto_emergencia',
+            id_contacto: contacto.id_contacto,
             estado: 'enviada',
             fecha_envio: new Date().toISOString()
           });
       });
 
-      // Si el nivel es fuerte (3) o grave (4), notificar autoridades
       if (nivelActual >= 3) {
+        // Para niveles Fuerte y Grave, crear alertas adicionales para autoridades
         alertasPromesas.push(
           supabase.from('alertas').insert([
             {
               id_acoso: acoso.id,
-              tipo_alerta: 'policia',
               estado: 'enviada',
               fecha_envio: new Date().toISOString()
             },
             {
               id_acoso: acoso.id,
-              tipo_alerta: 'linea_123',
               estado: 'enviada',
               fecha_envio: new Date().toISOString()
             }
@@ -229,17 +238,16 @@ function setupPanico() {
         );
       }
 
-      // Esperar a que todas las alertas se creen
       const resultadosAlertas = await Promise.allSettled(alertasPromesas);
       console.log('Resultados de crear alertas:', resultadosAlertas);
 
-      // Verificar si hubo errores al crear las alertas
       const erroresAlertas = resultadosAlertas.filter(r => r.status === 'rejected');
       if (erroresAlertas.length > 0) {
         console.error('Errores al crear algunas alertas:', erroresAlertas);
+        throw new Error('Algunas alertas no pudieron ser enviadas');
       }
 
-      // Mostrar mensaje apropiado
+      // 7. Mostrar mensaje de éxito
       if (nivelActual >= 3) {
         alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
       } else {
@@ -250,7 +258,7 @@ function setupPanico() {
 
     } catch (error) {
       console.error("Error al procesar la alerta:", error);
-      alert("Ocurrió un error al procesar la alerta: " + (error.message || 'Error desconocido'));
+      alert(error.message || "Ocurrió un error inesperado. Por favor, intenta de nuevo.");
     }
   });
 
