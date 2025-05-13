@@ -376,34 +376,36 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.3s ease;
 }
 
 .modal.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  display: none;
+  display: none !important;
 }
 
 .modal-content {
-  background-color: white;
+  background: white;
   padding: 2rem;
   border-radius: 15px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  animation: modalFadeIn 0.3s ease;
   position: relative;
-  transform: scale(1);
-  transition: transform 0.3s ease;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .modal h2 {
@@ -417,17 +419,6 @@ a:hover {
   color: var(--text);
   text-align: center;
   margin-bottom: 1.5rem;
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* Estilos para el slider y etiquetas */
@@ -703,62 +694,57 @@ label:hover .radio-custom {
   box-shadow: 0 0 0 2px var(--secondary);
 }
 
-/* Botón de pánico */
-
 /* === Botón de Pánico === */
 #boton-panico {
   background: linear-gradient(135deg, #ff4d8d 0%, #ff2d6d 100%);
-  font-size: 20px;
-  padding: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 30px;
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   margin: 20px auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  cursor: pointer;
   box-shadow: 0 8px 24px rgba(255, 77, 141, 0.4);
   animation: pulse 2s infinite;
-  font-weight: 700;
-  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
 }
 
 #boton-panico:hover {
   transform: scale(1.05);
   box-shadow: 0 12px 28px rgba(255, 77, 141, 0.6);
 }
-.panic-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
-  margin-top: 0;
+
+#boton-panico:active {
+  transform: scale(0.95);
 }
 
-/* Animaciones */
-
-/* === Animaciones === */
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 77, 141, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(255, 77, 141, 0);
+    box-shadow: 0 0 0 20px rgba(255, 77, 141, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
   }
 }
 
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.panic-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  margin-top: 0;
 }
 
 /* === Contacto Emergencia === */
@@ -1679,22 +1665,38 @@ footer {
   border-radius: 50%;
   background: linear-gradient(135deg, #ff4d8d 0%, #ff2d6d 100%);
   color: white;
-  font-size: 2rem;
+  font-size: 24px;
   font-weight: 700;
+  text-transform: uppercase;
+  padding: 30px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 15px 40px rgba(255, 45, 109, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(255, 77, 141, 0.4);
   animation: pulse 2s infinite;
-  margin: 0 auto;
-  display: block;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
 }
 
 #boton-panico:hover {
-  transform: scale(1.1);
-  box-shadow: 0 20px 60px rgba(255, 45, 109, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 77, 141, 0.6);
+}
+
+#boton-panico:active {
+  transform: scale(0.95);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 77, 141, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
+  }
 }
 
 .panic-description {
