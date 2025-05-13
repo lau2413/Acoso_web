@@ -1868,8 +1868,30 @@ footer {
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(106, 48, 147, 0.15);
+  max-height: 600px; /* Altura máxima para el contenedor */
+  overflow-y: auto; /* Habilitar scroll vertical */
 }
 
+/* Estilo personalizado para la barra de scroll */
+.survey-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.survey-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.survey-content::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+.survey-content::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Resto de los estilos se mantienen igual */
 .question-container {
   background: white;
   padding: 25px;
@@ -1893,12 +1915,13 @@ footer {
   transform: translateX(5px);
 }
 
-.question-container input[type="radio"] {
-  margin-right: 10px;
-}
-
 .progress-container {
-  margin: 20px 0 30px;
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 20px 0;
+  z-index: 1;
+  margin-bottom: 30px;
 }
 
 .progress-bar {
@@ -1914,19 +1937,14 @@ footer {
   transition: width 0.3s ease;
 }
 
-.progress-text {
-  text-align: right;
-  font-size: 0.9rem;
-  color: var(--text);
-  margin-top: 8px;
-}
-
 .survey-instructions {
   margin-bottom: 30px;
   color: var(--text);
 }
 
 #submit-btn {
+  position: sticky;
+  bottom: 0;
   background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
   color: white;
   padding: 15px 30px;
