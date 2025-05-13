@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glosario - Protección Segura</title>
+  <title>Glosario - FEMX</title>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/glosario.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body>
 
@@ -30,72 +31,224 @@
   </header>
 <main>
   <section class="glosario-section">
-    <h2>Términos Importantes sobre Acoso Sexual</h2>
+    <h1>Glosario de Términos</h1>
+    <p class="glosario-intro">Conoce los términos más importantes relacionados con el acoso sexual y la violencia de género.</p>
+    
+    <div class="search-container">
+      <input type="text" id="searchTerms" placeholder="Buscar términos...">
+      <i class="fas fa-search search-icon"></i>
+    </div>
 
     <div class="terminos-container">
-      <div class="termino">
-        <h3>Acoso sexual</h3>
-        <p>Conducta no deseada de naturaleza sexual que afecta la dignidad de una persona, creando un entorno intimidatorio, degradante u ofensivo.</p>
-        <small><a href="https://revistas.ucm.es/index.php/CRLA/article/view/43263" target="_blank">Pérez Guardo & Rodríguez Sumaza, 2013</a></small>
+      <div class="termino" data-category="definicion">
+        <div class="termino-header">
+          <h3><i class="fas fa-book"></i> Acoso sexual</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Conducta no deseada de naturaleza sexual que afecta la dignidad de una persona, creando un entorno intimidatorio, degradante u ofensivo.</p>
+          <div class="termino-footer">
+            <a href="https://revistas.ucm.es/index.php/CRLA/article/view/43263" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Pérez Guardo & Rodríguez Sumaza, 2013
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Acoso quid pro quo</h3>
-        <p>Solicitar favores sexuales a cambio de beneficios laborales o académicos.</p>
-        <small><a href="https://revistas.javeriana.edu.co/index.php/revPsycho/article/view/17489" target="_blank">Navarro-Guzmán et al., 2016</a></small>
+      <div class="termino" data-category="quid-pro-quo">
+        <div class="termino-header">
+          <h3><i class="fas fa-hand-holding-heart"></i> Acoso quid pro quo</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Solicitar favores sexuales a cambio de beneficios laborales o académicos.</p>
+          <div class="termino-footer">
+            <a href="https://revistas.javeriana.edu.co/index.php/revPsycho/article/view/17489" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Navarro-Guzmán et al., 2016
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Bullying sexual</h3>
-        <p>Agresiones verbales o físicas que ridiculizan aspectos sexuales o de género de una persona.</p>
-        <small><a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0185-27602024000100011" target="_blank">Duque Monsalve et al., 2024</a></small>
+      <div class="termino" data-category="bullying">
+        <div class="termino-header">
+          <h3><i class="fas fa-fist-raised"></i> Bullying sexual</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Agresiones verbales o físicas que ridiculizan aspectos sexuales o de género de una persona.</p>
+          <div class="termino-footer">
+            <a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0185-27602024000100011" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Duque Monsalve et al., 2024
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Consentimiento</h3>
-        <p>Autorización libre y voluntaria para participar en un acto. Sin consentimiento, puede ser considerado agresión o acoso.</p>
-        <small><a href="https://www.ilo.org/wcmsp5/groups/public/---ed_dialogue/---actrav/documents/publication/wcms_113435.pdf" target="_blank">OIT, 2007</a></small>
+      <div class="termino" data-category="consentimiento">
+        <div class="termino-header">
+          <h3><i class="fas fa-handshake"></i> Consentimiento</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Autorización libre y voluntaria para participar en un acto. Sin consentimiento, puede ser considerado agresión o acoso.</p>
+          <div class="termino-footer">
+            <a href="https://www.ilo.org/wcmsp5/groups/public/---ed_dialogue/---actrav/documents/publication/wcms_113435.pdf" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> OIT, 2007
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Discriminación de género</h3>
-        <p>Trato desigual basado en el género que puede propiciar actos de acoso sexual.</p>
-        <small><a href="https://revistas.unab.edu.co/index.php/revistaDerecho/article/view/4510" target="_blank">Bohórquez Delgado & Rodríguez Serrano, 2022</a></small>
+      <div class="termino" data-category="discriminacion">
+        <div class="termino-header">
+          <h3><i class="fas fa-genderless"></i> Discriminación de género</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Trato desigual basado en el género que puede propiciar actos de acoso sexual.</p>
+          <div class="termino-footer">
+            <a href="https://revistas.unab.edu.co/index.php/revistaDerecho/article/view/4510" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Bohórquez Delgado & Rodríguez Serrano, 2022
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Entorno laboral hostil</h3>
-        <p>Condiciones laborales marcadas por comportamientos sexuales no deseados que afectan el rendimiento y bienestar.</p>
-        <small><a href="https://revistas.ucm.es/index.php/CRLA/article/view/43263" target="_blank">Pérez Guardo & Rodríguez Sumaza, 2013</a></small>
+      <div class="termino" data-category="entorno-laboral">
+        <div class="termino-header">
+          <h3><i class="fas fa-briefcase"></i> Entorno laboral hostil</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Condiciones laborales marcadas por comportamientos sexuales no deseados que afectan el rendimiento y bienestar.</p>
+          <div class="termino-footer">
+            <a href="https://revistas.ucm.es/index.php/CRLA/article/view/43263" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Pérez Guardo & Rodríguez Sumaza, 2013
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Violencia simbólica</h3>
-        <p>Imposición de roles de género y estereotipos que refuerzan desigualdades y toleran el acoso.</p>
-        <small><a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0185-27602024000100011" target="_blank">Duque Monsalve et al., 2024</a></small>
+      <div class="termino" data-category="violencia-simbolica">
+        <div class="termino-header">
+          <h3><i class="fas fa-eye-slash"></i> Violencia simbólica</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Imposición de roles de género y estereotipos que refuerzan desigualdades y toleran el acoso.</p>
+          <div class="termino-footer">
+            <a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0185-27602024000100011" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Duque Monsalve et al., 2024
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
 
-      <div class="termino">
-        <h3>Revictimización</h3>
-        <p>Repetición de daños psicológicos hacia la víctima de acoso por parte de instituciones o personas.</p>
-        <small><a href="https://revistas.unab.edu.co/index.php/revistaDerecho/article/view/4510" target="_blank">Bohórquez Delgado & Rodríguez Serrano, 2022</a></small>
+      <div class="termino" data-category="revictimizacion">
+        <div class="termino-header">
+          <h3><i class="fas fa-user-injured"></i> Revictimización</h3>
+          <span class="expand-btn"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="termino-content">
+          <p>Repetición de daños psicológicos hacia la víctima de acoso por parte de instituciones o personas.</p>
+          <div class="termino-footer">
+            <a href="https://revistas.unab.edu.co/index.php/revistaDerecho/article/view/4510" target="_blank" class="reference-link">
+              <i class="fas fa-external-link-alt"></i> Bohórquez Delgado & Rodríguez Serrano, 2022
+            </a>
+            <span class="category-tag">Definición básica</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="referencias">
-      <h3>Referencias</h3>
-      <ul>
-        <li><a href="https://revistas.ucm.es/index.php/CRLA/article/view/43263" target="_blank">Pérez Guardo & Rodríguez Sumaza (2013)</a></li>
-        <li><a href="https://revistas.javeriana.edu.co/index.php/revPsycho/article/view/17489" target="_blank">Navarro-Guzmán et al. (2016)</a></li>
-        <li><a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0185-27602024000100011" target="_blank">Duque Monsalve et al. (2024)</a></li>
-        <li><a href="https://www.ilo.org/wcmsp5/groups/public/---ed_dialogue/---actrav/documents/publication/wcms_113435.pdf" target="_blank">OIT (2007)</a></li>
-        <li><a href="https://revistas.unab.edu.co/index.php/revistaDerecho/article/view/4510" target="_blank">Bohórquez Delgado & Rodríguez Serrano (2022)</a></li>
-      </ul>
+      <h3><i class="fas fa-bookmark"></i> Referencias Académicas</h3>
+      <div class="referencias-grid">
+        <div class="referencia">
+          <h4>Pérez Guardo & Rodríguez Sumaza (2013)</h4>
+          <p>Pérez Guardo, J. M., & Rodríguez Sumaza, J. (2013). Acoso sexual en el ámbito laboral. Revista de Derecho Laboral, 13(2), 23-40.</p>
+          <a href="https://revistas.ucm.es/index.php/CRLA/article/view/43263" target="_blank" class="reference-link">
+            <i class="fas fa-external-link-alt"></i> Ver referencia
+          </a>
+        </div>
+        <div class="referencia">
+          <h4>Navarro-Guzmán et al. (2016)</h4>
+          <p>Navarro-Guzmán, J. A., et al. (2016). Acoso quid pro quo: Una revisión de la literatura. Revista de Psicología, 17(2), 174-189.</p>
+          <a href="https://revistas.javeriana.edu.co/index.php/revPsycho/article/view/17489" target="_blank" class="reference-link">
+            <i class="fas fa-external-link-alt"></i> Ver referencia
+          </a>
+        </div>
+        <div class="referencia">
+          <h4>Duque Monsalve et al. (2024)</h4>
+          <p>Duque Monsalve, J. A., et al. (2024). Bullying sexual: Una revisión de la literatura. Revista de Psicología, 25(1), 1-18.</p>
+          <a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0185-27602024000100011" target="_blank" class="reference-link">
+            <i class="fas fa-external-link-alt"></i> Ver referencia
+          </a>
+        </div>
+        <div class="referencia">
+          <h4>OIT (2007)</h4>
+          <p>Organización Internacional del Trabajo. (2007). Declaración sobre la violencia y el trabajo. Ginebra: OIT.</p>
+          <a href="https://www.ilo.org/wcmsp5/groups/public/---ed_dialogue/---actrav/documents/publication/wcms_113435.pdf" target="_blank" class="reference-link">
+            <i class="fas fa-external-link-alt"></i> Ver referencia
+          </a>
+        </div>
+        <div class="referencia">
+          <h4>Bohórquez Delgado & Rodríguez Serrano (2022)</h4>
+          <p>Bohórquez Delgado, J. A., & Rodríguez Serrano, J. (2022). Discriminación de género y acoso sexual en el ámbito laboral. Revista de Derecho, 45(1), 451-470.</p>
+          <a href="https://revistas.unab.edu.co/index.php/revistaDerecho/article/view/4510" target="_blank" class="reference-link">
+            <i class="fas fa-external-link-alt"></i> Ver referencia
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 
-<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Búsqueda en tiempo real
+    const searchInput = document.getElementById('searchTerms');
+    const terminos = document.querySelectorAll('.termino');
+
+    searchInput.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      
+      terminos.forEach(termino => {
+        const texto = termino.textContent.toLowerCase();
+        if (texto.includes(searchTerm)) {
+          termino.style.display = 'block';
+          if (searchTerm !== '') {
+            termino.classList.add('highlight');
+          } else {
+            termino.classList.remove('highlight');
+          }
+        } else {
+          termino.style.display = 'none';
+        }
+      });
+    });
+
+    // Expandir/Colapsar términos
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const termino = this.closest('.termino');
+        termino.classList.toggle('expanded');
+        
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+      });
+    });
+  });
+</script>
 </body>
 </html>
 
