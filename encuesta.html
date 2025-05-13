@@ -42,23 +42,25 @@
     </div>
 
     <div class="survey-instructions">
-      <p><i class="fas fa-info-circle"></i> Selecciona la opción que mejor describa tu experiencia. Todas las preguntas son confidenciales.</p>
+      <p>Selecciona la opción que mejor describa tu experiencia. Todas las preguntas son confidenciales.</p>
     </div>
 
-    <p><strong> Esta encuesta tiene como finalidad identificar si has experimentado situaciones de acoso anteriormente. La información que proporciones será tratada de forma confidencial y protegida de acuerdo con la Ley de Habeas Data (Ley 1581 de 2012), garantizando que tus datos personales no serán compartidos sin tu consentimiento y se utilizarán únicamente con fines informativos y estadísticos.</strong></p>
+    <p><strong>Esta encuesta tiene como finalidad identificar si has experimentado situaciones de acoso anteriormente. La información que proporciones será tratada de forma confidencial y protegida de acuerdo con la Ley de Habeas Data (Ley 1581 de 2012), garantizando que tus datos personales no serán compartidos sin tu consentimiento y se utilizarán únicamente con fines informativos y estadísticos.</strong></p>
 
     <form id="encuesta-form">
       <div class="questions-container">
         <!-- Pregunta 1 -->
-        <div class="question-container" data-question="1">
+        <div class="question-container active" data-question="1">
           <div class="question-header">
             <span class="question-number">Pregunta 1</span>
           </div>
           <p>¿Alguna vez te han hecho comentarios sobre tu cuerpo o apariencia que te hicieron sentir incómodo/a?</p>
-          <label><input type="radio" name="q1" value="1"> No</label>
-          <label><input type="radio" name="q1" value="2"> Sí, de desconocidos</label>
-          <label><input type="radio" name="q1" value="3"> Sí, de conocidos o amigos</label>
-          <label><input type="radio" name="q1" value="4"> Sí, de ambos</label>
+          <div class="options-container">
+            <label><input type="radio" name="q1" value="1"> No</label>
+            <label><input type="radio" name="q1" value="2"> Sí, de desconocidos</label>
+            <label><input type="radio" name="q1" value="3"> Sí, de conocidos o amigos</label>
+            <label><input type="radio" name="q1" value="4"> Sí, de ambos</label>
+          </div>
         </div>
 
         <!-- Pregunta 2 -->
@@ -181,7 +183,7 @@
       </div>
 
       <div class="form-navigation">
-        <button type="button" id="prev-btn" class="nav-button" disabled>Anterior</button>
+        <button type="button" id="prev-btn" class="nav-button">Anterior</button>
         <button type="button" id="next-btn" class="nav-button">Siguiente</button>
         <button type="submit" id="submit-btn" class="nav-button" style="display: none;">Finalizar</button>
       </div>

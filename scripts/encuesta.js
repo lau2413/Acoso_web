@@ -15,66 +15,64 @@ function highlightUnansweredQuestions() {
 }
 
 export function setupEncuesta() {
-  const formEncuesta = document.getElementById('encuesta-form');
+  const form = document.getElementById('encuesta-form');
   const questions = document.querySelectorAll('.question-container');
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
   const submitBtn = document.getElementById('submit-btn');
   const progressBar = document.getElementById('survey-progress');
   const currentQuestionSpan = document.getElementById('current-question');
-  
-  let currentQuestion = 1;
-  const totalQuestions = questions.length;
 
-  function updateProgress() {
-    const progress = (currentQuestion / totalQuestions) * 100;
-    progressBar.style.width = `${progress}%`;
-    currentQuestionSpan.textContent = currentQuestion;
-  }
+  let currentQuestionIndex = 0;
 
-  function showQuestion(number) {
-    questions.forEach(q => q.style.display = 'none');
-    questions[number - 1].style.display = 'block';
+  function showQuestion(index) {
+    // Ocultar todas las preguntas
+    questions.forEach(q => {
+      q.style.display = 'none';
+      q.classList.remove('active');
+    });
     
-    // Actualizar botones
-    prevBtn.disabled = number === 1;
-    nextBtn.style.display = number === totalQuestions ? 'none' : 'block';
-    submitBtn.style.display = number === totalQuestions ? 'block' : 'none';
+    // Mostrar la pregunta actual
+    questions[index].style.display = 'block';
+    questions[index].classList.add('active');
+    
+    // Actualizar navegación
+    prevBtn.disabled = index === 0;
+    nextBtn.style.display = index === questions.length - 1 ? 'none' : 'block';
+    submitBtn.style.display = index === questions.length - 1 ? 'block' : 'none';
     
     // Actualizar progreso
-    currentQuestion = number;
-    updateProgress();
-
-    // Añadir animación
-    questions[number - 1].classList.add('question-fade-in');
+    currentQuestionIndex = index;
+    currentQuestionSpan.textContent = index + 1;
+    progressBar.style.width = `${((index + 1) / questions.length) * 100}%`;
   }
 
-  function canAdvance() {
-    const currentInputs = questions[currentQuestion - 1].querySelectorAll('input[type="radio"]');
-    return Array.from(currentInputs).some(input => input.checked);
-  }
+  // Event Listeners
+  nextBtn.addEventListener('click', () => {
+    const currentQuestion = questions[currentQuestionIndex];
+    const isAnswered = currentQuestion.querySelector('input[type="radio"]:checked');
+    
+    if (!isAnswered) {
+      alert('Por favor, selecciona una respuesta antes de continuar.');
+      return;
+    }
+    
+    if (currentQuestionIndex < questions.length - 1) {
+      showQuestion(currentQuestionIndex + 1);
+    }
+  });
 
   prevBtn.addEventListener('click', () => {
-    if (currentQuestion > 1) {
-      showQuestion(currentQuestion - 1);
+    if (currentQuestionIndex > 0) {
+      showQuestion(currentQuestionIndex - 1);
     }
   });
 
-  nextBtn.addEventListener('click', () => {
-    if (canAdvance()) {
-      if (currentQuestion < totalQuestions) {
-        showQuestion(currentQuestion + 1);
-      }
-    } else {
-      alert('Por favor, selecciona una respuesta antes de continuar.');
-    }
-  });
-
-  formEncuesta.addEventListener('submit', async (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     
-    if (!canAdvance()) {
-      alert('Por favor, responde la última pregunta antes de enviar.');
+    if (currentQuestionIndex !== questions.length - 1) {
+      alert('Por favor, completa la encuesta antes de enviar.');
       return;
     }
 
@@ -118,11 +116,12 @@ export function setupEncuesta() {
     }
   });
 
-  // Inicializar la primera pregunta
-  showQuestion(1);
+  // Inicializar
+  showQuestion(0);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   updateQuestionStatus();
   highlightUnansweredQuestions();
+  setupEncuesta();
 });
