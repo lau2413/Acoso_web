@@ -51,7 +51,9 @@ function setupPanico() {
     }
   }
 
-  function ocultarModal(cerrar = false) {
+  function ocultarModal() {
+    if (!modalEmergencia) return;
+    
     console.log('Intentando ocultar modal de emergencia');
     try {
       document.body.classList.remove('modal-open');
@@ -59,10 +61,11 @@ function setupPanico() {
       modalEmergencia.style.visibility = 'hidden';
       
       setTimeout(() => {
-        modalEmergencia.style.display = 'none';
-        modalEmergencia.classList.add('hidden');
+        if (modalEmergencia) {
+          modalEmergencia.style.display = 'none';
+          modalEmergencia.classList.add('hidden');
+        }
         isProcessing = false;
-        alertShown = false; // Reset alert flag when modal is fully hidden
       }, 300);
       
       console.log('Modal ocultado exitosamente');
@@ -93,10 +96,18 @@ function setupPanico() {
     nivelAcoso.textContent = texto;
   }
 
-  // Event Listeners
-  console.log('Configurando event listeners del pánico');
+  // Remover event listeners anteriores si existen
+  const nuevoBotonPanico = btnPanico.cloneNode(true);
+  btnPanico.parentNode.replaceChild(nuevoBotonPanico, btnPanico);
+  
+  const nuevoEnviarAlerta = enviarAlerta.cloneNode(true);
+  enviarAlerta.parentNode.replaceChild(nuevoEnviarAlerta, enviarAlerta);
+  
+  const nuevoCerrarModal = cerrarModal.cloneNode(true);
+  cerrarModal.parentNode.replaceChild(nuevoCerrarModal, cerrarModal);
 
-  btnPanico.addEventListener('click', (e) => {
+  // Event Listeners
+  nuevoBotonPanico.addEventListener('click', (e) => {
     console.log('Botón de pánico clickeado');
     e.preventDefault();
     e.stopPropagation();
@@ -105,7 +116,7 @@ function setupPanico() {
     }
   });
 
-  cerrarModal.addEventListener('click', (e) => {
+  nuevoCerrarModal.addEventListener('click', (e) => {
     console.log('Botón cerrar clickeado');
     e.preventDefault();
     e.stopPropagation();
@@ -119,38 +130,20 @@ function setupPanico() {
     }
   });
 
-  const modalContent = modalEmergencia.querySelector('.modal-content');
-  if (modalContent) {
-    modalContent.addEventListener('click', (e) => {
-      console.log('Click dentro del modal');
-      e.stopPropagation();
-    });
-  }
-
   slider.addEventListener('input', () => {
     const nivelActual = slider.value;
     console.log('Slider ajustado a:', nivelActual);
     actualizarNivelAcoso(nivelActual);
   });
 
-  enviarAlerta.addEventListener('click', async () => {
+  async function enviarAlertaHandler() {
     if (isProcessing) {
       console.log('Ya hay una alerta en proceso...');
       return;
     }
 
     isProcessing = true;
-    enviarAlerta.disabled = true;
-    console.log('Iniciando envío de alerta...');
-    
-    if (!navigator.geolocation) {
-      console.error('Geolocalización no soportada');
-      alert("Tu navegador no soporta geolocalización.");
-      isProcessing = false;
-      alertShown = false;
-      enviarAlerta.disabled = false;
-      return;
-    }
+    nuevoEnviarAlerta.disabled = true;
 
     try {
       // 1. Obtener usuario actual
@@ -270,11 +263,17 @@ function setupPanico() {
         ? `¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`
         : `¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`;
 
-      // Primero ocultamos el modal
-      ocultarModal(true);
-      
-      // Después de un pequeño delay mostramos el alert
+      // Remove event listeners temporarily
+      modalEmergencia.style.pointerEvents = 'none';
+      nuevoCerrarModal.style.pointerEvents = 'none';
+
+      // Close modal first
+      ocultarModal();
+
+      // Show alert after modal is closed
       setTimeout(() => {
+        modalEmergencia.style.pointerEvents = '';
+        nuevoCerrarModal.style.pointerEvents = '';
         alert(mensaje);
       }, 400);
 
@@ -282,9 +281,15 @@ function setupPanico() {
       console.error("Error al procesar la alerta:", error);
       alert(error.message || "Ocurrió un error inesperado. Por favor, intenta de nuevo.");
       isProcessing = false;
-      enviarAlerta.disabled = false;
+      nuevoEnviarAlerta.disabled = false;
+      
+      // Restore event handlers
+      modalEmergencia.style.pointerEvents = '';
+      nuevoCerrarModal.style.pointerEvents = '';
     }
-  });
+  }
+
+  nuevoEnviarAlerta.addEventListener('click', enviarAlertaHandler);
 
   console.log('Configuración del pánico completada');
 }
