@@ -704,7 +704,6 @@ select:focus {
 
 .question-container.active {
   display: block;
-  animation: fadeIn 0.5s ease;
 }
 
 /* Mejoras en las opciones */
@@ -973,44 +972,6 @@ select:focus {
   border-color: var(--accent);
 }
 
-/* Animación de entrada para las tarjetas */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.info-card {
-  animation: fadeInUp 0.5s ease forwards;
-  opacity: 0;
-}
-
-.info-card:nth-child(1) { animation-delay: 0.1s; }
-.info-card:nth-child(2) { animation-delay: 0.2s; }
-.info-card:nth-child(3) { animation-delay: 0.3s; }
-.info-card:nth-child(4) { animation-delay: 0.4s; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .info-section {
-    margin: 80px 20px 40px;
-    padding: 20px;
-  }
-
-  .info-section h2 {
-    font-size: 1.8rem;
-  }
-
-  .info-card {
-    padding: 20px;
-  }
-}
-
 /* === Transiciones Universales === */
 button, a, input, select, .termino, nav a, label, .modal-content {
   transition: all 0.3s ease;
@@ -1024,20 +985,7 @@ button, a, input, select, .termino, nav a, label, .modal-content {
 
 .modal-content {
   transform: scale(0.95);
-  animation: fadeInScale 0.4s ease forwards;
 }
-
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 
 /* === Estilo Figma Profesional === */
 
@@ -1099,19 +1047,6 @@ input:hover, select:hover {
 /* Transiciones visuales refinadas */
 .modal-content {
   border-radius: 20px;
-  animation: fadeInScale 0.4s ease-out;
-}
-
-/* Fade suave */
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* Etiquetas con interacción más marcada */
@@ -1277,12 +1212,6 @@ footer {
   padding: 20px;
   margin-top: 30px;
   text-align: center;
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Responsive mejoras */
@@ -1308,14 +1237,6 @@ footer {
 .question-container {
   opacity: 0;
   transform: translateY(20px);
-  animation: questionFadeIn 0.5s forwards;
-}
-
-@keyframes questionFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .progress-container {
@@ -1361,27 +1282,6 @@ footer {
 
 #submit-btn {
   background: linear-gradient(135deg, var(--accent) 0%, #ff2d6d 100%);
-}
-
-/* Animación para las preguntas */
-.question-fade-in {
-  animation: fadeInQuestion 0.5s ease forwards;
-}
-
-@keyframes fadeInQuestion {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Eliminar los estilos relacionados con la sección de opinión */
-.optional-comment {
-  display: none;
 }
 
 /* === Hero Section === */
@@ -1737,13 +1637,11 @@ footer {
     max-width: 1200px;
     margin: 100px auto 40px;
     padding: 40px;
-    animation: fadeInUp 0.5s ease forwards;
 }
 
 .tutorial-header {
     text-align: center;
     margin-bottom: 50px;
-    animation: fadeInUp 0.5s ease forwards;
 }
 
 .tutorial-header h1 {
@@ -1786,9 +1684,6 @@ footer {
     box-shadow: 0 8px 30px rgba(106, 48, 147, 0.1);
     transition: all 0.3s ease;
     opacity: 0;
-    animation: fadeInUp 0.5s ease forwards;
-    position: relative;
-    overflow: hidden;
 }
 
 .tutorial-card:nth-child(1) { animation-delay: 0.1s; }
@@ -1904,7 +1799,6 @@ footer {
     max-width: 90%;
     max-height: 90vh;
     margin: auto;
-    animation: scaleIn 0.3s ease forwards;
 }
 
 .modal-close {
@@ -1948,8 +1842,6 @@ footer {
 .tutorial-section {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
-    animation-delay: 0.1s;
 }
 
 /* Efecto para encabezados */
@@ -1961,8 +1853,6 @@ footer {
 .tutorial-header h1 {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
-    animation-delay: 0.2s;
 }
 
 /* Efecto para descripciones */
@@ -1974,8 +1864,6 @@ footer {
 .tutorial-description {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
-    animation-delay: 0.3s;
 }
 
 /* Efecto para tarjetas y elementos de contenido */
@@ -1987,7 +1875,6 @@ footer {
 .tutorial-card {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
 }
 
 /* Retraso escalonado para elementos múltiples */
@@ -2013,7 +1900,6 @@ footer {
 .contacto-form .form-group {
     opacity: 0;
     transform: translateY(10px);
-    animation: fadeInUp 0.5s ease forwards;
 }
 
 .form-group:nth-child(1) { animation-delay: 0.3s; }
@@ -2027,8 +1913,6 @@ footer {
 .glosario-icon {
     opacity: 0;
     transform: scale(0.8);
-    animation: fadeInScale 0.5s ease forwards;
-    animation-delay: 0.2s;
 }
 
 /* Efecto para listas */
@@ -2037,8 +1921,6 @@ footer {
 .feature-list {
     opacity: 0;
     transform: translateY(10px);
-    animation: fadeInUp 0.5s ease forwards;
-    animation-delay: 0.3s;
 }
 
 /* Efecto para botones principales */
@@ -2048,8 +1930,6 @@ footer {
 #boton-panico {
     opacity: 0;
     transform: scale(0.9);
-    animation: fadeInScale 0.5s ease forwards;
-    animation-delay: 0.5s;
 }
 
 /* Animaciones base */
@@ -2078,8 +1958,6 @@ footer {
 /* Efecto para la barra de progreso */
 .progress-container {
     opacity: 0;
-    animation: fadeIn 0.5s ease forwards;
-    animation-delay: 0.4s;
 }
 
 @keyframes fadeIn {
