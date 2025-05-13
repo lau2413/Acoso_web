@@ -72,25 +72,22 @@ function setupPanico() {
 
   function actualizarNivelAcoso(nivel) {
     console.log('Actualizando nivel de acoso:', nivel);
-    let texto = "Nivel " + nivel + ": ";
+    let texto = "";
     switch(nivel) {
-      case "0":
-        texto += "Nivel no definido";
-        break;
       case "1":
-        texto += "Leve - Situación incómoda o acoso verbal";
+        texto = "Leve - Situación incómoda o acoso verbal";
         break;
       case "2":
-        texto += "Moderado - Acoso persistente";
+        texto = "Moderado - Acoso persistente";
         break;
       case "3":
-        texto += "Fuerte - Amenazas directas";
+        texto = "Fuerte - Amenazas directas";
         break;
       case "4":
-        texto += "Grave - Peligro inminente";
+        texto = "Grave - Peligro inminente";
         break;
       default:
-        texto = "Nivel no definido";
+        texto = "Selecciona un nivel de acoso";
     }
     nivelAcoso.textContent = texto;
   }
@@ -154,80 +151,106 @@ function setupPanico() {
       console.log('Buscando contactos de emergencia...');
       const { data: contactos, error: contactoError } = await supabase
         .from('contactos')
-        .select('telefono_contacto')
+        .select('id, telefono_contacto')
         .eq('id_usuario', user.id);
 
-      if (contactoError || !contactos || contactos.length === 0) {
+      if (contactoError) {
         console.error('Error al obtener contactos:', contactoError);
+        throw new Error('No se pudieron obtener los contactos de emergencia');
+      }
+
+      if (!contactos || contactos.length === 0) {
         alert("No se encontró un contacto de emergencia para este usuario.");
         return;
       }
 
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        console.log('Posición obtenida:', position);
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        const link = `https://www.google.com/maps?q=${lat},${lon}`;
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
 
-        const nivelActual = parseInt(slider.value);
-        const esGrave = nivelActual >= 2; // Cambiado a 2 para que sea Fuerte o Grave
-        
-        // Crear registro de acoso
-        const { data: acoso, error: acosoError } = await supabase
-          .from('acoso')
+      console.log('Posición obtenida:', position);
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const nivelActual = parseInt(slider.value);
+      console.log('Nivel actual seleccionado:', nivelActual);
+
+      // Crear registro de acoso
+      const { data: acoso, error: acosoError } = await supabase
+        .from('acoso')
+        .insert({
+          id_usuario: user.id,
+          id_tipo_acoso: nivelActual, // El nivel seleccionado corresponde directamente al id_tipo_acoso
+          latitud: lat,
+          longitud: lon,
+          estado: 'reportado',
+          fecha_hora: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (acosoError) {
+        console.error('Error al crear registro de acoso:', acosoError);
+        throw new Error('No se pudo registrar el incidente');
+      }
+
+      console.log('Registro de acoso creado:', acoso);
+
+      // Crear alertas para contactos de emergencia
+      const alertasPromesas = contactos.map(contacto => {
+        return supabase
+          .from('alertas')
           .insert({
-            id_usuario: user.id,
-            id_tipo_acoso: nivelActual + 1, // Los IDs empiezan en 1
-            latitud: lat,
-            longitud: lon
-          })
-          .select()
-          .single();
-
-        if (acosoError) throw acosoError;
-
-        // Crear alertas para cada contacto
-        const alertasPromises = contactos.map(contacto => 
-          supabase.from('alertas').insert({
             id_acoso: acoso.id,
             id_contacto: contacto.id,
-            tipo_alerta: 'contacto_emergencia'
-          })
-        );
-
-        // Si el nivel es fuerte o grave, crear alertas para autoridades
-        if (esGrave) {
-          alertasPromises.push(
-            supabase.from('alertas').insert([
-              {
-                id_acoso: acoso.id,
-                tipo_alerta: 'policia'
-              },
-              {
-                id_acoso: acoso.id,
-                tipo_alerta: 'linea_123'
-              }
-            ])
-          );
-        }
-
-        await Promise.all(alertasPromises);
-        
-        if (esGrave) {
-          alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
-        } else {
-          alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
-        }
-
-        ocultarModal();
-        
-      }, (error) => {
-        console.error("Error al obtener ubicación:", error);
-        alert("Error al obtener la ubicación. Por favor, permite el acceso a tu ubicación e intenta de nuevo.");
+            tipo_alerta: 'contacto_emergencia',
+            estado: 'enviada',
+            fecha_envio: new Date().toISOString()
+          });
       });
+
+      // Si el nivel es fuerte (3) o grave (4), notificar autoridades
+      if (nivelActual >= 3) {
+        alertasPromesas.push(
+          supabase.from('alertas').insert([
+            {
+              id_acoso: acoso.id,
+              tipo_alerta: 'policia',
+              estado: 'enviada',
+              fecha_envio: new Date().toISOString()
+            },
+            {
+              id_acoso: acoso.id,
+              tipo_alerta: 'linea_123',
+              estado: 'enviada',
+              fecha_envio: new Date().toISOString()
+            }
+          ])
+        );
+      }
+
+      // Esperar a que todas las alertas se creen
+      const resultadosAlertas = await Promise.allSettled(alertasPromesas);
+      console.log('Resultados de crear alertas:', resultadosAlertas);
+
+      // Verificar si hubo errores al crear las alertas
+      const erroresAlertas = resultadosAlertas.filter(r => r.status === 'rejected');
+      if (erroresAlertas.length > 0) {
+        console.error('Errores al crear algunas alertas:', erroresAlertas);
+      }
+
+      // Mostrar mensaje apropiado
+      if (nivelActual >= 3) {
+        alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
+      } else {
+        alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
+      }
+
+      ocultarModal();
+
     } catch (error) {
-      console.error("Error general:", error);
-      alert("Ocurrió un error inesperado. Por favor, intenta de nuevo.");
+      console.error("Error al procesar la alerta:", error);
+      alert("Ocurrió un error al procesar la alerta: " + (error.message || 'Error desconocido'));
     }
   });
 
