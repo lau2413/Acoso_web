@@ -5,48 +5,25 @@ import { supabase } from './supabase.js';
 const WHATSAPP_TOKEN = 'EAAUGl1HX7KsBO4YWG55ZBjnkv6WZBdfkMxQMlVLeMl7CFFCZCeQIvnz6ZBRTB3ecgBFVTKklL9s4ExnzmZBj0yP7NdSKoJkekxbMsO5l4V2MwTWgxppz0R4ZBjOvvttLcNP4pkfjpzZCgQZC5FFTBDytuH2xcKWpU8MCKviWgw0U4xlqRKhZCjl8fKdN1RE5UQJJu9NE5dg0i8CbcQyBLAEiAQT4ZD'; // ← reemplázalo por el real
 const PHONE_NUMBER_ID = '690685430789757';
 
-const nivelesAcoso = {
-  1: {
-    titulo: "Nivel 1: Leve",
-    descripcion: "Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas",
-    color: "#ffcc00"
-  },
-  2: {
-    titulo: "Nivel 2: Moderado",
-    descripcion: "Llamadas, cartas o invitaciones con intenciones sexuales",
-    color: "#ff9900"
-  },
-  3: {
-    titulo: "Nivel 3: Fuerte",
-    descripcion: "Manoseos, tocamientos no consentidos, acorralar",
-    color: "#ff6600"
-  },
-  4: {
-    titulo: "Nivel 4: Severo",
-    descripcion: "Presiones físicas o psicológicas para tener contacto sexual, violencia sexual explícita",
-    color: "#cc0000"
-  }
-};
-
-export function setupPanico() {
+function setupPanico() {
   console.log('Inicializando setupPanico...');
   
   const btnPanico = document.getElementById('boton-panico');
   const modalEmergencia = document.getElementById('modal-emergencia');
   const slider = document.getElementById('slider-acoso');
-  const nivelTitulo = document.getElementById('nivel-titulo');
-  const nivelDetalle = document.getElementById('nivel-detalle');
   const enviarAlerta = document.getElementById('enviar-alerta');
+  const nivelAcoso = document.getElementById('nivel-acoso');
   const cerrarModal = document.getElementById('cerrar-modal');
 
-  if (!btnPanico || !modalEmergencia || !slider || !nivelTitulo || !nivelDetalle || !enviarAlerta || !cerrarModal) {
-    console.error('Elementos necesarios no encontrados:', {
+  // Verificar que todos los elementos necesarios existen
+  if (!btnPanico || !modalEmergencia || !slider || !enviarAlerta || !nivelAcoso || !cerrarModal) {
+    console.error('Faltan elementos necesarios para el botón de pánico');
+    console.log('Elementos encontrados:', {
       btnPanico: !!btnPanico,
       modalEmergencia: !!modalEmergencia,
       slider: !!slider,
-      nivelTitulo: !!nivelTitulo,
-      nivelDetalle: !!nivelDetalle,
       enviarAlerta: !!enviarAlerta,
+      nivelAcoso: !!nivelAcoso,
       cerrarModal: !!cerrarModal
     });
     return;
@@ -55,25 +32,43 @@ export function setupPanico() {
   function mostrarModal() {
     console.log('Mostrando modal de emergencia');
     modalEmergencia.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    slider.value = 1;
-    actualizarNivelAcoso(1);
+    document.body.style.overflow = 'hidden'; // Prevenir scroll
+    slider.value = 0;
+    actualizarNivelAcoso(0);
   }
 
   function ocultarModal() {
     console.log('Ocultando modal de emergencia');
     modalEmergencia.classList.add('hidden');
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''; // Restaurar scroll
   }
 
   function actualizarNivelAcoso(nivel) {
-    const nivelInfo = nivelesAcoso[nivel];
-    if (!nivelInfo) return;
-    
     console.log('Actualizando nivel de acoso:', nivel);
-    nivelTitulo.textContent = nivelInfo.titulo;
-    nivelDetalle.textContent = nivelInfo.descripcion;
-    nivelTitulo.style.color = nivelInfo.color;
+    let texto = "Nivel " + nivel + ": ";
+    switch(nivel) {
+      case "0":
+        texto += "Leve";
+        break;
+      case "1":
+        texto += "Moderado";
+        break;
+      case "2":
+        texto += "Medio";
+        break;
+      case "3":
+        texto += "Alto";
+        break;
+      case "4":
+        texto += "Grave";
+        break;
+      case "5":
+        texto += "Crítico";
+        break;
+      default:
+        texto = "Nivel no definido";
+    }
+    nivelAcoso.textContent = texto;
   }
 
   // Event Listeners
@@ -88,6 +83,7 @@ export function setupPanico() {
     ocultarModal();
   });
 
+  // Cerrar modal al hacer clic fuera
   modalEmergencia.addEventListener('click', (e) => {
     if (e.target === modalEmergencia) {
       ocultarModal();
@@ -95,97 +91,74 @@ export function setupPanico() {
   });
 
   slider.addEventListener('input', () => {
-    const nivelActual = parseInt(slider.value);
+    const nivelActual = slider.value;
     actualizarNivelAcoso(nivelActual);
   });
 
   enviarAlerta.addEventListener('click', async () => {
     console.log('Iniciando envío de alerta...');
     
+    if (!navigator.geolocation) {
+      console.error('Geolocalización no soportada');
+      alert("Tu navegador no soporta geolocalización.");
+      return;
+    }
+
     try {
+      console.log('Obteniendo usuario actual...');
       const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
       if (userError || !user) {
         console.error('Error al obtener usuario:', userError);
-        alert("Por favor, inicia sesión para usar esta función.");
+        alert("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
         return;
       }
 
+      console.log('Buscando contactos de emergencia...');
       const { data: contactos, error: contactoError } = await supabase
         .from('contactos')
         .select('telefono_contacto')
         .eq('id_usuario', user.id);
 
-      if (contactoError || !contactos?.length) {
+      if (contactoError || !contactos || contactos.length === 0) {
         console.error('Error al obtener contactos:', contactoError);
-        alert("Por favor, configura un contacto de emergencia primero.");
+        alert("No se encontró un contacto de emergencia para este usuario.");
         return;
       }
 
-      if (!navigator.geolocation) {
-        console.error('Geolocalización no soportada');
-        alert("Tu navegador no soporta geolocalización. La alerta se enviará sin ubicación.");
-        enviarAlertaSinUbicacion();
-        return;
-      }
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        console.log('Posición obtenida:', position);
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const link = `https://www.google.com/maps?q=${lat},${lon}`;
 
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          await enviarAlertaConUbicacion(position);
-        },
-        (error) => {
-          console.error("Error al obtener ubicación:", error);
-          enviarAlertaSinUbicacion();
-        },
-        { timeout: 10000 }
-      );
+        const nivelActual = parseInt(slider.value);
+        const esGrave = nivelActual >= 3;
+        
+        // Simulación de envío de mensajes
+        if (esGrave) {
+          // Mensaje para casos graves (niveles 3 y 4)
+          alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
+        } else {
+          // Mensaje para casos leves (niveles 1 y 2)
+          alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
+        }
+
+        ocultarModal();
+        
+      }, (error) => {
+        console.error("Error al obtener ubicación:", error);
+        alert("Error al obtener la ubicación.");
+      });
     } catch (error) {
       console.error("Error general:", error);
       alert("Ocurrió un error inesperado. Por favor, intenta de nuevo.");
     }
   });
-
-  async function enviarAlertaConUbicacion(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    const link = `https://www.google.com/maps?q=${lat},${lon}`;
-    const nivelActual = parseInt(slider.value);
-    const esGrave = nivelActual >= 3;
-
-    try {
-      // Aquí iría la lógica de envío de alerta al backend
-      if (esGrave) {
-        alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
-      } else {
-        alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
-      }
-      ocultarModal();
-    } catch (error) {
-      console.error("Error al enviar alerta:", error);
-      alert("Error al enviar la alerta. Por favor, intenta de nuevo.");
-    }
-  }
-
-  function enviarAlertaSinUbicacion() {
-    const nivelActual = parseInt(slider.value);
-    const esGrave = nivelActual >= 3;
-
-    try {
-      // Aquí iría la lógica de envío de alerta al backend sin ubicación
-      if (esGrave) {
-        alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112`);
-      } else {
-        alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.`);
-      }
-      ocultarModal();
-    } catch (error) {
-      console.error("Error al enviar alerta:", error);
-      alert("Error al enviar la alerta. Por favor, intenta de nuevo.");
-    }
-  }
 }
 
-// Inicializar si estamos en la página correcta
+// Inicializar inmediatamente si estamos en la página correcta
 if (document.getElementById('boton-panico')) {
   setupPanico();
 }
+
+export { setupPanico };

@@ -376,134 +376,198 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  z-index: 9999;
 }
 
 .modal.hidden {
-  display: none;
-  opacity: 0;
+  display: none !important;
 }
 
 .modal-content {
-  background-color: white;
+  background: white;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
   width: 90%;
   max-width: 500px;
   position: relative;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .modal h2 {
-  margin-bottom: 1rem;
+  color: var(--primary);
   font-size: 1.5rem;
-  font-weight: 600;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
-.slider-container {
+.modal p {
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos para el slider y etiquetas */
+.thermometer-container {
   margin: 2rem 0;
+  padding: 0 1rem;
 }
 
 #slider-acoso {
   width: 100%;
-  height: 6px;
+  height: 10px;
   -webkit-appearance: none;
   background: linear-gradient(to right, #ffcc00, #ff9900, #ff6600, #cc0000);
-  border-radius: 3px;
+  border-radius: 5px;
   outline: none;
+  margin: 1rem 0;
 }
 
 #slider-acoso::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   background: white;
-  border: 2px solid #6a3093;
+  border: 2px solid var(--primary);
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 #slider-acoso::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.slider-labels {
+.thermometer-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
-  padding: 0 10px;
+  margin-top: 10px;
+  padding: 0 12px;
 }
 
-.slider-labels span {
+.thermometer-labels span {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text);
+  font-weight: 500;
 }
 
-.modal-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+#nivel-descripcion {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 1.5rem 0;
 }
 
-.primary-button, .secondary-button {
-  flex: 1;
-  padding: 0.75rem;
-  border-radius: 6px;
+#nivel-titulo {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+#nivel-detalle {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.btn-primary, .btn-secondary {
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
   border: none;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.primary-button {
-  background-color: #6a3093;
-  color: white;
-}
-
-.primary-button:hover {
-  background-color: #7b3dad;
-}
-
-.secondary-button {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.secondary-button:hover {
-  background-color: #e0e0e0;
-}
-
-#boton-panico {
-  background-color: #cc0000;
-  color: white;
-  padding: 1.5rem 3rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(204, 0, 0, 0.3);
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-secondary {
+  background: #e9ecef;
+  color: var(--text);
+}
+
+.btn-primary:hover {
+  background: #ff3366;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:hover {
+  background: #dee2e6;
+}
+
+/* === Botón de Pánico === */
+#boton-panico {
+  background: linear-gradient(135deg, #ff4d8d 0%, #ff2d6d 100%);
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 30px;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 77, 141, 0.4);
+  animation: pulse 2s infinite;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
 }
 
 #boton-panico:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
+  box-shadow: 0 12px 28px rgba(255, 77, 141, 0.6);
+}
+
+#boton-panico:active {
+  transform: scale(0.95);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 77, 141, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
+  }
 }
 
 .panic-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem 0;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  margin-top: 0;
 }
 
 .card {

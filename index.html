@@ -83,21 +83,11 @@
   <!-- ===== MODAL DE EMERGENCIA CON SLIDER ===== -->
   <div id="modal-emergencia" class="modal hidden">
     <div class="modal-content">
-      <h2 id="nivel-titulo">Nivel 1: Leve</h2>
-      <p id="nivel-detalle">Selecciona el nivel de acoso que estás experimentando</p>
-      <div class="slider-container">
-        <input type="range" id="slider-acoso" min="1" max="4" step="1" value="1">
-        <div class="slider-labels">
-          <span>Leve</span>
-          <span>Moderado</span>
-          <span>Fuerte</span>
-          <span>Severo</span>
-        </div>
-      </div>
-      <div class="modal-buttons">
-        <button id="enviar-alerta" class="primary-button">Enviar Alerta</button>
-        <button id="cerrar-modal" class="secondary-button">Cancelar</button>
-      </div>
+      <h2>¿Qué nivel de acoso estás viviendo?</h2>
+      <input type="range" id="slider-acoso" min="0" max="5" step="1" value="0">
+      <p id="nivel-acoso">Nivel 0: Leve</p>
+      <button id="enviar-alerta">Enviar Alerta</button>
+      <button class="secondary" id="cerrar-modal">Cancelar</button>
     </div>
   </div>
 
