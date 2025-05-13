@@ -95,21 +95,24 @@
 
   <div id="modal-emergencia" class="modal hidden">
     <div class="modal-content">
-      <h2>Identifica el nivel de acoso</h2>
+      <h2>Nivel de Acoso</h2>
+      <p>Por favor, indica el nivel de acoso que estás experimentando:</p>
+      
       <div class="thermometer-container">
-        <input type="range" id="slider-acoso" min="1" max="5" step="1" value="1">
+        <input type="range" id="slider-acoso" min="1" max="4" value="1" step="1">
         <div class="thermometer-labels">
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>5</span>
+          <span>Leve</span>
+          <span>Moderado</span>
+          <span>Fuerte</span>
+          <span>Severo</span>
         </div>
       </div>
+
       <div id="nivel-descripcion">
         <h3 id="nivel-titulo">Nivel 1: Leve</h3>
         <p id="nivel-detalle">Piropos, miradas o gestos sugestivos, chistes o conversaciones de contenido sexual, muecas</p>
       </div>
+
       <button id="enviar-alerta" class="btn-primary">Enviar Alerta</button>
       <button id="cerrar-modal" class="btn-secondary">Cancelar</button>
     </div>

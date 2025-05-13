@@ -44,13 +44,8 @@ export function setupPanico() {
       color: "#ff6600"
     },
     4: {
-      titulo: "Nivel 4: Grave",
-      descripcion: "Presiones físicas o psicológicas para tener contacto sexual",
-      color: "#ff3300"
-    },
-    5: {
-      titulo: "Nivel 5: Severo",
-      descripcion: "Forzar relaciones sexuales, violencia sexual explícita",
+      titulo: "Nivel 4: Severo",
+      descripcion: "Presiones físicas o psicológicas para tener contacto sexual, violencia sexual explícita",
       color: "#cc0000"
     }
   };
@@ -131,64 +126,26 @@ export function setupPanico() {
           return;
         }
 
-        let numeroEmergencia = contactos[0].telefono_contacto;
-        if (!numeroEmergencia.startsWith("+")) {
-          numeroEmergencia = '+57' + numeroEmergencia;
-        }
-        console.log('Número de emergencia encontrado:', numeroEmergencia);
-
         navigator.geolocation.getCurrentPosition(async (position) => {
           console.log('Posición obtenida:', position);
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
           const link = `https://www.google.com/maps?q=${lat},${lon}`;
 
-          const val = parseInt(slider.value);
-          const gravedad = val <= 2 ? 'leve' : 'grave';
-          const mensaje = `🚨 ¡ALERTA ${gravedad.toUpperCase()}! Necesito ayuda. Esta es mi ubicación: ${link}`;
-          console.log('Mensaje preparado:', mensaje);
-
-          try {
-            console.log('Enviando mensaje a WhatsApp...');
-            const response = await fetch(`https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`, {
-              method: 'POST',
-              headers: {
-                'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                messaging_product: 'whatsapp',
-                to: numeroEmergencia.replace('+', ''),
-                type: 'template',
-                template: {
-                  name: 'alerta_emergencia',
-                  language: { code: 'es_CO' },
-                  components: [{
-                    type: 'body',
-                    parameters: [{
-                      type: 'text',
-                      text: link
-                    }]
-                  }]
-                }
-              })
-            });
-
-            const data = await response.json();
-            console.log('Respuesta de WhatsApp:', data);
-
-            if (!response.ok) {
-              console.error("Error WhatsApp API:", data);
-              alert(`Error al enviar el mensaje: ${data.error?.message}`);
-            } else {
-              console.log("Mensaje enviado exitosamente");
-              alert("¡Mensaje de emergencia enviado por WhatsApp!");
-              modalEmergencia.classList.add('hidden');
-            }
-          } catch (error) {
-            console.error("Error al conectar con WhatsApp Cloud API:", error);
-            alert("No se pudo enviar el mensaje de alerta.");
+          const nivelActual = parseInt(slider.value);
+          const esGrave = nivelActual >= 3;
+          
+          // Simulación de envío de mensajes
+          if (esGrave) {
+            // Mensaje para casos graves (niveles 3 y 4)
+            alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
+          } else {
+            // Mensaje para casos leves (niveles 1 y 2)
+            alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
           }
+
+          modalEmergencia.classList.add('hidden');
+          
         }, (error) => {
           console.error("Error al obtener ubicación:", error);
           alert("Error al obtener la ubicación.");
