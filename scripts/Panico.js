@@ -269,10 +269,4 @@ function setupPanico() {
   console.log('Configuración del pánico completada');
 }
 
-// Inicializar inmediatamente si estamos en la página correcta
-if (document.getElementById('boton-panico')) {
-  console.log('Página con botón de pánico detectada, iniciando configuración...');
-  setupPanico();
-}
-
 export { setupPanico };
