@@ -123,12 +123,21 @@ function setupPanico() {
     ocultarModal();
   });
 
-  modalEmergencia.addEventListener('click', (e) => {
+  modalEmergencia.addEventListener('mousedown', (e) => {
+    // Only close if clicking directly on the modal backdrop
     if (e.target === modalEmergencia) {
       console.log('Click fuera del modal');
       ocultarModal();
     }
   });
+
+  // Create a wrapper for the content to prevent event bubbling
+  const modalContent = modalEmergencia.querySelector('.modal-content');
+  if (modalContent) {
+    modalContent.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
 
   slider.addEventListener('input', () => {
     const nivelActual = slider.value;
@@ -136,10 +145,16 @@ function setupPanico() {
     actualizarNivelAcoso(nivelActual);
   });
 
+  let alertaEnviada = false;
+  
   nuevoEnviarAlerta.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    enviarAlertaHandler();
+    
+    if (!alertaEnviada) {
+      alertaEnviada = true;
+      enviarAlertaHandler();
+    }
   });
 
   async function enviarAlertaHandler() {
@@ -284,6 +299,7 @@ function setupPanico() {
         nuevoCerrarModal.style.pointerEvents = '';
         isProcessing = false;
         nuevoEnviarAlerta.disabled = false;
+        alertaEnviada = false;
       }, 400);
 
     } catch (error) {
