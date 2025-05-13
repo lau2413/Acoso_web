@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Información sobre Acoso Sexual - Protección Segura</title>
+  <title>Tutorial - FEMX</title>
   <link rel="stylesheet" href="styles/styles.css" />
-  <link rel="stylesheet" href="styles/informacion.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles/tutorial.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body>
 
@@ -29,117 +30,115 @@
   </header>
 
   <main>
-    <section class="info-section">
-      <h2>Comprendiendo la Aplicación</h2>
-      <p></p>
+    <section class="tutorial-section">
+      <div class="tutorial-header">
+        <h1>Guía de Uso FEMX</h1>
+        <p class="tutorial-intro">Aprende a utilizar todas las funciones de nuestra aplicación para tu seguridad</p>
+      </div>
 
-      <h3>Menú de la página</h3>
-      <ul>
-        <p>
-            En la parte posterior de la pagina se encuentra nuestro menu, el cual contiene los botones para:
-            <ul>
-                <li>Ir al inicio</li>
-                <li>Ir a la pagina de informacion sobre el acoso</li>
-                <li>Registrar tu Contacto de Emergencia</li>
-                <li>Ir al Glosario</li>
-                <li>Realizar tu encuesta sobre el acoso</li>
-                <li>Inciair sesion</li>
+      <div class="tutorial-grid">
+        <!-- Sección 1: Menú -->
+        <div class="tutorial-card" data-section="menu">
+          <div class="card-icon">
+            <i class="fas fa-bars"></i>
+          </div>
+          <h3>Menú Principal</h3>
+          <div class="card-content">
+            <p>Navega fácilmente por todas las funciones de la aplicación:</p>
+            <ul class="feature-list">
+              <li><i class="fas fa-home"></i> Inicio</li>
+              <li><i class="fas fa-info-circle"></i> Información</li>
+              <li><i class="fas fa-phone"></i> Contacto de Emergencia</li>
+              <li><i class="fas fa-book"></i> Glosario</li>
+              <li><i class="fas fa-clipboard-list"></i> Encuesta de Acoso</li>
+              <li><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</li>
             </ul>
-            <img src="images/MenuPagina.jpg" alt="Menu de la aplicaicon" style="max-width: 100%; height: auto; margin-top: 10px;">
-        </p>
-      </ul>
+            <div class="tutorial-image">
+              <img src="images/MenuPagina.jpg" alt="Menú de la aplicación">
+            </div>
+          </div>
+        </div>
 
-      <h3>Registro e Inicio de Sesión:</h3>
-      <ul>
-        <li>
-            <p><strong>Para nuevos usuarios:</strong></p>
-            <ol>
-              <li>Haz clic en "Iniciar Sesión" en el menú</li>
-              <li>Selecciona "Registrarse"</li>
-              <li>
-                Completa el formulario con:
-                <ul>
-                  <li>Nombre completo</li>
-                  <li>Correo electrónico</li>
-                  <li>Teléfono (10 dígitos)</li>
-                  <li>Contraseña segura</li>
-                </ul>
-              </li>
-              <li>Haz clic en "Continuar"</li>
-              <li>
-                Registra tu Contacto de Emergencia con:
-                <ul>
-                    <li>Nombre de tu contacto</li>
-                    <li>Seleccionas el parentezco con el contacto</li>
-                    <li>El numero de tu contacto (10digitos)</li>
-                </ul>
-              </li>
-              <li>Haz clic en "Continuar"</li>
-              <!-- Imagen del formulario -->
-               <img src="images/FormRegistro.jpg" alt="Formulario de registro" style="max-width: 100%; height: auto; margin-top: 10px;">
-            </ol>
-            <p><strong>Para usuarios registrados:</strong></p>
-            <p>Haz clic en "Iniciar Sesión" e ingresa tus credenciales.</p>
-        </li>
-      </ul>
+        <!-- Sección 2: Registro -->
+        <div class="tutorial-card" data-section="registro">
+          <div class="card-icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <h3>Registro e Inicio de Sesión</h3>
+          <div class="card-content">
+            <div class="steps-container">
+              <div class="step">
+                <span class="step-number">1</span>
+                <p>Haz clic en "Iniciar Sesión"</p>
+              </div>
+              <div class="step">
+                <span class="step-number">2</span>
+                <p>Completa tus datos personales</p>
+              </div>
+              <div class="step">
+                <span class="step-number">3</span>
+                <p>Registra tu contacto de emergencia</p>
+              </div>
+            </div>
+            <div class="tutorial-image">
+              <img src="images/FormRegistro.jpg" alt="Formulario de registro">
+            </div>
+          </div>
+        </div>
 
-        <h3>Uso del Botón de Pánico (Función Principal)</h3>
-        <ul>
-            <ol>
-                <li>Desde la página principal, localiza la sección "Botón de Pánico"</li>
-                <li>Haz clic en el botón rojo "¡PÁNICO!"</li>
-                <li>
-                    Se abrirá un modal donde podrás:
-                    <ul>
-                        <li>Identificar el nivel de acoso (del 1 al 5)</li> 
-                        <li>Ver descripciones de cada nivel</li>
-                        <li>Enviar una alerta o cancelar</li>
-                    </ul>
-                </li>  
-            </ol>
-        </ul>
-        <h3>Encuesta de Acoso</h3>
-        <ul>
-            <ol>
-                <li>Desde el menú, selecciona "Encuesta de Acoso"</li>
-                <li>Lee atentamente la introducción sobre confidencialidad</li>
-                <li>Responde las 10 preguntas seleccionando una opción por cada una</li>
-                <li>Cuando hayas respondido todas, aparecerá el botón "Continuar"</li>
-                <li>Haz clic en "Continuar" para enviar tus respuestas</li>
-            </ol>
-        </ul>
+        <!-- Sección 3: Botón de Pánico -->
+        <div class="tutorial-card" data-section="panico">
+          <div class="card-icon">
+            <i class="fas fa-exclamation-circle"></i>
+          </div>
+          <h3>Botón de Pánico</h3>
+          <div class="card-content">
+            <div class="panic-steps">
+              <div class="panic-step">
+                <div class="step-icon"><i class="fas fa-search"></i></div>
+                <p>Localiza el botón rojo de pánico en la página principal</p>
+              </div>
+              <div class="panic-step">
+                <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <p>Haz clic para activar la alerta</p>
+              </div>
+              <div class="panic-step">
+                <div class="step-icon"><i class="fas fa-sliders-h"></i></div>
+                <p>Selecciona el nivel de emergencia (1-5)</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <h3>Glosario de Términos</h3>
-        <ul>
-            <ol>
-                <li>Desde el menú, selecciona "Glosario"</li>
-                <li>Explora los términos importantes sobre acoso sexual</li>
-                <li>Cada término incluye:</li>
-                <ul>
-                    <li>Definición clara</li>
-                    <li>Referencia académica</li>
-                    <li>Enlace para más información</li>
-                </ul>
-            </ol>
-        </ul>
-
-        <h3>Información y Recursos</h3>
-        <ol>
-            <li>Desde el menú, selecciona "Información"</li>
-            <li>Encontrarás secciones sobre:</li>
-            <ul>
-                <li>Niveles de acoso sexual (leve, moderado, grave)</li>
-                <li>Qué hacer si eres víctima</li>
-                <li>Protocolos de acoso sexual</li>
-                <li>Centros de atención especializada</li>
-                <li>Ubicación de secretarías de la mujer</li>
-            </ul>
-            <p>Cada sección incluye enlaces a recursos oficiales</p>
-        </ol>
+        <!-- Sección 4: Encuesta -->
+        <div class="tutorial-card" data-section="encuesta">
+          <div class="card-icon">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <h3>Encuesta de Acoso</h3>
+          <div class="card-content">
+            <div class="survey-info">
+              <p>Evalúa tu situación respondiendo 10 preguntas simples</p>
+              <ul class="survey-steps">
+                <li>Respuestas confidenciales</li>
+                <li>Resultados inmediatos</li>
+                <li>Recomendaciones personalizadas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <script src="js/main.js"></script>
+  <script>
+    // Añadir interactividad a las tarjetas
+    document.querySelectorAll('.tutorial-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('expanded');
+      });
+    });
+  </script>
 </body>
 </html>
 

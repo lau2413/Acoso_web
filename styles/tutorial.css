@@ -1,0 +1,218 @@
+/* === Tutorial Styles === */
+.tutorial-section {
+  padding: 40px 20px;
+  margin-top: 80px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 80px);
+}
+
+.tutorial-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.tutorial-header h1 {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tutorial-intro {
+  font-size: 1.2rem;
+  color: var(--text);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tutorial-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.tutorial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.card-icon i {
+  font-size: 24px;
+  color: var(--primary);
+}
+
+.tutorial-card:hover .card-icon {
+  background: var(--primary);
+}
+
+.tutorial-card:hover .card-icon i {
+  color: white;
+  transform: scale(1.1);
+}
+
+.tutorial-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.tutorial-card.expanded .card-content {
+  max-height: 1000px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature-list i {
+  color: var(--accent);
+}
+
+.tutorial-image {
+  margin: 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tutorial-image img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.tutorial-card:hover .tutorial-image img {
+  transform: scale(1.05);
+}
+
+.steps-container {
+  margin: 20px 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.panic-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panic-step {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: var(--light);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.panic-step:hover {
+  transform: translateX(10px);
+  background: #f0e0ff;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.survey-info {
+  padding: 20px;
+  background: var(--light);
+  border-radius: 10px;
+}
+
+.survey-steps {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.survey-steps li {
+  padding: 10px 0;
+  padding-left: 25px;
+  position: relative;
+}
+
+.survey-steps li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .tutorial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial-header h1 {
+    font-size: 2rem;
+  }
+
+  .tutorial-card {
+    padding: 20px;
+  }
+} 
