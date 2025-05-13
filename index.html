@@ -116,14 +116,30 @@
     </section>
   </main>
 
-  <!-- ===== MODAL DE EMERGENCIA CON SLIDER ===== -->
-  <div id="modal-emergencia" class="modal hidden">
+  <!-- Modal de Emergencia -->
+  <div id="modal-emergencia" class="modal">
     <div class="modal-content">
-      <h2>¿Qué nivel de acoso estás viviendo?</h2>
-      <input type="range" id="slider-acoso" min="0" max="4" step="1" value="0">
-      <p id="nivel-acoso">Nivel 0: Nivel no definido</p>
-      <button id="enviar-alerta">Enviar Alerta</button>
-      <button class="secondary" id="cerrar-modal">Cancelar</button>
+      <h2>Nivel de Emergencia</h2>
+      
+      <div class="thermometer-container">
+        <input type="range" id="slider-acoso" min="1" max="4" value="1" step="1">
+        <div class="thermometer-labels">
+          <span>Leve</span>
+          <span>Moderado</span>
+          <span>Fuerte</span>
+          <span>Grave</span>
+        </div>
+      </div>
+
+      <div id="nivel-acoso">Selecciona un nivel de acoso</div>
+
+      <button id="enviar-alerta" class="btn-primary">
+        Enviar Alerta
+      </button>
+      
+      <button id="cerrar-modal" class="btn-secondary">
+        Cancelar
+      </button>
     </div>
   </div>
 
