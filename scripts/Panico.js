@@ -29,20 +29,32 @@ function setupPanico() {
     return;
   }
 
+  console.log('Todos los elementos del pánico encontrados');
+
   function mostrarModal() {
-    console.log('Mostrando modal de emergencia');
-    modalEmergencia.classList.remove('hidden');
-    // Forzar un reflow para asegurar que la transición funcione
-    modalEmergencia.offsetHeight;
-    document.body.style.overflow = 'hidden'; // Prevenir scroll
-    slider.value = 0;
-    actualizarNivelAcoso(0);
+    console.log('Intentando mostrar modal de emergencia');
+    try {
+      modalEmergencia.style.display = 'flex';
+      modalEmergencia.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      slider.value = 0;
+      actualizarNivelAcoso(0);
+      console.log('Modal mostrado exitosamente');
+    } catch (error) {
+      console.error('Error al mostrar el modal:', error);
+    }
   }
 
   function ocultarModal() {
-    console.log('Ocultando modal de emergencia');
-    modalEmergencia.classList.add('hidden');
-    document.body.style.overflow = ''; // Restaurar scroll
+    console.log('Intentando ocultar modal de emergencia');
+    try {
+      modalEmergencia.style.display = 'none';
+      modalEmergencia.classList.add('hidden');
+      document.body.style.overflow = '';
+      console.log('Modal ocultado exitosamente');
+    } catch (error) {
+      console.error('Error al ocultar el modal:', error);
+    }
   }
 
   function actualizarNivelAcoso(nivel) {
@@ -74,33 +86,40 @@ function setupPanico() {
   }
 
   // Event Listeners
+  console.log('Configurando event listeners del pánico');
+
   btnPanico.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation(); // Prevenir propagación del evento
     console.log('Botón de pánico clickeado');
+    e.preventDefault();
+    e.stopPropagation();
     mostrarModal();
   });
 
   cerrarModal.addEventListener('click', (e) => {
+    console.log('Botón cerrar clickeado');
     e.preventDefault();
-    e.stopPropagation(); // Prevenir propagación del evento
+    e.stopPropagation();
     ocultarModal();
   });
 
-  // Cerrar modal al hacer clic fuera
   modalEmergencia.addEventListener('click', (e) => {
     if (e.target === modalEmergencia) {
+      console.log('Click fuera del modal');
       ocultarModal();
     }
   });
 
-  // Prevenir que los clics dentro del modal lo cierren
-  modalEmergencia.querySelector('.modal-content').addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
+  const modalContent = modalEmergencia.querySelector('.modal-content');
+  if (modalContent) {
+    modalContent.addEventListener('click', (e) => {
+      console.log('Click dentro del modal');
+      e.stopPropagation();
+    });
+  }
 
   slider.addEventListener('input', () => {
     const nivelActual = slider.value;
+    console.log('Slider ajustado a:', nivelActual);
     actualizarNivelAcoso(nivelActual);
   });
 
@@ -143,12 +162,9 @@ function setupPanico() {
         const nivelActual = parseInt(slider.value);
         const esGrave = nivelActual >= 3;
         
-        // Simulación de envío de mensajes
         if (esGrave) {
-          // Mensaje para casos graves (niveles 3-5)
           alert(`¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`);
         } else {
-          // Mensaje para casos leves (niveles 0-2)
           alert(`¡Alerta enviada!\n\nSe ha notificado a tu contacto de emergencia.\nTu ubicación ha sido compartida.`);
         }
 
@@ -163,10 +179,13 @@ function setupPanico() {
       alert("Ocurrió un error inesperado. Por favor, intenta de nuevo.");
     }
   });
+
+  console.log('Configuración del pánico completada');
 }
 
 // Inicializar inmediatamente si estamos en la página correcta
 if (document.getElementById('boton-panico')) {
+  console.log('Página con botón de pánico detectada, iniciando configuración...');
   setupPanico();
 }
 
