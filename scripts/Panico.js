@@ -2,8 +2,49 @@
 import { supabase } from './supabase.js';
 
 // Configuración para WhatsApp Cloud API (solo para pruebas)
-const WHATSAPP_TOKEN = 'EAAUGl1HX7KsBO4YWG55ZBjnkv6WZBdfkMxQMlVLeMl7CFFCZCeQIvnz6ZBRTB3ecgBFVTKklL9s4ExnzmZBj0yP7NdSKoJkekxbMsO5l4V2MwTWgxppz0R4ZBjOvvttLcNP4pkfjpzZCgQZC5FFTBDytuH2xcKWpU8MCKviWgw0U4xlqRKhZCjl8fKdN1RE5UQJJu9NE5dg0i8CbcQyBLAEiAQT4ZD'; // ← reemplázalo por el real
+const WHATSAPP_TOKEN = 'EAAUGl1HX7KsBO6rblO491nFBU59IVGG9IF7GtlupZADzkB6GatndyrgqhlyhisM1iqZCw6Jp6ZBgZBSorYI9QbYtZCZCDilZCIRjCZB1WFNR97fEDWtaTyc701TRM3odJUKbLXeONiooLLZAkMdmJHrEEq0Gmhg3gplMOsoK4DW8RyAi8WdtdZCr6BGn8sLPwkhUJDJhMIXf7Wxnj4YDcgbbSJoVnqUAaCDnQZD'; // ← reemplázalo por el real
 const PHONE_NUMBER_ID = '690685430789757';
+
+// Función para enviar mensajes WhatsApp
+async function enviarMensajeWhatsApp(numero, mensaje) {
+  try {
+    const response = await fetch(`https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messaging_product: 'whatsapp',
+        to: numeroEmergencia.replace('+', ''), // WhatsApp requiere solo números
+        type: 'template',
+        template: {
+          name: 'alerta_emergencia',
+          language: { code: 'es_CO' },
+          components: [{
+            type: 'body',
+            parameters: [{
+              type: 'text',
+              text: link // ubicación dinámica que reemplaza {{1}}
+            }]
+          }]
+        }
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Error al enviar mensaje por WhatsApp:", data);
+      throw new Error(`Error al enviar el mensaje: ${data.error?.message}`);
+    } else {
+      console.log("Mensaje enviado por WhatsApp:", data);
+    }
+  } catch (error) {
+    console.error("Error al conectar con WhatsApp Cloud API:", error);
+    throw new Error("No se pudo enviar el mensaje de alerta por WhatsApp.");
+  }
+}
 
 function setupPanico() {
   console.log('Inicializando setupPanico...');
@@ -44,8 +85,6 @@ function setupPanico() {
       actualizarNivelAcoso(1);
       
       modalEmergencia.offsetHeight;
-      
-      console.log('Modal mostrado exitosamente');
     } catch (error) {
       console.error('Error al mostrar el modal:', error);
     }
@@ -215,7 +254,8 @@ function setupPanico() {
       console.log('Posición obtenida:', position.coords);
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-
+      const link = `https://www.google.com/maps?q=${lat},${lon}`;
+      
       // 4. Obtener nivel de acoso
       const nivelActual = parseInt(slider.value);
       console.log('Nivel de acoso seleccionado:', nivelActual);
@@ -239,6 +279,53 @@ function setupPanico() {
       }
 
       console.log('Registro de acoso creado:', acoso);
+
+      for (let contacto of contactos) {
+        console.log(contacto)
+        let telefono = contacto.telefono_contacto;
+        let numeroFormateado = telefono.replace(/\D/g, ''); // elimina todo lo que no sea dígito
+        if (!numeroFormateado.startsWith('57')) {
+          numeroFormateado = '57' + numeroFormateado;
+        }
+        console.log("Número formateado:", numeroFormateado);
+        try {
+        const response = await fetch(`https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to: numeroFormateado,
+            type: 'template',
+            template: {
+              name: 'alerta_emergencia',
+              language: { code: 'es_CO' },
+              components: [{
+                type: 'body',
+                parameters: [{
+                  type: 'text',
+                  text: link // ubicación dinámica que reemplaza {{1}}
+                }]
+              }]
+            }
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.error("Error al enviar mensaje por WhatsApp:", data);
+          throw new Error(`Error al enviar el mensaje: ${data.error?.message}`);
+        } else {
+          console.log("Mensaje enviado por WhatsApp:", data);
+        }
+        } catch (error) {
+          console.error("Error al conectar con WhatsApp Cloud API:", error);
+          throw new Error("No se pudo enviar el mensaje de alerta por WhatsApp.");
+        }
+    }
 
       // 6. Crear alertas
       console.log('Creando alertas...');
@@ -280,6 +367,7 @@ function setupPanico() {
         throw new Error('Algunas alertas no pudieron ser enviadas');
       }
 
+
       // 7. Mostrar mensaje de éxito y cerrar modal
       const mensaje = nivelActual >= 3 
         ? `¡Alerta enviada!\n\nSe ha notificado a:\n- Tu contacto de emergencia\n- Línea de emergencia 123\n- Policía Nacional 112\n\nTu ubicación ha sido compartida con las autoridades.`
@@ -314,7 +402,6 @@ function setupPanico() {
     }
   }
 
-  console.log('Configuración del pánico completada');
 }
 
 export { setupPanico };
