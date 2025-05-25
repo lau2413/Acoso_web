@@ -2,7 +2,7 @@
 import { supabase } from './supabase.js';
 
 // Configuración para WhatsApp Cloud API (solo para pruebas)
-const WHATSAPP_TOKEN = 'EAAUGl1HX7KsBO6rblO491nFBU59IVGG9IF7GtlupZADzkB6GatndyrgqhlyhisM1iqZCw6Jp6ZBgZBSorYI9QbYtZCZCDilZCIRjCZB1WFNR97fEDWtaTyc701TRM3odJUKbLXeONiooLLZAkMdmJHrEEq0Gmhg3gplMOsoK4DW8RyAi8WdtdZCr6BGn8sLPwkhUJDJhMIXf7Wxnj4YDcgbbSJoVnqUAaCDnQZD'; // ← reemplázalo por el real
+const WHATSAPP_TOKEN = 'EAAUGl1HX7KsBOwS2DNpXO896MWCGrRC8Y77LUhuesJMMP5cv8MNGGN1ZA2JnbWhkbLsVAdaeCYC60I3eEsrzkzwWw97WAnbeEQ8A70KBDG8rn6OmoDxHoKDZBt3HcaMtRZCb4cnwuvZCoMH0JI8C945QcEkXUe5Wrizyny3YsEx7PlZACIuAzmZCBwmbBFzLM47jnOY69OppMZD'; // ← reemplázalo por el real
 const PHONE_NUMBER_ID = '690685430789757';
 
 // Función para enviar mensajes WhatsApp
@@ -47,7 +47,10 @@ async function enviarMensajeWhatsApp(numero, mensaje) {
 }
 
 function setupPanico() {
-  console.log('Inicializando setupPanico...');
+  console.log('Inicializando setupPanico');
+  // Protección global para evitar listeners duplicados
+  if (window.__panicoListenerAdded) return;
+  window.__panicoListenerAdded = true;
   
   const btnPanico = document.getElementById('boton-panico');
   const modalEmergencia = document.getElementById('modal-emergencia');
@@ -56,6 +59,7 @@ function setupPanico() {
   const nivelAcoso = document.getElementById('nivel-acoso');
   const cerrarModal = document.getElementById('cerrar-modal');
   let isProcessing = false;
+  let alertaEnviada = false;
 
   // Verificar que todos los elementos necesarios existen
   if (!btnPanico || !modalEmergencia || !slider || !enviarAlerta || !nivelAcoso || !cerrarModal) {
@@ -83,7 +87,6 @@ function setupPanico() {
       modalEmergencia.classList.remove('hidden');
       slider.value = 1;
       actualizarNivelAcoso(1);
-      
       modalEmergencia.offsetHeight;
     } catch (error) {
       console.error('Error al mostrar el modal:', error);
@@ -98,7 +101,6 @@ function setupPanico() {
       document.body.classList.remove('modal-open');
       modalEmergencia.style.opacity = '0';
       modalEmergencia.style.visibility = 'hidden';
-      
       setTimeout(() => {
         if (modalEmergencia) {
           modalEmergencia.style.display = 'none';
@@ -106,10 +108,10 @@ function setupPanico() {
         }
         isProcessing = false;
       }, 300);
-      
       console.log('Modal ocultado exitosamente');
     } catch (error) {
       console.error('Error al ocultar el modal:', error);
+      isProcessing = false;
     }
   }
 
@@ -135,18 +137,12 @@ function setupPanico() {
     nivelAcoso.textContent = texto;
   }
 
-  // Remover event listeners anteriores si existen
-  const nuevoBotonPanico = btnPanico.cloneNode(true);
-  btnPanico.parentNode.replaceChild(nuevoBotonPanico, btnPanico);
-  
-  const nuevoEnviarAlerta = enviarAlerta.cloneNode(true);
-  enviarAlerta.parentNode.replaceChild(nuevoEnviarAlerta, enviarAlerta);
-  
-  const nuevoCerrarModal = cerrarModal.cloneNode(true);
-  cerrarModal.parentNode.replaceChild(nuevoCerrarModal, cerrarModal);
+  // Eliminar listeners previos si es necesario (opcional, si hay riesgo de duplicados)
+  btnPanico.onclick = null;
+  cerrarModal.onclick = null;
 
   // Event Listeners
-  nuevoBotonPanico.addEventListener('click', (e) => {
+  btnPanico.addEventListener('click', (e) => {
     console.log('Botón de pánico clickeado');
     e.preventDefault();
     e.stopPropagation();
@@ -155,7 +151,7 @@ function setupPanico() {
     }
   });
 
-  nuevoCerrarModal.addEventListener('click', (e) => {
+  cerrarModal.addEventListener('click', (e) => {
     console.log('Botón cerrar clickeado');
     e.preventDefault();
     e.stopPropagation();
@@ -184,28 +180,24 @@ function setupPanico() {
     actualizarNivelAcoso(nivelActual);
   });
 
-  let alertaEnviada = false;
-  
-  nuevoEnviarAlerta.addEventListener('click', (e) => {
+  enviarAlerta.onclick = null;
+  enviarAlerta.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if (!alertaEnviada) {
-      alertaEnviada = true;
-      enviarAlertaHandler();
-    }
+    if (alertaEnviada) return;
+    alertaEnviada = true;
+    enviarAlertaHandler();
   });
 
   async function enviarAlertaHandler() {
     if (isProcessing) {
       console.log('Ya hay una alerta en proceso...');
+      alertaEnviada = false;
       return;
     }
-
     console.log('Iniciando proceso de alerta...');
     isProcessing = true;
-    nuevoEnviarAlerta.disabled = true;
-
+    enviarAlerta.disabled = true;
     try {
       // 1. Obtener usuario actual
       console.log('Obteniendo usuario actual...');
@@ -376,7 +368,7 @@ function setupPanico() {
 
       // Disable pointer events
       modalEmergencia.style.pointerEvents = 'none';
-      nuevoCerrarModal.style.pointerEvents = 'none';
+      cerrarModal.style.pointerEvents = 'none';
 
       // Show alert and then close modal
       alert(mensaje);
@@ -385,9 +377,9 @@ function setupPanico() {
       // Re-enable pointer events after modal is closed
       setTimeout(() => {
         modalEmergencia.style.pointerEvents = '';
-        nuevoCerrarModal.style.pointerEvents = '';
+        cerrarModal.style.pointerEvents = '';
         isProcessing = false;
-        nuevoEnviarAlerta.disabled = false;
+        enviarAlerta.disabled = false;
         alertaEnviada = false;
       }, 400);
 
@@ -395,14 +387,26 @@ function setupPanico() {
       console.error("Error al procesar la alerta:", error);
       alert(error.message || "Ocurrió un error inesperado. Por favor, intenta de nuevo.");
       isProcessing = false;
-      nuevoEnviarAlerta.disabled = false;
-      
+      enviarAlerta.disabled = false;
+      alertaEnviada = false;
       // Restore event handlers
       modalEmergencia.style.pointerEvents = '';
-      nuevoCerrarModal.style.pointerEvents = '';
+      cerrarModal.style.pointerEvents = '';
     }
   }
+}
 
+// Inicializar solo cuando el DOM esté listo y los elementos existen
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('boton-panico') && document.getElementById('modal-emergencia')) {
+      setupPanico();
+    }
+  });
+} else {
+  if (document.getElementById('boton-panico') && document.getElementById('modal-emergencia')) {
+    setupPanico();
+  }
 }
 
 export { setupPanico };
