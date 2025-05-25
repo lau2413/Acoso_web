@@ -270,15 +270,16 @@ function setupPanico() {
           latitud: lat,
           longitud: lon
         })
-        .select()
+        .select('id_acoso')
         .single();
 
       if (acosoError) {
         console.error('Error al crear registro de acoso:', acosoError);
         throw new Error('Error al registrar el incidente: ' + acosoError.message);
       }
+      acoso.id = acoso.id_acoso;
 
-      console.log('Registro de acoso creado:', acoso);
+      console.log('Registro de acoso creado:', acoso.id);
 
       for (let contacto of contactos) {
         console.log(contacto)
