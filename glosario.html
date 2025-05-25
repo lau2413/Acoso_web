@@ -267,22 +267,32 @@
     // Funcionalidad de expandir/colapsar
     document.querySelectorAll('.termino-header').forEach(header => {
       header.addEventListener('click', function() {
-        const termino = this.parentElement;
-        const content = this.nextElementSibling;
-        const icon = this.querySelector('.expand-btn i');
-        
-        // Toggle la clase expanded
-        termino.classList.toggle('expanded');
-        
-        // Cambiar el icono
-        icon.classList.toggle('fa-chevron-down');
-        icon.classList.toggle('fa-chevron-up');
-        
-        // Toggle la visibilidad del contenido
-        if (termino.classList.contains('expanded')) {
-          content.style.display = 'block';
+        const clickedTermino = this.parentElement;
+        const clickedContent = clickedTermino.querySelector('.termino-content');
+        const clickedIcon = this.querySelector('.expand-btn i');
+
+        // Cerrar todas las demás tarjetas
+        document.querySelectorAll('.termino').forEach(termino => {
+          const content = termino.querySelector('.termino-content');
+          const icon = termino.querySelector('.expand-btn i');
+          if (termino !== clickedTermino) {
+            termino.classList.remove('expanded');
+            content.style.display = 'none';
+            icon.classList.add('fa-chevron-down');
+            icon.classList.remove('fa-chevron-up');
+          }
+        });
+
+        // Toggle la seleccionada
+        const isExpanded = clickedTermino.classList.toggle('expanded');
+        if (isExpanded) {
+          clickedContent.style.display = 'block';
+          clickedIcon.classList.remove('fa-chevron-down');
+          clickedIcon.classList.add('fa-chevron-up');
         } else {
-          content.style.display = 'none';
+          clickedContent.style.display = 'none';
+          clickedIcon.classList.add('fa-chevron-down');
+          clickedIcon.classList.remove('fa-chevron-up');
         }
       });
     });
